@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormLogin from './FormLogin';
 import B1logo from './B1Logo';
 import Contact from './Contact';
+import SideImage from './SideImage';
 
 const useStyle = makeStyles({
     Above: {
@@ -28,6 +29,7 @@ function LoginPage() {
             <Typography component="div" className={classes.Above} />
             <B1logo />
             <FormLogin />
+            <SideImage />
           </Grid>
           <Grid item container sm={12} xs={12} >
             <Grid item sm={8} xs={8}>
