@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import logo from '../../imgs/B1.jpg';
+import logo from '../../imgs/B1_BRANCO.png';
 
 
 const useStyle = makeStyles({
@@ -20,7 +20,7 @@ const useStyle = makeStyles({
 function B1logo() {
     const classes = useStyle();
     return (
-        <img src={logo} className={classes.Img}/>
+        <img src={logo} className={classes.Img} alt=""/>
     )
 }
 
