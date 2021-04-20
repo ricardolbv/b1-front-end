@@ -19,8 +19,7 @@ const useStyle = makeStyles({
 })
 
 
-
-function LoginPage() {
+const LoginPage = () => {
     const classes = useStyle();
     return (
         <>
