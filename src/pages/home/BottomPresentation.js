@@ -1,26 +1,30 @@
 import React from 'react';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
 
 const useStyle = makeStyles({
     Root: {
        position: 'fixed',
-       bottom: 0,
-       paddingLeft: '9vh',
+       bottom: 6,
+       paddingLeft: '10vh',
+       padding: '5px'
     },
     Text: {
-
+        color: "white"
     }
 })
 
 const BottomPresentation = () => {
     const classes = useStyle();
         return (
-                <Box p={3}  textAlign='center' alignItems='center' justify='center' className={ classes.Root }>
-                    <Typography variant='subtitle2' style={{ color: "white"}} textAlign='center'> Copyright 2021 </Typography>
-                </Box>
+            <>
+                <div style={{ width: '16.6%',borderTop: '1px solid white',  position: 'fixed',bottom: '5%',}}></div>
+                <Container className={ classes.Root } maxWidth='xs'>
+                    <Typography variant='subtitle2' className={classes.Text} textAlign='center'> Copyright 2021 </Typography>
+                </Container>
+            </>
         )
 }
 
