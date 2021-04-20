@@ -6,9 +6,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyle = makeStyles({
     Root: {
-       position: 'absolute',
-       bottom: '0',
-       left: '5vh',
+       position: 'fixed',
+       bottom: 0,
+       paddingLeft: '9vh',
     },
     Text: {
 
@@ -18,11 +18,9 @@ const useStyle = makeStyles({
 const BottomPresentation = () => {
     const classes = useStyle();
         return (
-            <Box display="flex" justifyContent="center" alignItems='center' m={1} p={1} className={ classes.Root } >
-                <Box p={1}>
-                    <Typography variant='subtitle2' style={{ color: "white"}} > Copyright 2021 </Typography>
+                <Box p={3}  textAlign='center' alignItems='center' justify='center' className={ classes.Root }>
+                    <Typography variant='subtitle2' style={{ color: "white"}} textAlign='center'> Copyright 2021 </Typography>
                 </Box>
-            </Box>
         )
 }
 

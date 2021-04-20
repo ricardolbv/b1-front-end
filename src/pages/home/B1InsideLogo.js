@@ -8,13 +8,14 @@ const useStyle = makeStyles({
     Img: {
         height: '80px',
         width: '165px',
+        paddingLeft: '2vh'
     }
 })
 
 function B1InsideLogo() {
     const classes = useStyle();
     return (
-        <Box p={3} >
+        <Box p={3}>
             <img src={logo} className={classes.Img} alt=""/>
         </Box>
     )
