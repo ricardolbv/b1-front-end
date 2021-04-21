@@ -8,7 +8,7 @@
 
 ### Contribuindo após clonar o repo (git clone https://B1-PUC@dev.azure.com/B1-PUC/B1/\_git/b1-frontend)
 
-### Instalnado depdencias: Ir para pasta do projeto>> Rodar: npm install
+### Instalando dependências: Ir para pasta do projeto>> Rodar: npm install
 
 ### Startando o projeto locamente: npm start
 
