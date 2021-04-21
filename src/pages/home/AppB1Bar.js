@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ProfileBar from './ProfileBar';
 
 
 const useStyle = makeStyles({
@@ -19,7 +19,7 @@ const AppB1Bar = () => {
         return (
             <AppBar position="static" className={classes.Root}>
                  <Toolbar>
-                     <AccountCircleIcon className={classes.Person}/>
+                     <ProfileBar />
                  </Toolbar>
             </AppBar>
         )

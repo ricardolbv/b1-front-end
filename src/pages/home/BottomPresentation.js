@@ -7,7 +7,7 @@ import Container from '@material-ui/core/Container';
 const useStyle = makeStyles({
     Root: {
        position: 'fixed',
-       bottom: 6,
+       bottom: '2vh',
        paddingLeft: '10vh',
        padding: '5px'
     },
@@ -20,8 +20,8 @@ const BottomPresentation = () => {
     const classes = useStyle();
         return (
             <>
-                <div style={{ width: '16.6%',borderTop: '1px solid white',  position: 'fixed',bottom: '5%',}}></div>
-                <Container className={ classes.Root } maxWidth='xs'>
+                <div style={{ width: '16.6%',borderTop: '0.01em groove grey',  position: 'fixed',bottom: '6%'}}></div>
+                <Container className={ classes.Root } maxWidth='xs' >
                     <Typography variant='subtitle2' className={classes.Text} textAlign='center'> Copyright 2021 </Typography>
                 </Container>
             </>

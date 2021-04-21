@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -10,15 +9,9 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 
-/*
-const useStyle = makeStyles({
-    Tab: {
-       
-    }
-})*/
 
 function TabOptions(props) {
-   // const classes = useStyle();
+
     return (
         <List>
             <ListItem button>
