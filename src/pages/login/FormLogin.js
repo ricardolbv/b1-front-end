@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const useStyle = makeStyles({
     Form: {
@@ -63,9 +64,11 @@ function FormLogin() {
                 </Typography>
                 </a>
                 <Typography align="center">
+                <Link to='/home'>
                 <Button variant="contained" color="primary" className={classes.Btn}>
                     Entre
                 </Button>
+                </Link>
                 </Typography>
             </form>
         </Paper>
