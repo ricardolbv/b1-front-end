@@ -8,7 +8,7 @@ const useStyle = makeStyles({
         position: "fixed",
         top: "25%",
         right: "70%",
-        width: "375px",
+        width: "500px",
         height: "500px",
     }
 })
