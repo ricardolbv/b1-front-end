@@ -14,7 +14,7 @@ const useStyle = makeStyles({
         font: "Roboto"
     },
     Button: {
-        margin: '6px'
+        marginTop: '15px'
     }
 })
 
