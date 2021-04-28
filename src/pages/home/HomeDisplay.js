@@ -2,13 +2,13 @@ import Typography from '@material-ui/core/Typography';
 import BuildIcon from '@material-ui/icons/Build';
 import Container from '@material-ui/core/Container';
 
-const RetailPage = () => {
+const HomeDisplay = () => {
     return (
         <Container>
-            <Typography variant='h2' textAlign='center'> Pagina Varejo </Typography>
+            <Typography variant='h2' textAlign='center'> Pagina Inicial </Typography>
             <BuildIcon />
-        </Container>
+       </Container>
     )
 }
 
-export default RetailPage;
+export default HomeDisplay;

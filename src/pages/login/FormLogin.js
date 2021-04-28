@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const useStyle = makeStyles({
     Form: {
@@ -14,18 +15,18 @@ const useStyle = makeStyles({
         minHeight: "450px",
         top: "30%",
         left: "50%",
-        marginTop: "-50px",
+        marginTop: "-35px",
         marginLeft: "-205px",
     },
     PrimaryColor: {
         color: "#0D0B23",
         margin: "10px",
-        marginTop: "45px",
+        marginTop: "35px",
     },
     GreyText: {
         color: "#9B9B9B",
         font: "Roboto",
-        marginTop: "45px",
+        marginTop: "20px",
     },
     Input :{
         width: '300px',
@@ -33,7 +34,7 @@ const useStyle = makeStyles({
         marginTop: '35px',
     },
     Forgot :{
-        marginTop: '20px',
+        marginTop: '30px',
         marginRight: "40px"
     },
     Btn: {
@@ -63,9 +64,11 @@ function FormLogin() {
                 </Typography>
                 </a>
                 <Typography align="center">
+                <Link to='/home'>
                 <Button variant="contained" color="primary" className={classes.Btn}>
                     Entre
                 </Button>
+                </Link>
                 </Typography>
             </form>
         </Paper>
