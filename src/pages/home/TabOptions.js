@@ -8,30 +8,42 @@ import PeopleIcon from '@material-ui/icons/People';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
+import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
+
+const useStyle = makeStyles({
+    Root: {
+       width: '100%'
+    }
+})
+
+
 
 
 function TabOptions(props) {
+   const classes = useStyle();
+   const history = useHistory();
 
     return (
-        <List>
-            <ListItem button>
-                <ListItemIcon> <HomeIcon style={{ color: "white"}}/>  </ListItemIcon>
+        <List disablePadding className={classes.Root}>
+            <ListItem button id='home' name='home' onClick= {() => history.push('/home')} >
+                <ListItemIcon > <HomeIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Home"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
-            <ListItem button>
-                <ListItemIcon> <PeopleIcon style={{ color: "white"}}/>  </ListItemIcon>
-                <ListItemText primary={"Verejo"} style={{ color: "white", width: "auto" }}/>
+            <ListItem button  name='varejo' id='varejo' onClick= {() => history.push('/home/retail')} >
+                <ListItemIcon > <PeopleIcon style={{ color: "white"}}/>  </ListItemIcon>
+                <ListItemText primary={"Varejo"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
-            <ListItem button>
-                <ListItemIcon> <StorefrontIcon style={{ color: "white"}}/>  </ListItemIcon>
+            <ListItem button  name='marca' id='marca' onClick= {() => history.push('/home/brand')}>
+                <ListItemIcon> <StorefrontIcon  style={{ color: "white"}} />  </ListItemIcon>
                 <ListItemText primary={"Marca"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
-            <ListItem button>
-                <ListItemIcon> <LocalGroceryStoreIcon style={{ color: "white"}}/>  </ListItemIcon>
+            <ListItem button  name='campanha' id='campanha' onClick= {() => history.push('/home/campaign')}>
+                <ListItemIcon> <LocalGroceryStoreIcon  style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Campanha"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
-            <ListItem button>
-                <ListItemIcon> <DashboardIcon style={{ color: "white"}}/>  </ListItemIcon>
+            <ListItem button name='visualizacao' id='visualizacao' onClick= {() => history.push('/home/visualization')}>
+                <ListItemIcon  > <DashboardIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Visualização"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
         </List>
