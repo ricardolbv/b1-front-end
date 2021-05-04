@@ -1,12 +1,12 @@
 import Typography from '@material-ui/core/Typography';
-import BuildIcon from '@material-ui/icons/Build';
 import Container from '@material-ui/core/Container';
+import RetailTableContainer from './RetailTableContainer';
+import RetailTable from './RetailTable';
 
 const RetailPage = () => {
     return (
         <Container>
-            <Typography variant='h2' textAlign='center'> Pagina Varejo </Typography>
-            <BuildIcon />
+            <RetailTableContainer />
         </Container>
     )
 }
