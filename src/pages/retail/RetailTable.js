@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,6 +7,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { connect } from 'react-redux';
+import { fetchRetails } from './thunks';
 
 const useStyles = makeStyles({
   table: {
@@ -27,8 +29,11 @@ const rows = [
   createData('x', 5, 'Test3', 'Test', 'test@gmail.com'),
 ];
 
-function RetailTable () {
+function RetailTable ({ retails, retailLoad}) {
   const classes = useStyles();
+  useEffect(() => {
+    retailLoad();
+  }, [])
 
   return (
     <TableContainer component={Paper}>
@@ -44,15 +49,15 @@ function RetailTable () {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
+          {retails.map((row) => (
+            <TableRow key={row.id}>
               <TableCell align="center" component="th" scope="row">
-                {row.name}
+                {row.id}
               </TableCell>
-              <TableCell align="center">{row.calories}</TableCell>
-              <TableCell align="center">{row.fat}</TableCell>
-              <TableCell align="center">{row.carbs}</TableCell>
-              <TableCell align="center">{row.protein}</TableCell>
+              <TableCell align="center">{row.cnpj}</TableCell>
+              <TableCell align="center">{row.nome_fantasia}</TableCell>
+              <TableCell align="center">{row.razao_social}</TableCell>
+              <TableCell align="center">{row.telefone}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -61,4 +66,12 @@ function RetailTable () {
   );
 }
 
-export default RetailTable;
+const mapStateToProps = state => ({
+  retails: state.retails,
+})
+
+const mapDispatchToProps = dispatch => ({
+  retailLoad: () => dispatch(fetchRetails()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(RetailTable);
