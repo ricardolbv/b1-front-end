@@ -1,13 +1,15 @@
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import { Route, Switch } from 'react-router-dom';
 import RetailTableContainer from './RetailTableContainer';
-import RetailTable from './RetailTable';
+import FormRetail from './FormRetail';
 
 const RetailPage = () => {
     return (
-        <Container>
-            <RetailTableContainer />
-        </Container>
+        <Grid container direction="column" xs={12}>
+            <Grid item xs={12}>
+                <Route path="/home/retail" exact component={RetailTableContainer}/>
+            </Grid>
+        </Grid>
     )
 }
 

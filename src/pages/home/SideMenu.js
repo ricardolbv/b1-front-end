@@ -7,13 +7,15 @@ import BottomPresentation from './BottomPresentation';
 
 const SideMenu = () => {
     return (
-        <Grid wrap='wrap' container direction="column" spacing={0} style={{backgroundColor: '#0D0B23', height:'100vh'}}>
-            <Grid item xs={3}  lg={3}>
+        <Grid wrap='wrap' container direction="column" spacing={0} style={{backgroundColor: '#0D0B23', height:'100%'}}>
+            <Grid item xs={2} >
                <B1InsideLogo />
             </Grid>
-            <Grid item xs={9} lg={9}>
+            <Grid item xs={9} >
               <TabOptions />
-              <BottomPresentation />
+            </Grid>
+            <Grid item xs={1} >
+                <BottomPresentation />
             </Grid>
         </Grid>
     )
