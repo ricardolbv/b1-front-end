@@ -7,8 +7,8 @@ import Container from '@material-ui/core/Container';
 const useStyle = makeStyles({
     Root: {
        position: 'fixed',
-       bottom: '2vh',
-       paddingLeft: '10vh',
+       bottom: '2%',
+       paddingLeft: '5%',
        padding: '5px'
     },
     Text: {

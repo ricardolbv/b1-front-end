@@ -7,20 +7,22 @@ import HomeDisplay from './HomeDisplay';
 import RetailPage from '../retail/RetailPage';
 import BrandPage from '../brand/BrandPage';
 import CampaignPage from '../campaign/CampaignPage';
-import VisualizationPage from '../visualization/VisualizationPage'
+import VisualizationPage from '../visualization/VisualizationPage';
+import FormRetail from '../retail/FormRetail';
 
 
 const HomePage = () => {
         return (
-        <Grid container spacing={0} >
-          <Grid item sm={2} xs={2} md={2} xl={2}>
-                  <SideMenu />
+        <Grid container spacing={0} style={{height: '100vh' }}>
+          <Grid item xs={2} >
+                <SideMenu />
           </Grid>
-          <Grid item sm={10} xs={10} md={10} xl={10}>
+          <Grid item  xs={10}>
              <AppB1Bar />
              <Switch>
                 <Route path="/home" exact component={HomeDisplay}/>
                 <Route path="/home/retail" exact component={RetailPage}/>
+                <Route path="/home/retail/add" exact component={FormRetail}/>
                 <Route path="/home/brand" exact component={BrandPage}/>
                 <Route path="/home/campaign" exact component={CampaignPage}/>
                 <Route path="/home/visualization" exact component={VisualizationPage}/>

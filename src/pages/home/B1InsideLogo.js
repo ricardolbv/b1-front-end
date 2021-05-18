@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 
 const useStyle = makeStyles({
     Img: {
+        position: 'fixed',
         height: '80px',
         width: '165px',
     },
