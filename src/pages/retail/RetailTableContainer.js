@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import { Typography } from '@material-ui/core';
@@ -18,6 +19,7 @@ const useStyle = makeStyles({
 })
 
 const RetailTableContainer = () => {
+    const [searchTerm, setSearchTerm] = useState('');
     const classes = useStyle();
     const history = useHistory();
     return (
@@ -29,8 +31,10 @@ const RetailTableContainer = () => {
                     <Box display='flex' justifyContent='center' p={1}  >
                         <Paper elevation={2} style={{ width:'60%' }}>
                             <InputBase 
-                            placeholder='Procurar por nome ou código ...'
-                            style={{ width: '90%', padding:'5px' }}>
+                            placeholder='Procurar por nome fantasia ou código ...'
+                            style={{ width: '90%', padding:'5px' }}
+                            onChange={event => {setSearchTerm(event.target.value)}}
+                            >
                             </InputBase>
                             <IconButton type="submit" aria-label="search" style={{ right:'1px', position:'' }}>
                                 <SearchIcon />
@@ -42,7 +46,7 @@ const RetailTableContainer = () => {
                         </Box>
                     </Box>
                     <Box p={1}>
-                    <RetailTable />
+                    <RetailTable searchTerm={searchTerm}/>
                     </Box>
                 </Box>
             </Paper>

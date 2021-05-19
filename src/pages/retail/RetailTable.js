@@ -11,8 +11,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Switch from '@material-ui/core/Switch';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TableContainer from '@material-ui/core/TableContainer';
-
 import RetailPagination from './RetailPagination'
+
 
 const RetailEditAndExclude = () => {
   return ( <div>
@@ -24,27 +24,27 @@ const RetailEditAndExclude = () => {
 }
 
 
-function RetailTable ({ retails, retailLoad}) {
+function RetailTable (props) {
   const [load, setLoad] = useState(true);
   const [page, setPage] = useState(1);
   const [ref, setRef] = useState();
   const [acc, setAcc] = useState(0);
-  const [_retails, setRetail] = useState(retails)
+  const [_retails, setRetail] = useState(props.retails)
 
   const handleChange = (event, value) => {
     if (page > value){
-      setRetail(retails)
+      setRetail(props.retails)
       setAcc(ref);
       setRef(ref+10);
-      setRetail(retails.filter((item, index) => {
+      setRetail(props.retails.filter((item, index) => {
         return ((index >= acc) && (index <ref))
       }))
     }
     else if (page < value){
-      setRetail(retails)
+      setRetail(props.retails)
       setAcc(ref);
       setRef(ref-10);
-      setRetail(retails.filter((item, index) => {
+      setRetail(props.retails.filter((item, index) => {
         return ((index >= acc) && (index <ref))
       }))
     }
@@ -54,9 +54,9 @@ function RetailTable ({ retails, retailLoad}) {
 
   useEffect(() => {
     setLoad(true);
-    retailLoad();
+    props.retailLoad();
     setLoad(false);
-  }, [retails])
+  }, [props.retails])
 
   return (
     <TableContainer style={{ minHeight: '80%' }}>
@@ -73,7 +73,13 @@ function RetailTable ({ retails, retailLoad}) {
         </TableHead>
         <TableBody>
         {load ? <CircularProgress style={{ position:'relative', left: '75vh', top:'15vh' }}/> : 
-        retails.map(row => 
+        props.retails.filter((val) => {
+          if (props.searchTerm === '')
+            return val
+          else if (val.nome_fantasia.toLowerCase().includes(props.searchTerm.toLowerCase()) || 
+                   val.razao_social.toLowerCase().includes(props.searchTerm.toLowerCase()))
+            return val
+        }).map(row => 
         <TableRow >
           <TableCell align='center'> {row.id} </TableCell>
           <TableCell align='center'> {row.cnpj} </TableCell>
