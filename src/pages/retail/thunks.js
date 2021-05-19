@@ -10,24 +10,30 @@ export const fetchRetails = () => async (dispatch, getState) => {
         alert(error);
     }
 }
-/*
-export const newPlayer = player => async (dispatch) => {
-    try {
-        console.log(player)
-        const response = await axios.post('http://localhost:3000/jogador', 
-        {
-            nome: player.nome,
-            apelido: player.nome,
-            posicao: "test",
-            telefone: "54687",
-            id_time: 1,
-            data_nasc: "01/01/1998"
-        })
 
-        console.log(response);
-        dispatch(createPlayer(response.data));
+export const newRetail = retail => async (dispatch) => {
+    try {
+        const now = Date.now()
+        const _now = new Date(now)
+        const _retail =  {
+            inscricao: 'tst',
+            cnpj: retail.cnpj,
+            razao_social: retail.razao_social,
+            nome_fantasia: retail.nome_fantasia,
+            telefone: retail.telefone,
+            status: 1,
+            id_cargo: 1,
+            id_login: 1,
+            id_segmento: 1,
+            created_at: _now,
+            updated_at: _now,
+        }
+        const response = await axios.post('https://b1-backend.azurewebsites.net/retail', 
+        _retail)
+
+        dispatch(createRetail(retail));
 
     } catch (error) {
         alert(error)
     }
-}*/
+}
