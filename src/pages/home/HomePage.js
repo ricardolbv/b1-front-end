@@ -8,7 +8,7 @@ import RetailPage from '../retail/RetailPage';
 import BrandPage from '../brand/BrandPage';
 import CampaignPage from '../campaign/CampaignPage';
 import VisualizationPage from '../visualization/VisualizationPage';
-import FormRetail from '../retail/FormRetail';
+import ManageRetailForm from '../retail/ManageRetailForm';
 
 
 const HomePage = () => {
@@ -22,7 +22,7 @@ const HomePage = () => {
              <Switch>
                 <Route path="/home" exact component={HomeDisplay}/>
                 <Route path="/home/retail" exact component={RetailPage}/>
-                <Route path="/home/retail/add" exact component={FormRetail}/>
+                <Route path="/home/retail/add" exact component={ManageRetailForm}/>
                 <Route path="/home/brand" exact component={BrandPage}/>
                 <Route path="/home/campaign" exact component={CampaignPage}/>
                 <Route path="/home/visualization" exact component={VisualizationPage}/>

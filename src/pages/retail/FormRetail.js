@@ -12,7 +12,7 @@ import { useHistory } from 'react-router-dom';
 import Toast from '../../common/Toast';
 
 
-const FormRetail = () => {
+const FormRetail = (props) => {
     //Message status
     const [toast, setToast] = useState(false);
     const [status, setStatus] = useState("success");
@@ -47,13 +47,15 @@ const FormRetail = () => {
                             <Typography variant='h5'> Dados de usuário</Typography>
                         </Box>
                         <Box p={1}>
-                            <TextField id="emailVarejo" label="E-mail" variant="outlined"  style={{ width:'55%', paddingRight: '1vh' }}/>
+                            <TextField id="emailVarejo" label="E-mail" variant="outlined"  onChange={props.onChange} 
+                             style={{ width:'55%',paddingRight: '1vh' }}/>
                             <TextField style={{ width:'40%' }}
-                                    id="outlined-password-input"
+                                    id="senha"
                                     label="Senha"
                                     type="password"
                                     autoComplete="current-password"
                                     variant="outlined"
+                                    onChange={props.onChange}
                             />
                         </Box>
                         </Paper>
@@ -66,15 +68,15 @@ const FormRetail = () => {
                             <Typography variant='h5'> Dados de varejo</Typography>
                         </Box>
                         <Box p={1}>
-                            <TextField id="nomeFantasia" label="Nome fantasia" variant="outlined"  style={{ width:'49%', paddingRight: '1vh' }}/>
-                            <TextField id="razaoSocial" label="Razão social" variant="outlined"  style={{ width:'49%'}}/>
+                            <TextField id="nome_fantasia" label="Nome fantasia" variant="outlined"  style={{ width:'49%', paddingRight: '1vh' }} onChange={props.onChange}/>
+                            <TextField id="razao_social" label="Razão social" variant="outlined"  style={{ width:'49%'}} onChange={props.onChange}/>
                         </Box>
                         <Box p={1}>
-                            <TextField id="cnpj" label="CNPJ" variant="outlined"  style={{ width:'49%', paddingRight: '1vh' }}/>
-                            <TextField id="telefone" label="Telefone" variant="outlined"  style={{ width:'49%'}}/>
+                            <TextField id="cnpj" label="CNPJ" variant="outlined"  style={{ width:'49%', paddingRight: '1vh' }} onChange={props.onChange}/>
+                            <TextField id="telefone" label="Telefone" variant="outlined"  style={{ width:'49%'}} onChange={props.onChange}/>
                         </Box>
                         <Box p={1}>
-                            <TextField id="segmento" label="Segmento" variant="outlined"  style={{ width:'100%'}}/>
+                            <TextField id="segmento" label="Segmento" variant="outlined"  style={{ width:'100%'}} onChange={props.onChange}/>
                         </Box>
                     </Paper>
                     </Box>
@@ -87,6 +89,7 @@ const FormRetail = () => {
                 width: '300px',
                 height: '40px',
                 marginTop: '35px',  }} onClick={() => {
+                props.onSubmit()
                 setToast(true) 
                 setMessage('Aviso: Mensagem de Sucesso...') 
                 setStatus("success")
