@@ -5,8 +5,9 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles({
     root: {
         width: '50%',
-        position: 'fixed',
-        top:'130px'
+        position: 'absolute',
+        top:'5%',
+        left: '65%'
     }
 })
 
