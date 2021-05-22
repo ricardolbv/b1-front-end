@@ -9,18 +9,8 @@ import Divider from '@material-ui/core/Divider';
 import Tab from '@material-ui/core/Tab';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import { useHistory } from 'react-router-dom';
-import Toast from '../../common/Toast';
-
 
 const FormRetail = (props) => {
-    //Message status
-    const [toast, setToast] = useState(false);
-    const [status, setStatus] = useState("success");
-    const [message, setMessage] = useState("");
-    const handleClose = () => {
-        setToast(false)
-        history.push('/home/retail')
-    };
     const history = useHistory();
     
     return (
@@ -88,17 +78,12 @@ const FormRetail = (props) => {
                 backgroundColor: "#0D0B23",
                 width: '300px',
                 height: '40px',
-                marginTop: '35px',  }} onClick={() => {
-                props.onSubmit()
-                setToast(true) 
-                setMessage('Aviso: Mensagem de Sucesso...') 
-                setStatus("success")
-                }}>
+                marginTop: '35px',  }}
+            onClick={props.onSubmit}>
                     Criar
             </Button>
             </Box>
        </Paper>
-       <Toast status={status} message={message} open={toast} handleClose={handleClose}/>
        </Box>
     )
 }
