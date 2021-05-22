@@ -9,6 +9,8 @@ import Divider from '@material-ui/core/Divider';
 import Tab from '@material-ui/core/Tab';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import { useHistory } from 'react-router-dom';
+import InputMask from 'react-input-mask';
+import { newRetail } from './thunks';
 
 const FormRetail = (props) => {
     const history = useHistory();
@@ -37,15 +39,19 @@ const FormRetail = (props) => {
                             <Typography variant='h5'> Dados de usuário</Typography>
                         </Box>
                         <Box p={1}>
-                            <TextField id="emailVarejo" label="E-mail" variant="outlined"  onChange={props.onChange} 
-                             style={{ width:'55%',paddingRight: '1vh' }}/>
+                                <TextField id="emailVarejo" label="E-mail" variant="outlined" value={props.retail.emailVarejo}
+                                style={{ width:'55%',paddingRight: '1vh' }} error={props.mailValidation} onChange={props.onChange} 
+                                {...(props.mailValidation && {helperText:'Formato inválido'})}/>
                             <TextField style={{ width:'40%' }}
                                     id="senha"
                                     label="Senha"
                                     type="password"
                                     autoComplete="current-password"
                                     variant="outlined"
+                                    value={props.retail.senha}
                                     onChange={props.onChange}
+                                    error={props.pswValidation}
+                                    {...(props.pswValidation && {helperText:'Poucos caracteres'})}
                             />
                         </Box>
                         </Paper>
@@ -58,15 +64,25 @@ const FormRetail = (props) => {
                             <Typography variant='h5'> Dados de varejo</Typography>
                         </Box>
                         <Box p={1}>
-                            <TextField id="nome_fantasia" label="Nome fantasia" variant="outlined"  style={{ width:'49%', paddingRight: '1vh' }} onChange={props.onChange}/>
-                            <TextField id="razao_social" label="Razão social" variant="outlined"  style={{ width:'49%'}} onChange={props.onChange}/>
+                            <TextField id="nome_fantasia" label="Nome fantasia" variant="outlined"  style={{ width:'49%', paddingRight: '1vh' }} onChange={props.onChange} error={props.nomeFantasiaValidation}
+                            {...(props.nomeFantasiaValidation && {helperText:'Poucos caracteres'})}/>
+                            <TextField id="razao_social" label="Razão social" variant="outlined"  style={{ width:'49%'}} onChange={props.onChange} error={props.razaoSocialValidation}
+                            {...(props.razaoSocialValidation && {helperText:'Poucos caracteres'})}/>
                         </Box>
                         <Box p={1}>
-                            <TextField id="cnpj" label="CNPJ" variant="outlined"  style={{ width:'49%', paddingRight: '1vh' }} onChange={props.onChange}/>
-                            <TextField id="telefone" label="Telefone" variant="outlined"  style={{ width:'49%'}} onChange={props.onChange}/>
+                        <InputMask mask="99999999999999" onChange={props.onChange} value={newRetail.cnpj}>
+                            {(inputProps) => 
+                            <TextField id="cnpj" label="CNPJ" variant="outlined"  {...inputProps} style={{ width:'49%', paddingRight: '1vh' }} error={props.cnpjValidation}
+                            {...(props.cnpjValidation && {helperText:'CNPJ inválido'})}/>
+                            }
+                        </InputMask>
+                        <InputMask mask="(99) 9 9999-9999" onChange={props.onChange} value={newRetail.telefone}>
+                            {(inputProps) => 
+                            <TextField id="telefone" label="Telefone" variant="outlined"  style={{ width:'49%'}} onChange={props.onChange} />}
+                        </InputMask>
                         </Box>
                         <Box p={1}>
-                            <TextField id="segmento" label="Segmento" variant="outlined"  style={{ width:'100%'}} onChange={props.onChange}/>
+                            <TextField id="segmento" label="Segmento" variant="outlined"  style={{ width:'100%'}} onChange={props.onChange} />
                         </Box>
                     </Paper>
                     </Box>
