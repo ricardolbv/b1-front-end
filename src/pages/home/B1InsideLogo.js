@@ -7,8 +7,8 @@ import Container from '@material-ui/core/Container';
 const useStyle = makeStyles({
     Img: {
         position: 'fixed',
-        height: '80px',
-        width: '165px',
+        height: '11%',
+        width: '11%',
     },
     Container: {
         padding: '3vh',

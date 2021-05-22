@@ -56,7 +56,7 @@ function FormLogin() {
                     <TextField id="email" label="E-mail" variant="outlined" className={classes.Input} />
                 </Typography>
                 <Typography align="center">
-                <TextField id="senha" label="Digite sua senha" variant="outlined" className={classes.Input} />
+                <TextField id="senha" label="Digite sua senha" variant="outlined" className={classes.Input} type='password'/>
                 </Typography>
                 <a href="https://material-ui.com/api/text-field/">
                 <Typography align="right" className={classes.Forgot}>

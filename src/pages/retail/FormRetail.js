@@ -10,7 +10,6 @@ import Tab from '@material-ui/core/Tab';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import { useHistory } from 'react-router-dom';
 
-
 const FormRetail = (props) => {
     const history = useHistory();
     
