@@ -1,4 +1,4 @@
-import { loadRetail, createRetail, updateRetailStatus } from './actions';
+import { loadRetail, createRetail, updateRetailStatus, deleteRetail } from './actions';
 import axios from 'axios';
 
 export const fetchRetails = () => async (dispatch, getState) => {
@@ -47,6 +47,20 @@ export const updateNewStatus = retail => async (dispatch) => {
         const response = await axios.post('https://b1-backend.azurewebsites.net/retail/update-status', 
         _retail)
         dispatch(updateRetailStatus(retail));
+
+    } catch (error) {
+        alert(error)
+    }
+}
+
+export const excludeRetail = retail => async (dispatch) => {
+    try {
+        const _retail =  {
+            email: retail.email,
+        }
+        const response = await axios.post('https://b1-backend.azurewebsites.net/retail/delete', 
+        _retail)
+        dispatch(deleteRetail(retail));
 
     } catch (error) {
         alert(error)
