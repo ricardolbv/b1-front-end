@@ -6,22 +6,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Switch from '@material-ui/core/Switch';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TableContainer from '@material-ui/core/TableContainer';
 import RetailPagination from './RetailPagination'
-
-
-const RetailEditAndExclude = () => {
-  return ( <div>
-          <Switch color='primary'/>
-          <EditIcon style={{ position:'relative', top:'1vh'}}/>
-          <DeleteIcon style={{ position:'relative', top:'1vh' }}/>
-        </div>
-        )
-}
+import RetailEditAndExcludeEnable from './RetailEditExcludeEnable';
 
 
 function RetailTable (props) {
@@ -63,7 +51,7 @@ function RetailTable (props) {
       <Table size='small'>
         <TableHead>
           <TableRow>
-            <TableCell align='center'> ID </TableCell>
+            <TableCell align='center'> Email </TableCell>
             <TableCell align='center'> CNPJ </TableCell>
             <TableCell align='center'> Nome Fantasia </TableCell>
             <TableCell align='center'> Razão social </TableCell>
@@ -77,16 +65,18 @@ function RetailTable (props) {
           if (props.searchTerm === '')
             return val
           else if (val.nome_fantasia.toLowerCase().includes(props.searchTerm.toLowerCase()) || 
-                   val.razao_social.toLowerCase().includes(props.searchTerm.toLowerCase()))
+                   val.razao_social.toLowerCase().includes(props.searchTerm.toLowerCase()) || 
+                   val.email.toLowerCase().includes(props.searchTerm.toLowerCase()))
             return val
         }).map(row => 
-        <TableRow >
-          <TableCell align='center'> {row.id} </TableCell>
+        <TableRow id={row.id}>
+          <TableCell align='center'> {row.email} </TableCell>
           <TableCell align='center'> {row.cnpj} </TableCell>
           <TableCell align='center'> {row.nome_fantasia} </TableCell>
           <TableCell align='center'> {row.razao_social} </TableCell>
           <TableCell align='center'> {row.telefone} </TableCell>
-          <TableCell align='center'> <RetailEditAndExclude /> </TableCell>
+          <TableCell align='center'> <RetailEditAndExcludeEnable status={row.status} idRetail={row.id} emailVarejo={row.email}
+          {...props}/> </TableCell>
         </TableRow>
         )}
         </TableBody>

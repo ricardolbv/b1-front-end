@@ -18,7 +18,7 @@ const useStyle = makeStyles({
     }
 })
 
-const RetailTableContainer = () => {
+const RetailTableContainer = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
     const classes = useStyle();
     const history = useHistory();
@@ -31,7 +31,7 @@ const RetailTableContainer = () => {
                     <Box display='flex' justifyContent='center' p={1}  >
                         <Paper elevation={2} style={{ width:'60%' }}>
                             <InputBase 
-                            placeholder='Procurar por nome fantasia ou código ...'
+                            placeholder='Procurar por nome fantasia ou email ...'
                             style={{ width: '90%', padding:'5px' }}
                             onChange={event => {setSearchTerm(event.target.value)}}
                             >
@@ -46,7 +46,7 @@ const RetailTableContainer = () => {
                         </Box>
                     </Box>
                     <Box p={1}>
-                    <RetailTable searchTerm={searchTerm}/>
+                    <RetailTable searchTerm={searchTerm} {...props}/>
                     </Box>
                 </Box>
             </Paper>

@@ -9,3 +9,9 @@ export const loadRetail = allRetail => ({
     type: LOAD_RETAIL,
     payload: { allRetail }
 })
+
+export const UPDATE_RETAIL_STATUS = 'UPDATE_RETAIL_STATUS';
+export const updateRetailStatus = updatedRetail => ({
+    type: UPDATE_RETAIL_STATUS,
+    payload: updatedRetail
+})

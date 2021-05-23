@@ -28,7 +28,8 @@ const HomePage = () => {
              <AppB1Bar />
              <Switch>
                 <Route path="/home" exact component={HomeDisplay} />
-                <Route path="/home/retail" exact component={RetailPage}/>
+                <Route path="/home/retail" exact render={(props) => <RetailPage {...props}
+                setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
                 <Route path="/home/retail/add" exact render={(props) => <ManageRetailForm {...props} 
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
                 <Route path="/home/brand" exact component={BrandPage}/>
