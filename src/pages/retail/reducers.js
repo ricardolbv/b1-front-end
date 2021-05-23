@@ -1,4 +1,8 @@
-import { CREATE_RETAIL, LOAD_RETAIL, UPDATE_RETAIL_STATUS } from "./actions";
+import { CREATE_RETAIL, 
+         LOAD_RETAIL, 
+         UPDATE_RETAIL_STATUS,
+         DELETE_RETAIL,
+ } from "./actions";
 
 export const retails = ( state = [], action ) => {
     const { type, payload } = action;
@@ -19,6 +23,11 @@ export const retails = ( state = [], action ) => {
             // O que fazer para deixar imutavel?
             const updatedRetail = state;
             return updatedRetail;
+        }
+
+        case DELETE_RETAIL: {
+            const deleteRetail = state;
+            return deleteRetail;
         }
 
         default:

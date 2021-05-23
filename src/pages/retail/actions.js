@@ -15,3 +15,9 @@ export const updateRetailStatus = updatedRetail => ({
     type: UPDATE_RETAIL_STATUS,
     payload: updatedRetail
 })
+
+export const DELETE_RETAIL = 'DELETE_RETAIL';
+export const deleteRetail = retail => ({
+    type: UPDATE_RETAIL_STATUS,
+    payload: retail
+})
