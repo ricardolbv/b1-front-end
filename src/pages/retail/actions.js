@@ -21,3 +21,9 @@ export const deleteRetail = retail => ({
     type: UPDATE_RETAIL_STATUS,
     payload: retail
 })
+
+export const LOAD_SEGMENT = 'LOAD_SEGMENT';
+export const loadSegment = allSegments => ({
+    type: LOAD_SEGMENT,
+    payload: { allSegments }
+})

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -11,9 +11,17 @@ import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import { useHistory } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import { newRetail } from './thunks';
+import { connect } from 'react-redux';
+import Select from '@material-ui/core/Select';
+import { fetchSegments } from './thunks';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel'
 
 const FormRetail = (props) => {
     const history = useHistory();
+    useEffect(() => {
+        props.segmentsLoad();
+    },[])
     
     return (
         <Box display='flex' justifyContent='center' p={3} style={{maxHeight:'80%'}}>
@@ -34,7 +42,7 @@ const FormRetail = (props) => {
             <Grid container spacing={1}>
                 <Grid item sm={6}>
                     <Box p={2} >
-                        <Paper elevation={5} style={{ height: '20vh' }}>
+                        <Paper elevation={5} style={{ height: '100%' }}>
                         <Box p={1}>
                             <Typography variant='h5'> Dados de usuário</Typography>
                         </Box>
@@ -59,7 +67,7 @@ const FormRetail = (props) => {
                 </Grid>
                 <Grid item sm={6}>
                 <Box p={2}>
-                        <Paper elevation={5} style={{ height: '50vh' }}>
+                        <Paper elevation={5} style={{ height: '100%' }}>
                         <Box p={1}>
                             <Typography variant='h5'> Dados de varejo</Typography>
                         </Box>
@@ -81,8 +89,25 @@ const FormRetail = (props) => {
                             <TextField id="telefone" label="Telefone" variant="outlined"  style={{ width:'49%'}} onChange={props.onChange} />}
                         </InputMask>
                         </Box>
+
                         <Box p={1}>
-                            <TextField id="segmento" label="Segmento" variant="outlined"  style={{ width:'100%'}} onChange={props.onChange} />
+                            <InputLabel id='segmento-label'> Segmento </InputLabel>
+                            <TextField
+                             id="segmento"
+                             labelId='segmento-label'
+                             variant="outlined"
+                             onChange={props.onChangeSelect}
+                             value={props.retail.segmento}
+                             style={{ width: '100%' }}
+                             select>
+                                  {props.segments.map(seg => 
+                                      <MenuItem  id="segmento" key={seg.id} name={seg.id} value={seg.id}> {seg.segmento}</MenuItem>
+                                  )}
+                            </TextField>
+                        
+                        </Box>
+                        <Box p={1}>
+                            <TextField id="inscricao" label="Inscrição" variant="outlined"  style={{ width:'100%'}} onChange={props.onChange} />
                         </Box>
                     </Paper>
                     </Box>
@@ -104,4 +129,12 @@ const FormRetail = (props) => {
     )
 }
 
-export default FormRetail;
+const mapStateToProps = state => ({
+    segments: state.segments,
+  })
+
+const mapDispatchToProps = dispatch => ({
+    segmentsLoad: () => dispatch(fetchSegments()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormRetail);

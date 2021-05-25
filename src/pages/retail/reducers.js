@@ -2,6 +2,7 @@ import { CREATE_RETAIL,
          LOAD_RETAIL, 
          UPDATE_RETAIL_STATUS,
          DELETE_RETAIL,
+         LOAD_SEGMENT,
  } from "./actions";
 
 export const retails = ( state = [], action ) => {
@@ -30,6 +31,19 @@ export const retails = ( state = [], action ) => {
             return deleteRetail;
         }
 
+        default:
+            return state;
+    }
+}
+
+export const segments = ( state = [], action ) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case LOAD_SEGMENT: {
+            const { allSegments } = payload;
+            return allSegments;
+        }
         default:
             return state;
     }
