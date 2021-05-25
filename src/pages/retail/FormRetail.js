@@ -24,7 +24,7 @@ const FormRetail = (props) => {
     },[])
     
     return (
-        <Box display='flex' justifyContent='center' p={3} style={{maxHeight:'80%'}}>
+        <Box boxShadow={3} display='flex' justifyContent='center' p={3} style={{maxHeight:'85%'}}>
         <Paper elevation={3} style={{ width: '100%', height:'100%' }}>
         <Grid container spacing={1}>
             <Grid item sm={6}>
@@ -41,12 +41,12 @@ const FormRetail = (props) => {
         <Divider variant="middle" style={{ padding: '1px' }}/>
             <Grid container spacing={1}>
                 <Grid item sm={6}>
-                    <Box p={2} >
+                    <Box boxShadow={3} p={2} m={1}>
                         <Paper elevation={5} style={{ height: '100%' }}>
                         <Box p={1}>
                             <Typography variant='h5'> Dados de usuário</Typography>
                         </Box>
-                        <Box p={1}>
+                        <Box p={1} >
                                 <TextField id="emailVarejo" label="E-mail" variant="outlined" value={props.retail.emailVarejo}
                                 style={{ width:'55%',paddingRight: '1vh' }} error={props.mailValidation} onChange={props.onChange} 
                                 {...(props.mailValidation && {helperText:'Formato inválido'})}/>
@@ -66,7 +66,7 @@ const FormRetail = (props) => {
                     </Box>
                 </Grid>
                 <Grid item sm={6}>
-                <Box p={2}>
+                <Box boxShadow={3} p={2} m={1}>
                         <Paper elevation={5} style={{ height: '100%' }}>
                         <Box p={1}>
                             <Typography variant='h5'> Dados de varejo</Typography>

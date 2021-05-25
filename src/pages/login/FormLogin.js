@@ -5,6 +5,7 @@ import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import Box from '@material-ui/core/Box'
 
 const useStyle = makeStyles({
     Form: {
@@ -48,6 +49,7 @@ const useStyle = makeStyles({
 function FormLogin() {
     const classes = useStyle();
     return (
+        <Box boxShadow={4} className={classes.Form}>
         <Paper elevation={2} className={classes.Form} >
             <form>
                 <Typography className={classes.PrimaryColor} variant='h5' align="center">Bem vindo!</Typography>
@@ -72,6 +74,7 @@ function FormLogin() {
                 </Typography>
             </form>
         </Paper>
+        </Box>
     )
 }
 

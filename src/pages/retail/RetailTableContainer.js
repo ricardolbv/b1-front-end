@@ -23,7 +23,7 @@ const RetailTableContainer = (props) => {
     const classes = useStyle();
     const history = useHistory();
     return (
-        <Box display='flex' justifyContent='center' p={3} style={{maxHeight:'80%'}}>
+        <Box  boxShadow={3} m={1} display='flex' justifyContent='center' p={2}>
             <Paper elevation={3} style={{ width: '100%', height:'100%' }}>
                 <Box p={1} paddingLeft={3}>
                     <Typography variant='h3'> Varejo</Typography>
@@ -31,6 +31,7 @@ const RetailTableContainer = (props) => {
                     <Box display='flex' justifyContent='center' p={1}  >
                         <Paper elevation={2} style={{ width:'60%' }}>
                             <InputBase 
+                            margin='dense'
                             placeholder='Procurar por nome fantasia ou email ...'
                             style={{ width: '90%', padding:'5px' }}
                             onChange={event => {setSearchTerm(event.target.value)}}
