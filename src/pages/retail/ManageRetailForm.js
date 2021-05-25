@@ -11,6 +11,16 @@ function ManageRetailForm (props)  {
     const [cnpjValidation, setCnpjValid] = useState(false);
     const [nomeFantasiaValidation, setNomeFantasiaValid] = useState(false)
     const [razaoSocialValidation, setRazaoSocialValid] = useState(false)
+    const [retail, setRetail] = useState({
+        cnpj: '',
+        razao_social: '',
+        nome_fantasia: '',
+        telefone: '',
+        segmento: '',
+        emailVarejo: '',
+        senha: '',
+        inscricao: '',
+    });
  
     const handleSubmit = (target) => {
         if (mailIsValidated() && pswIsValid() &&
@@ -69,15 +79,7 @@ function ManageRetailForm (props)  {
     }
     return true;
 }
-    const [retail, setRetail] = useState({
-        cnpj: '',
-        razao_social: '',
-        nome_fantasia: '',
-        telefone: '',
-        segmento: '',
-        emailVarejo: '',
-        senha: '',
-    });
+    
 
     function handleChange ({ target }) {
         setValidationsToFalse();
@@ -87,12 +89,21 @@ function ManageRetailForm (props)  {
         })
     }
 
+    function handleChangeSelect ({ target }) {
+        console.log(target)
+        setRetail({
+            ...retail,
+            segmento: target.value,
+        })
+    }
+
 
     return (
     <>
         <FormRetail retail={retail} 
                     onChange={handleChange}
                     onSubmit={handleSubmit}
+                    onChangeSelect={handleChangeSelect}
                     mailValidation={mailValidation}
                     pswValidation={pswValidation}
                     cnpjValidation={cnpjValidation}
