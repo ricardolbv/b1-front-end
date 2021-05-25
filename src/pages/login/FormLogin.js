@@ -48,7 +48,7 @@ const useStyle = makeStyles({
 function FormLogin() {
     const classes = useStyle();
     return (
-        <Paper elevation={3} className={classes.Form} >
+        <Paper elevation={2} className={classes.Form} >
             <form>
                 <Typography className={classes.PrimaryColor} variant='h5' align="center">Bem vindo!</Typography>
                 <Typography variant='subtitle1' align="center" className={classes.GreyText}>Faça seu login</Typography>

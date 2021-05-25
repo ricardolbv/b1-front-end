@@ -25,7 +25,7 @@ const DeletAlertDialog = (props) => {
           <Button onClick={props.handleCloseDialog} color="primary">
             Cancelar
           </Button>
-          <Button onClick={props.handleExclude} color="primary" autoFocus>
+          <Button onClick={props.handleExclude} color="primary">
             Prosseguir
           </Button>
         </DialogActions>

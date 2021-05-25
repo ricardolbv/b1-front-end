@@ -69,7 +69,7 @@ function RetailTable (props) {
                    val.email.toLowerCase().includes(props.searchTerm.toLowerCase()))
             return val
         }).map(row => 
-        <TableRow id={row.id}>
+        <TableRow id={row.id} key={row.id}>
           <TableCell align='center'> {row.email} </TableCell>
           <TableCell align='center'> {row.cnpj} </TableCell>
           <TableCell align='center'> {row.nome_fantasia} </TableCell>

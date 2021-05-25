@@ -27,6 +27,7 @@ const RetailEditAndExcludeEnable = (props) => {
             email: props.emailVarejo,
         }
         props.onExcludeRetail(_retail);
+        handleCloseDialog();
         props.setToast(true);
         props.setStatus("success");
         props.setMessage('Usuario Varejo '+ props.emailVarejo +' Excluido!') 
@@ -37,7 +38,7 @@ const RetailEditAndExcludeEnable = (props) => {
     }
     return (
             <div>
-                <Switch color='primary' checked={props.status} onClick={handleClickSlide}/>
+                <Switch color='primary' checked={props.status} onClick={handleClickSlide} value={props.status}/>
                 <EditIcon style={{ position:'relative', top:'1vh'}} />
                 <DeleteIcon style={{ position:'relative', top:'1vh' }} onClick={handleClickDelete}/>
                 <DeletAlertDialog openDialog={openDialog} handleCloseDialog={handleCloseDialog} handleExclude={handleExclude} {...props}/>

@@ -25,10 +25,10 @@ function ManageRetailForm (props)  {
     const handleSubmit = (target) => {
         if (mailIsValidated() && pswIsValid() &&
             nomeFantasiaIsValid() && razaoSocialIsValid()){
+        props.onCreateRetail(retail);
         props.setToast(true)
         props.setMessage('Varejo '+ retail.nome_fantasia +' Cadastrado!') 
         props.setStatus("success");
-        props.onCreateRetail(retail);
         history.push("/home/retail" );
         }
     }
