@@ -10,6 +10,7 @@ import RetailTable from './RetailTable';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const useStyle = makeStyles({
     Btn: {
@@ -28,19 +29,21 @@ const RetailTableContainer = (props) => {
                 <Box p={1} paddingLeft={3}>
                     <Typography variant='h3'> Varejo</Typography>
                     <Divider style={{ padding: '1px' }}/>
-                    <Box display='flex' justifyContent='center' p={1}  >
-                        <Paper elevation={2} style={{ width:'60%' }}>
-                            <InputBase 
+                    <Box display='flex' justifyContent='center' p={1}>
+                        <Box boxShadow={5} paddingRight={45}>
+                        <InputBase 
                             margin='dense'
                             placeholder='Procurar por nome fantasia ou email ...'
-                            style={{ width: '90%', padding:'5px' }}
+                            style={{ width: '1650%', padding:'5px' }}
                             onChange={event => {setSearchTerm(event.target.value)}}
+                            startAdornment={
+                                <InputAdornment position='end'>
+                                    <SearchIcon />
+                                </InputAdornment>
+                            }
                             >
-                            </InputBase>
-                            <IconButton type="submit" aria-label="search" style={{ right:'1px', position:'' }}>
-                                <SearchIcon />
-                            </IconButton>
-                        </Paper>
+                        </InputBase>
+                        </Box>
                         <Box paddingLeft={3}>
                             <Button className={classes.Btn} variant="contained" color="primary" 
                             onClick= {() => history.push('/home/retail/add')}> + Novo varejo </Button>
