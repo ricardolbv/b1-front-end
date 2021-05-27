@@ -9,6 +9,7 @@ import BrandPage from '../brand/BrandPage';
 import CampaignPage from '../campaign/CampaignPage';
 import VisualizationPage from '../visualization/VisualizationPage';
 import ManageRetailForm from '../retail/ManageRetailForm';
+import ManageRetailFormEdit from '../retail/ManageRetailFormEdit';
 import Toast from '../../common/Toast';
 
 const HomePage = () => {
@@ -31,6 +32,8 @@ const HomePage = () => {
                 <Route path="/home/retail" exact render={(props) => <RetailPage {...props}
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
                 <Route path="/home/retail/add" exact render={(props) => <ManageRetailForm {...props} 
+                setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
+                <Route path="/home/retail/edit/:id" exact render={(props) => <ManageRetailFormEdit {...props} 
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
                 <Route path="/home/brand" exact component={BrandPage}/>
                 <Route path="/home/campaign" exact component={CampaignPage}/>
