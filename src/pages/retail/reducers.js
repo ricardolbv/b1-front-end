@@ -3,6 +3,7 @@ import { CREATE_RETAIL,
          UPDATE_RETAIL_STATUS,
          DELETE_RETAIL,
          LOAD_SEGMENT,
+         EDIT_RETAIL
  } from "./actions";
 
 export const retails = ( state = [], action ) => {
@@ -21,7 +22,11 @@ export const retails = ( state = [], action ) => {
         }
 
         case UPDATE_RETAIL_STATUS: {
-            // O que fazer para deixar imutavel?
+            const updatedRetail = state;
+            return updatedRetail;
+        }
+        //TODO : Verificar manuseio
+        case EDIT_RETAIL: {
             const updatedRetail = state;
             return updatedRetail;
         }

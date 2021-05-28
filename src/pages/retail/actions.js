@@ -4,6 +4,12 @@ export const createRetail = retail => ({
     payload: retail,
 })
 
+export const EDIT_RETAIL = 'EDIT_RETAIL';
+export const editRetail = retail => ({
+    type: EDIT_RETAIL,
+    payload: retail,
+})
+
 export const LOAD_RETAIL = 'LOAD_RETAIL';
 export const loadRetail = allRetail => ({
     type: LOAD_RETAIL,

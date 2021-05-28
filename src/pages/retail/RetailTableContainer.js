@@ -24,8 +24,7 @@ const RetailTableContainer = (props) => {
     const classes = useStyle();
     const history = useHistory();
     return (
-        <Box  boxShadow={3} m={1} display='flex' justifyContent='center' p={2}>
-            <Paper elevation={3} style={{ width: '100%', height:'100%' }}>
+        <Box  boxShadow={5} m={2} display='flex' justifyContent='center' p={2}>
                 <Box p={1} paddingLeft={3}>
                     <Typography variant='h3'> Varejo</Typography>
                     <Divider style={{ padding: '1px' }}/>
@@ -53,7 +52,6 @@ const RetailTableContainer = (props) => {
                     <RetailTable searchTerm={searchTerm} {...props}/>
                     </Box>
                 </Box>
-            </Paper>
         </Box>
     )
 }

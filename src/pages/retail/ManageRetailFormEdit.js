@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import FormRetail from './FormRetail';
 import { connect } from 'react-redux';
-import { newRetail } from './thunks';
+import { editedRetail } from './thunks';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector} from 'react-redux';
 
@@ -30,9 +30,9 @@ function ManageRetailFormEdit (props)  {
     const handleSubmit = (target) => {
         if (mailIsValidated() && pswIsValid() &&
             nomeFantasiaIsValid() && razaoSocialIsValid()){
-        props.onCreateRetail(retail);
+        props.onEditRetail(retail);
         props.setToast(true)
-        props.setMessage('Varejo '+ retail.nome_fantasia +' Cadastrado!') 
+        props.setMessage('Varejo '+ retail.nome_fantasia +' Editado!') 
         props.setStatus("success");
         history.push("/home/retail" );
         }
@@ -121,7 +121,7 @@ function ManageRetailFormEdit (props)  {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onCreateRetail: retail => dispatch(newRetail(retail))
+    onEditRetail: retail => dispatch(editedRetail(retail))
 })
 
 export default connect(null, mapDispatchToProps)(ManageRetailFormEdit);
