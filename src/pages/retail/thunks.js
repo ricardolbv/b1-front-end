@@ -83,6 +83,7 @@ export const updateNewStatus = retail => async (dispatch) => {
 
 export const excludeRetail = retail => async (dispatch) => {
     try {
+        console.log(retail)
         const _retail =  {
             email: retail.email,
         }
