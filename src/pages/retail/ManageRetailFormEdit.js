@@ -1,33 +1,38 @@
 import { React, useState } from 'react';
 import FormRetail from './FormRetail';
 import { connect } from 'react-redux';
-import { newRetail } from './thunks';
-import { useHistory } from 'react-router-dom';
+import { editedRetail } from './thunks';
+import { useHistory, useParams } from 'react-router-dom';
+import { useSelector} from 'react-redux';
 
-function ManageRetailForm (props)  {
+function ManageRetailFormEdit (props)  {
     const history = useHistory();
+    const retails = useSelector(state => state.retails);
+    let {id} = useParams()
+    const [_retail] = retails.filter(item => item.id == id);
+
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);
     const [cnpjValidation, setCnpjValid] = useState(false);
     const [nomeFantasiaValidation, setNomeFantasiaValid] = useState(false)
     const [razaoSocialValidation, setRazaoSocialValid] = useState(false)
     const [retail, setRetail] = useState({
-        cnpj: '',
-        razao_social: '',
-        nome_fantasia: '',
-        telefone: '',
-        segmento: '',
-        emailVarejo: '',
-        senha: '',
-        inscricao: '',
+        cnpj: _retail.cnpj,
+        razao_social: _retail.razao_social,
+        nome_fantasia: _retail.nome_fantasia,
+        telefone: _retail.telefone,
+        segmento: _retail.segmento,
+        emailVarejo: _retail.email,
+        senha: _retail.senha,
+        inscricao: _retail.inscricao,
     });
  
     const handleSubmit = (target) => {
         if (mailIsValidated() && pswIsValid() &&
             nomeFantasiaIsValid() && razaoSocialIsValid()){
-        props.onCreateRetail(retail);
+        props.onEditRetail(retail);
         props.setToast(true)
-        props.setMessage('Varejo '+ retail.nome_fantasia +' Cadastrado!') 
+        props.setMessage('Varejo '+ retail.nome_fantasia +' Editado!') 
         props.setStatus("success");
         history.push("/home/retail" );
         }
@@ -100,8 +105,8 @@ function ManageRetailForm (props)  {
 
     return (
     <>
-        <FormRetail retail={retail}
-                    type={"Novo varejo"} 
+        <FormRetail retail={retail} 
+                    type={'Editando varejo'}
                     onChange={handleChange}
                     onSubmit={handleSubmit}
                     onChangeSelect={handleChangeSelect}
@@ -116,7 +121,7 @@ function ManageRetailForm (props)  {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onCreateRetail: retail => dispatch(newRetail(retail))
+    onEditRetail: retail => dispatch(editedRetail(retail))
 })
 
-export default connect(null, mapDispatchToProps)(ManageRetailForm);
+export default connect(null, mapDispatchToProps)(ManageRetailFormEdit);

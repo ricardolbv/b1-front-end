@@ -1,4 +1,12 @@
-import { loadSegment, loadRetail, createRetail, updateRetailStatus, deleteRetail } from './actions';
+import { 
+    loadSegment, 
+    loadRetail, 
+    createRetail, 
+    updateRetailStatus, 
+    deleteRetail,
+    editRetail, 
+} 
+from './actions';
 import axios from 'axios';
 
 export const fetchRetails = () => async (dispatch, getState) => {
@@ -13,7 +21,6 @@ export const fetchRetails = () => async (dispatch, getState) => {
 
 export const newRetail = retail => async (dispatch) => {
     try {
-        console.log(retail)
         const _retail =  {
             email: retail.emailVarejo,
             inscricao: retail.inscricao,
@@ -30,6 +37,29 @@ export const newRetail = retail => async (dispatch) => {
         _retail)
 
         dispatch(createRetail(retail));
+
+    } catch (error) {
+        alert(error)
+    }
+}
+
+export const editedRetail = retail => async (dispatch) => {
+    try {
+        console.log(retail)
+        const _retail =  {
+            email: retail.emailVarejo,
+            update_inscricao: retail.inscricao,
+            update_senha: retail.senha,
+            update_cnpj: retail.cnpj,
+            update_razao_social: retail.razao_social,
+            update_nome_fantasia: retail.nome_fantasia,
+            update_telefone: retail.telefone,
+            update_id_segmento: retail.segmento,
+        }
+        const response = await axios.post('https://b1-backend.azurewebsites.net/retail/update-retail', 
+        _retail)
+
+        dispatch(editRetail(retail));
 
     } catch (error) {
         alert(error)
@@ -53,6 +83,7 @@ export const updateNewStatus = retail => async (dispatch) => {
 
 export const excludeRetail = retail => async (dispatch) => {
     try {
+        console.log(retail)
         const _retail =  {
             email: retail.email,
         }

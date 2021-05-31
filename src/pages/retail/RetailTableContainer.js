@@ -10,6 +10,7 @@ import RetailTable from './RetailTable';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const useStyle = makeStyles({
     Btn: {
@@ -23,24 +24,25 @@ const RetailTableContainer = (props) => {
     const classes = useStyle();
     const history = useHistory();
     return (
-        <Box  boxShadow={3} m={1} display='flex' justifyContent='center' p={2}>
-            <Paper elevation={3} style={{ width: '100%', height:'100%' }}>
+        <Box  boxShadow={5} m={2} display='flex' justifyContent='center' p={2}>
                 <Box p={1} paddingLeft={3}>
                     <Typography variant='h3'> Varejo</Typography>
                     <Divider style={{ padding: '1px' }}/>
-                    <Box display='flex' justifyContent='center' p={1}  >
-                        <Paper elevation={2} style={{ width:'60%' }}>
-                            <InputBase 
+                    <Box display='flex' justifyContent='center' p={1}>
+                        <Box boxShadow={5} paddingRight={45} >
+                        <InputBase 
                             margin='dense'
                             placeholder='Procurar por nome fantasia ou email ...'
-                            style={{ width: '90%', padding:'5px' }}
+                            style={{ width: '52vh', padding:'5px' }}
                             onChange={event => {setSearchTerm(event.target.value)}}
+                            startAdornment={
+                                <InputAdornment position='end'>
+                                    <SearchIcon />
+                                </InputAdornment>
+                            }
                             >
-                            </InputBase>
-                            <IconButton type="submit" aria-label="search" style={{ right:'1px', position:'' }}>
-                                <SearchIcon />
-                            </IconButton>
-                        </Paper>
+                        </InputBase>
+                        </Box>
                         <Box paddingLeft={3}>
                             <Button className={classes.Btn} variant="contained" color="primary" 
                             onClick= {() => history.push('/home/retail/add')}> + Novo varejo </Button>
@@ -50,7 +52,6 @@ const RetailTableContainer = (props) => {
                     <RetailTable searchTerm={searchTerm} {...props}/>
                     </Box>
                 </Box>
-            </Paper>
         </Box>
     )
 }
