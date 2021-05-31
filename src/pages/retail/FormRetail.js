@@ -24,7 +24,7 @@ const FormRetail = (props) => {
     }, [])
 
     return (
-        <Box  m={2} boxShadow={5} display='flex' justifyContent='center' p={1} >
+        <Box  m={2} boxShadow={5} p={1} >
             <div>
                 <Grid container spacing={1}>
                     <Grid item sm={6}>

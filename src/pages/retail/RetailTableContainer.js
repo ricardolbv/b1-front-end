@@ -24,7 +24,7 @@ const RetailTableContainer = (props) => {
     const classes = useStyle();
     const history = useHistory();
     return (
-        <Box  boxShadow={5} m={2} display='flex' justifyContent='center' p={2}>
+        <Box boxShadow={5} m={2} p={2}>
                 <Box p={1} paddingLeft={3}>
                     <Typography variant='h3'> Varejo</Typography>
                     <Divider style={{ padding: '1px' }}/>
