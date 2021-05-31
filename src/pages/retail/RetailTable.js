@@ -39,9 +39,11 @@ function RetailTable (props) {
     setPage(value);
   };
 
-
   useEffect(() => {
     setLoad(true);
+  }, [])
+
+  useEffect(() => {
     props.retailLoad();
     setLoad(false);
   }, [props.retails])

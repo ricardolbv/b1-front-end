@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 
 const BrandPage = () => {
     return (
-        <Box display='flex' justifyContent='center' p={3} style={{maxHeight:'80%'}}>
+        <Box display='flex' justifyContent='center' p={2} style={{maxHeight:'80%'}}>
         <Paper elevation={3} style={{ width: '100%', height:'85vh' }}>
             <Typography variant='h2' textAlign='center'> Pagina Marca </Typography>
             <BuildIcon />
