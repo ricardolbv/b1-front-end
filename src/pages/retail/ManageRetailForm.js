@@ -11,6 +11,7 @@ function ManageRetailForm (props)  {
     const [cnpjValidation, setCnpjValid] = useState(false);
     const [nomeFantasiaValidation, setNomeFantasiaValid] = useState(false)
     const [razaoSocialValidation, setRazaoSocialValid] = useState(false)
+    const [segmentoValidation, setSegValid] = useState(false);
     const [retail, setRetail] = useState({
         cnpj: '',
         razao_social: '',
@@ -24,7 +25,8 @@ function ManageRetailForm (props)  {
  
     const handleSubmit = (target) => {
         if (mailIsValidated() && pswIsValid() &&
-            nomeFantasiaIsValid() && razaoSocialIsValid()){
+            nomeFantasiaIsValid() && razaoSocialIsValid()&&
+            segmentoIsValidated()){
         props.onCreateRetail(retail);
         props.setToast(true)
         props.setMessage('Varejo '+ retail.nome_fantasia +' Cadastrado!') 
@@ -39,6 +41,7 @@ function ManageRetailForm (props)  {
         setCnpjValid(false);
         setNomeFantasiaValid(false);
         setRazaoSocialValid(false);
+        setSegValid(false);
     }
 
     const mailIsValidated = () => {
@@ -48,6 +51,14 @@ function ManageRetailForm (props)  {
         }
         if(!retail.emailVarejo.toLowerCase().includes('@') || !retail.emailVarejo.toLowerCase().includes('.com')){
             setMailValid(true);
+            return false;
+        }
+        return true;
+    }
+
+    const segmentoIsValidated = () => {
+        if(retail.segmento === '' ){
+            setSegValid(true);
             return false;
         }
         return true;
@@ -110,6 +121,7 @@ function ManageRetailForm (props)  {
                     cnpjValidation={cnpjValidation}
                     nomeFantasiaValidation={nomeFantasiaValidation}
                     razaoSocialValidation={razaoSocialValidation}
+                    segmentoValidation={segmentoValidation}
         />
     </>
     )

@@ -14,14 +14,15 @@ function ManageRetailFormEdit (props)  {
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);
     const [cnpjValidation, setCnpjValid] = useState(false);
-    const [nomeFantasiaValidation, setNomeFantasiaValid] = useState(false)
-    const [razaoSocialValidation, setRazaoSocialValid] = useState(false)
+    const [nomeFantasiaValidation, setNomeFantasiaValid] = useState(false);
+    const [razaoSocialValidation, setRazaoSocialValid] = useState(false);
+    const [segmentoValidation, setSegValid] = useState(false);
     const [retail, setRetail] = useState({
         cnpj: _retail.cnpj,
         razao_social: _retail.razao_social,
         nome_fantasia: _retail.nome_fantasia,
         telefone: _retail.telefone,
-        segmento: _retail.segmento,
+        segmento: _retail.id_segmento,
         emailVarejo: _retail.email,
         senha: _retail.senha,
         inscricao: _retail.inscricao,
@@ -29,7 +30,8 @@ function ManageRetailFormEdit (props)  {
  
     const handleSubmit = (target) => {
         if (mailIsValidated() && pswIsValid() &&
-            nomeFantasiaIsValid() && razaoSocialIsValid()){
+            nomeFantasiaIsValid() && razaoSocialIsValid() &&
+            segmentoIsValidated()){
         props.onEditRetail(retail);
         props.setToast(true)
         props.setMessage('Varejo '+ retail.nome_fantasia +' Editado!') 
@@ -44,6 +46,7 @@ function ManageRetailFormEdit (props)  {
         setCnpjValid(false);
         setNomeFantasiaValid(false);
         setRazaoSocialValid(false);
+        setSegValid(false);
     }
 
     const mailIsValidated = () => {
@@ -53,6 +56,14 @@ function ManageRetailFormEdit (props)  {
         }
         if(!retail.emailVarejo.toLowerCase().includes('@') || !retail.emailVarejo.toLowerCase().includes('.com')){
             setMailValid(true);
+            return false;
+        }
+        return true;
+    }
+
+    const segmentoIsValidated = () => {
+        if(retail.segmento === '' ){
+            setSegValid(true);
             return false;
         }
         return true;
@@ -115,6 +126,7 @@ function ManageRetailFormEdit (props)  {
                     cnpjValidation={cnpjValidation}
                     nomeFantasiaValidation={nomeFantasiaValidation}
                     razaoSocialValidation={razaoSocialValidation}
+                    segmentoValidation={segmentoValidation}
         />
     </>
     )

@@ -100,7 +100,9 @@ const FormRetail = (props) => {
                                         onChange={props.onChangeSelect}
                                         value={props.retail.segmento}
                                         style={{ width: '100%' }}
-                                        select>
+                                        select
+                                        error={props.segmentoValidation}
+                                        {...(props.segmentoValidation && { helperText: 'Segmento é obrigatório' })}>
                                         
                                         {props.segments.map(seg =>
                                             <MenuItem key={seg.id} name={seg.id} value={seg.id}> {seg.segmento}</MenuItem>
