@@ -33,6 +33,8 @@ export const newRetail = retail => async (dispatch) => {
             id_segmento: retail.segmento,
             status: 1,
         }
+
+        console.log(_retail);
         const response = await axios.post('https://b1-backend.azurewebsites.net/retail/create', 
         _retail)
 
