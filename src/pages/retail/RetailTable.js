@@ -46,7 +46,7 @@ function RetailTable (props) {
   useEffect(() => {
     props.retailLoad();
     setLoad(false);
-  }, [props.retails])
+  }, [])
 
   return (
     <TableContainer style={{ minHeight: '80%' }}>

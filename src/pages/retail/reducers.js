@@ -22,8 +22,15 @@ export const retails = ( state = [], action ) => {
         }
 
         case UPDATE_RETAIL_STATUS: {
-            const updatedRetail = state;
-            return updatedRetail;
+            return state.map(retail => {
+                if (retail.email != payload.email) {
+                    return retail;
+                }
+                return {
+                    ...retail,
+                    ...payload
+                }
+            })
         }
         //TODO : Verificar manuseio
         case EDIT_RETAIL: {

@@ -3,10 +3,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Switch from '@material-ui/core/Switch';
 import { connect } from 'react-redux';
-import { updateNewStatus, excludeRetail } from './thunks';
+import { updateNewStatus, excludeRetail, fetchRetails } from './thunks';
 import DeletAlertDialog from '../../common/DeletAlertDialog';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const RetailEditAndExcludeEnable = (props) => {
     const [openDialog, setHandleDialog] = useState(false);
@@ -16,12 +15,12 @@ const RetailEditAndExcludeEnable = (props) => {
     function handleClickSlide () {
         const _retail = {
             email: props.emailVarejo, 
-            status: props.status == 0? 1 : 0 
+            status: props.status == 0 ? 1 : 0 
         }
         props.onUpdateStatus(_retail);
         props.setToast(true);
         props.setStatus("success");
-        props.setMessage('Usuario Varejo '+ props.emailVarejo +' Atualizado!') 
+        props.setMessage('Usuario Varejo '+ props.emailVarejo +' Atualizado!');
     }
 
     function handleExclude (){
@@ -42,6 +41,7 @@ const RetailEditAndExcludeEnable = (props) => {
     function handleClickDelete () {
         setHandleDialog(true);
     }
+
     return (
             <div>
                 <Switch color='primary' checked={props.status} onClick={handleClickSlide} value={props.status}/>
@@ -55,6 +55,7 @@ const RetailEditAndExcludeEnable = (props) => {
 const mapDispatchToProps = dispatch => ({
     onUpdateStatus: retail => dispatch(updateNewStatus(retail)),
     onExcludeRetail: retail => dispatch(excludeRetail(retail)),
+    retailLoad: () => dispatch(fetchRetails()),
 })
 
 export default connect(null, mapDispatchToProps)(RetailEditAndExcludeEnable);
