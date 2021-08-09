@@ -24,7 +24,7 @@ export const updateRetailStatus = updatedRetail => ({
 
 export const DELETE_RETAIL = 'DELETE_RETAIL';
 export const deleteRetail = retail => ({
-    type: UPDATE_RETAIL_STATUS,
+    type: DELETE_RETAIL,
     payload: retail
 })
 
