@@ -47,8 +47,7 @@ export const newRetail = retail => async (dispatch) => {
 
 export const editedRetail = retail => async (dispatch) => {
     try {
-        console.log(retail)
-        const _retail =  {
+        const _retail = {
             email: retail.emailVarejo,
             update_inscricao: retail.inscricao,
             update_senha: retail.senha,
@@ -61,6 +60,7 @@ export const editedRetail = retail => async (dispatch) => {
         const response = await axios.post('https://b1-backend.azurewebsites.net/retail/update-retail', 
         _retail)
 
+        console.log(retail)
         dispatch(editRetail(retail));
 
     } catch (error) {
@@ -85,7 +85,6 @@ export const updateNewStatus = retail => async (dispatch) => {
 
 export const excludeRetail = retail => async (dispatch) => {
     try {
-        console.log(retail)
         const _retail =  {
             email: retail.email,
         }

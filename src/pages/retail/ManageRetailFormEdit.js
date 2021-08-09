@@ -8,7 +8,7 @@ import { useSelector} from 'react-redux';
 function ManageRetailFormEdit (props)  {
     const history = useHistory();
     const retails = useSelector(state => state.retails);
-    let {id} = useParams()
+    let {id} = useParams();
     const [_retail] = retails.filter(item => item.id == id);
 
     const [mailValidation, setMailValid] = useState(false);

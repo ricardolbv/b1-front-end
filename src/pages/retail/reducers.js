@@ -23,7 +23,7 @@ export const retails = ( state = [], action ) => {
 
         case UPDATE_RETAIL_STATUS: {
             return state.map(retail => {
-                if (retail.email != payload.email) {
+                if (retail.email !== payload.email) {
                     return retail;
                 }
                 return {
@@ -32,15 +32,21 @@ export const retails = ( state = [], action ) => {
                 }
             })
         }
-        //TODO : Verificar manuseio
+        
         case EDIT_RETAIL: {
-            const updatedRetail = state;
-            return updatedRetail;
+            console.log(payload)
+            return state.map(retail => {
+                if (retail.email === payload.emailVarejo) 
+                    return {
+                        ...retail,
+                        ...payload
+                    }
+                    return retail
+            })
         }
 
         case DELETE_RETAIL: {
-            const deleteRetail = state;
-            return deleteRetail;
+            return state.filter(retail => retail.email !== payload.email );
         }
 
         default:
