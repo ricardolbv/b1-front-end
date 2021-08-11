@@ -77,7 +77,7 @@ function RetailTable (props) {
           <TableCell align='center'> {row.nome_fantasia} </TableCell>
           <TableCell align='center'> {row.razao_social} </TableCell>
           <TableCell align='center'> {row.telefone} </TableCell>
-          <TableCell align='center'> <RetailEditAndExcludeEnable status={row.status} idRetail={row.id} emailVarejo={row.email}
+          <TableCell align='center'> <RetailEditAndExcludeEnable status={row.status} idRetail={row.id} email={row.email}
           {...props} nomeFantasia={row.nome_fantasia}/> </TableCell>
         </TableRow>
         )}

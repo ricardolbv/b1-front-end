@@ -35,7 +35,8 @@ const HomePage = () => {
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
                 <Route path="/home/retail/edit/:id" exact render={(props) => <ManageRetailFormEdit {...props} 
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
-                <Route path="/home/brand" exact component={BrandPage}/>
+                <Route path="/home/brand" exact render={(props) => <BrandPage {...props}
+                setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
                 <Route path="/home/campaign" exact component={CampaignPage}/>
                 <Route path="/home/visualization" exact component={VisualizationPage}/>
              </Switch>

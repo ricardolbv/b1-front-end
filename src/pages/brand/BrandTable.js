@@ -48,8 +48,8 @@ function BrandTable (props) {
           <TableCell align='center'> {row.nome} </TableCell>
           <TableCell align='center'> {row.cnpj} </TableCell>
           <TableCell align='center'> {row.email} </TableCell>
-          <TableCell align='center'>  <BrandEditExcludeEnable status={row.status} idRetail={row.id} emailVarejo={row.email}
-          {...props} nomeFantasia={row.nome_fantasia}/></TableCell>
+          <TableCell align='center'>  <BrandEditExcludeEnable status={row.status} id={row.id} email={row.email}
+          {...props}/></TableCell>
         </TableRow>
         )}
         </TableBody>

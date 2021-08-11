@@ -14,24 +14,24 @@ const RetailEditAndExcludeEnable = (props) => {
 
     function handleClickSlide () {
         const _retail = {
-            email: props.emailVarejo, 
+            email: props.email, 
             status: props.status == 0 ? 1 : 0 
         }
         props.onUpdateStatus(_retail);
         props.setToast(true);
         props.setStatus("success");
-        props.setMessage('Usuario Varejo '+ props.emailVarejo +' Atualizado!');
+        props.setMessage('Usuario Varejo '+ props.email +' Atualizado!');
     }
 
     function handleExclude (){
         const _retail = {
-            email: props.emailVarejo,
+            email: props.email,
         }
         props.onExcludeRetail(_retail);
         handleCloseDialog();
         props.setToast(true);
         props.setStatus("success");
-        props.setMessage('Usuario Varejo '+ props.emailVarejo +' Excluido!') 
+        props.setMessage('Usuario Varejo '+ props.email +' Excluido!') 
     }
 
     function handleEdit (){

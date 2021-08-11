@@ -15,10 +15,10 @@ const DeletAlertDialog = (props) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
     >
-        <DialogTitle id="alert-dialog-title">{`Excluindo o ${props.emailVarejo}`}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{`Excluindo o ${props.email}`}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Ao excluir o {props.nomeFantasia} não terá mais acesso ao sistema
+            Ao excluir o {props.email} não terá mais acesso ao sistema
           </DialogContentText>
         </DialogContent>
         <DialogActions>

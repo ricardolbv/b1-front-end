@@ -3,7 +3,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Switch from '@material-ui/core/Switch';
 import { connect } from 'react-redux';
-//import { updateNewStatus, excludeRetail, fetchRetails } from './thunks';
+import { deleteBrand } from './thunks';
 import DeletAlertDialog from '../../common/DeletAlertDialog';
 import { useHistory } from 'react-router-dom';
 
@@ -27,11 +27,11 @@ const BrandEditAndExcludeEnable = (props) => {
         const _brand = {
             email: props.email,
         }
-        //props.onExcludeRetail(_brand);
+        props.onExcludeBrand(_brand);
         handleCloseDialog();
         props.setToast(true);
         props.setStatus("success");
-        props.setMessage('Usuario Varejo '+ props.email +' Excluido!') 
+        props.setMessage('Usuario Marca '+ props.email +' Excluido!') 
     }
 
     function handleEdit (){
@@ -53,9 +53,7 @@ const BrandEditAndExcludeEnable = (props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-   // onUpdateStatus: retail => dispatch(updateNewStatus(retail)),
-   // onExcludeRetail: retail => dispatch(excludeRetail(retail)),
-   // retailLoad: () => dispatch(fetchRetails()),
+   onExcludeBrand: brand => dispatch(deleteBrand(brand)),
 })
 
 export default connect(null, mapDispatchToProps)(BrandEditAndExcludeEnable);
