@@ -32,7 +32,7 @@ const BrandTableContainer = (props) => {
                         <Box boxShadow={5} paddingRight={45} >
                         <InputBase 
                             margin='dense'
-                            placeholder='Procurar por nome fantasia ou email ...'
+                            placeholder='Procurar por nome, CNPJ ou email...'
                             style={{ width: '52vh', padding:'5px' }}
                             onChange={event => {setSearchTerm(event.target.value)}}
                             startAdornment={

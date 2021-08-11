@@ -32,7 +32,7 @@ const RetailTableContainer = (props) => {
                         <Box boxShadow={5} paddingRight={45} >
                         <InputBase 
                             margin='dense'
-                            placeholder='Procurar por Npme, email ou Marca ...'
+                            placeholder='Procurar por nome, razão social ou email...'
                             style={{ width: '52vh', padding:'5px' }}
                             onChange={event => {setSearchTerm(event.target.value)}}
                             startAdornment={
