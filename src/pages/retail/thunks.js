@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { 
     loadSegment, 
     loadRetail, 
@@ -7,7 +8,6 @@ import {
     editRetail, 
 } 
 from './actions';
-import axios from 'axios';
 
 export const fetchRetails = () => async (dispatch, getState) => {
     try {
