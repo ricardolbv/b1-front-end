@@ -9,3 +9,9 @@ export const excludeBrand = brand => ({
     type: EXCLUDE_BRAND,
     payload: brand
 })
+
+export const UPDATE_BRAND_STATUS = 'UPDATE_BRAND_STATUS';
+export const updateNewStatus = brand => ({
+    type: UPDATE_BRAND_STATUS,
+    payload: brand
+})
