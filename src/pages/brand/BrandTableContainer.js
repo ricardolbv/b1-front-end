@@ -45,7 +45,7 @@ const BrandTableContainer = (props) => {
                         </Box>
                         <Box paddingLeft={3}>
                             <Button className={classes.Btn} variant="contained" color="primary" 
-                            onClick= {() => history.push('/home/retail/add')}> + Nova marca </Button>
+                            onClick= {() => history.push('/home/brand/add')}> + Nova marca </Button>
                         </Box>
                     </Box>
                     <Box p={1}>
