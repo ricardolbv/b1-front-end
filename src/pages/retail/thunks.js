@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { 
     loadSegment, 
     loadRetail, 
@@ -7,7 +8,6 @@ import {
     editRetail, 
 } 
 from './actions';
-import axios from 'axios';
 
 export const fetchRetails = () => async (dispatch, getState) => {
     try {
@@ -22,7 +22,7 @@ export const fetchRetails = () => async (dispatch, getState) => {
 export const newRetail = retail => async (dispatch) => {
     try {
         const _retail =  {
-            email: retail.emailVarejo,
+            email: retail.email,
             inscricao: retail.inscricao,
             senha: retail.senha,
             cnpj: retail.cnpj,
@@ -31,7 +31,7 @@ export const newRetail = retail => async (dispatch) => {
             telefone: retail.telefone,
             id_cargo: 2,
             id_segmento: retail.segmento,
-            status: 1,
+            status: retail.status,
         }
 
         console.log(_retail);
@@ -48,7 +48,7 @@ export const newRetail = retail => async (dispatch) => {
 export const editedRetail = retail => async (dispatch) => {
     try {
         const _retail = {
-            email: retail.emailVarejo,
+            email: retail.email,
             update_inscricao: retail.inscricao,
             update_senha: retail.senha,
             update_cnpj: retail.cnpj,

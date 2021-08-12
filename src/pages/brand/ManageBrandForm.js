@@ -1,38 +1,37 @@
 import { React, useState } from 'react';
-import FormRetail from './FormRetail';
+import FormBrand from './FormBrand';
 import { connect } from 'react-redux';
-import { newRetail, fetchRetails } from './thunks';
+import { createBrand } from './thunks';
 import { useHistory } from 'react-router-dom';
 
-function ManageRetailForm (props)  {
+function ManageBrandForm (props)  {
     const history = useHistory();
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);
     const [cnpjValidation, setCnpjValid] = useState(false);
-    const [nomeFantasiaValidation, setNomeFantasiaValid] = useState(false)
-    const [razaoSocialValidation, setRazaoSocialValid] = useState(false)
+    const [nomeValidation, setNomeValid] = useState(false)
+    const [retailValidation, setRetailValid] = useState(false)
     const [segmentoValidation, setSegValid] = useState(false);
-    const [retail, setRetail] = useState({
-        cnpj: '',
-        razao_social: '',
-        nome_fantasia: '',
-        telefone: '',
-        segmento: '',
+    const [brand, setBrand] = useState({
         email: '',
         senha: '',
-        inscricao: '',
-        status: 1
+        nome: '',
+        cnpj: '',
+        segmento: '',
+        varejo_responsavel: '',
+        status: 1,
+        telefone: ''
     });
  
     const handleSubmit = (target) => {
         if (mailIsValidated() && pswIsValid() &&
-            nomeFantasiaIsValid() && razaoSocialIsValid()&&
+            nomeIsValid() && retailIsValidated()&&
             segmentoIsValidated()){
-        props.onCreateRetail(retail);
+        props.onCreateBrand(brand);
         props.setToast(true)
-        props.setMessage('Varejo '+ retail.nome_fantasia +' Cadastrado!') 
+        props.setMessage('Marca '+ brand.nome +' Cadastrada!') 
         props.setStatus("success");
-        history.push("/home/retail" );
+        history.push("/home/brand" );
         }
     }
 
@@ -40,17 +39,17 @@ function ManageRetailForm (props)  {
         setMailValid(false);
         setPwsValid(false);
         setCnpjValid(false);
-        setNomeFantasiaValid(false);
-        setRazaoSocialValid(false);
+        setNomeValid(false);
+        setRetailValid(false);
         setSegValid(false);
     }
 
     const mailIsValidated = () => {
-        if(retail.email === '' ){
+        if(brand.email === '' ){
             setMailValid(true);
             return false;
         }
-        if(!retail.email.toLowerCase().includes('@') || !retail.email.toLowerCase().includes('.com')){
+        if(!brand.email.toLowerCase().includes('@') || !brand.email.toLowerCase().includes('.com')){
             setMailValid(true);
             return false;
         }
@@ -58,7 +57,7 @@ function ManageRetailForm (props)  {
     }
 
     const segmentoIsValidated = () => {
-        if(retail.segmento === '' ){
+        if(brand.segmento === '' ){
             setSegValid(true);
             return false;
         }
@@ -66,62 +65,70 @@ function ManageRetailForm (props)  {
     }
 
     const pswIsValid = () => {
-        if(retail.senha === '' ){
+        if(brand.senha === '' ){
             setPwsValid(true);
             return false;
         }
-        if(retail.senha.length <= 3){
+        if(brand.senha.length <= 3){
             setPwsValid(true);
             return false;
         }
         return true;
     }
 
-    const razaoSocialIsValid = () => {
-        if(retail.razao_social.length == 0){
-            setRazaoSocialValid(true);
+    const retailIsValidated = () => {
+        if(brand.segmento === '' ){
+            setSegValid(true);
             return false;
         }
         return true;
     }
-    const nomeFantasiaIsValid = () => {
-    if(retail.nome_fantasia.length == 0){
-        setNomeFantasiaValid(true);
-        return false;
+
+    const nomeIsValid = () => {
+        if(brand.nome == 0){
+            setNomeValid(true);
+            return false;
+        }
+        return true;
     }
-    return true;
-}
     
 
     function handleChange ({ target }) {
         setValidationsToFalse();
-        setRetail({
-            ...retail,
+        setBrand({
+            ...brand,
             [ target.id ]: target.value,
         })
     }
 
     function handleChangeSelect ({ target }) {
-        console.log(target)
-        setRetail({
-            ...retail,
+        setBrand({
+            ...brand,
             segmento: target.value,
+        })
+    }
+
+    function handleChangeSelectRetail ({ target }) {
+        setBrand({
+            ...brand,
+            varejo_responsavel: target.value,
         })
     }
 
 
     return (
     <>
-        <FormRetail retail={retail}
-                    type={"Novo varejo"} 
+        <FormBrand  brand ={brand}
+                    type={"Nova marca"} 
                     onChange={handleChange}
                     onSubmit={handleSubmit}
                     onChangeSelect={handleChangeSelect}
+                    onChangeRetail={handleChangeSelectRetail}
                     mailValidation={mailValidation}
                     pswValidation={pswValidation}
                     cnpjValidation={cnpjValidation}
-                    nomeFantasiaValidation={nomeFantasiaValidation}
-                    razaoSocialValidation={razaoSocialValidation}
+                    nomeValidation={nomeValidation}
+                    retailValidation={retailValidation}
                     segmentoValidation={segmentoValidation}
         />
     </>
@@ -129,7 +136,7 @@ function ManageRetailForm (props)  {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onCreateRetail: retail => dispatch(newRetail(retail))
+    onCreateBrand: brand => dispatch(createBrand(brand))
 })
 
-export default connect(null, mapDispatchToProps)(ManageRetailForm);
+export default connect(null, mapDispatchToProps)(ManageBrandForm);

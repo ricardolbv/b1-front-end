@@ -3,39 +3,39 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Switch from '@material-ui/core/Switch';
 import { connect } from 'react-redux';
-import { updateNewStatus, excludeRetail, fetchRetails } from './thunks';
+import { deleteBrand, updateBrandStatus } from './thunks';
 import DeletAlertDialog from '../../common/DeletAlertDialog';
 import { useHistory } from 'react-router-dom';
 
-const RetailEditAndExcludeEnable = (props) => {
+const BrandEditAndExcludeEnable = (props) => {
     const [openDialog, setHandleDialog] = useState(false);
     const handleCloseDialog = () => setHandleDialog(false);
     const history = useHistory();
 
     function handleClickSlide () {
-        const _retail = {
+        const _brand = {
             email: props.email, 
             status: props.status == 0 ? 1 : 0 
         }
-        props.onUpdateStatus(_retail);
+        props.onUpdateBrandStatus(_brand);
         props.setToast(true);
         props.setStatus("success");
-        props.setMessage('Usuario Varejo '+ props.email +' Atualizado!');
+        props.setMessage('Usuario Marca '+ props.email +' Atualizado!');
     }
 
     function handleExclude (){
-        const _retail = {
+        const _brand = {
             email: props.email,
         }
-        props.onExcludeRetail(_retail);
+        props.onExcludeBrand(_brand);
         handleCloseDialog();
         props.setToast(true);
         props.setStatus("success");
-        props.setMessage('Usuario Varejo '+ props.email +' Excluido!') 
+        props.setMessage('Usuario Marca '+ props.email +' Excluido!') 
     }
 
     function handleEdit (){
-        history.push(`/home/retail/edit/${props.idRetail}`)
+       history.push(`/home/brand/edit/${props.id}`)
     }
 
     function handleClickDelete () {
@@ -53,9 +53,8 @@ const RetailEditAndExcludeEnable = (props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onUpdateStatus: retail => dispatch(updateNewStatus(retail)),
-    onExcludeRetail: retail => dispatch(excludeRetail(retail)),
-    retailLoad: () => dispatch(fetchRetails()),
+   onExcludeBrand: brand => dispatch(deleteBrand(brand)),
+   onUpdateBrandStatus: brand => dispatch(updateBrandStatus(brand))
 })
 
-export default connect(null, mapDispatchToProps)(RetailEditAndExcludeEnable);
+export default connect(null, mapDispatchToProps)(BrandEditAndExcludeEnable);

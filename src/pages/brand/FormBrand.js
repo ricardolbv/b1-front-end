@@ -8,19 +8,19 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Tab from '@material-ui/core/Tab';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
-import { useHistory } from 'react-router-dom';
+import { StaticRouter, useHistory } from 'react-router-dom';
 import InputMask from 'react-input-mask';
-import { newRetail } from './thunks';
 import { connect } from 'react-redux';
 import Select from '@material-ui/core/Select';
-import { fetchSegments } from './thunks';
+import { fetchSegments, fetchRetails } from '../retail/thunks';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
-const FormRetail = (props) => {
+const FormBrand = (props) => {
     const history = useHistory();
     useEffect(() => {
         props.segmentsLoad();
+        props.retailLoad();
     }, [])
 
     return (
@@ -34,7 +34,7 @@ const FormRetail = (props) => {
                     </Grid>
                     <Grid item sm={6}>
                         <Box p={1} paddingRight={0} display='flex' justifyContent='flex-end'>
-                            <Tab icon={<ArrowBackIosRoundedIcon />} onClick={() => history.push('/home/retail')} />
+                            <Tab icon={<ArrowBackIosRoundedIcon />} onClick={() => history.push('/home/brand')} />
                         </Box>
                     </Grid>
                 </Grid>
@@ -47,19 +47,19 @@ const FormRetail = (props) => {
                                     <Typography variant='h5'> Dados de usuário</Typography>
                                 </Box>
                                 <Box p={1} >
-                                    <TextField id="email" label="E-mail" variant="outlined" value={props.retail.email}
+                                    <TextField id="email" label="E-mail" variant="outlined" value={props.brand.email}
                                         style={{ width: '55%', paddingRight: '1vh' }} error={props.mailValidation} onChange={props.onChange}
-                                        {...(props.mailValidation && { helperText: 'Formato inválido' })} {...(props.type == 'Editando varejo'&& {disabled:true })} />
+                                        {...(props.mailValidation && { helperText: 'Formato inválido' })} {...(props.type == 'Editando marca'&& {disabled:true })} />
                                     <TextField style={{ width: '43%' }}
                                         id="senha"
                                         label="Senha"
                                         type="password"
                                         autoComplete="current-password"
                                         variant="outlined"
-                                        value={props.retail.senha}
+                                        value={props.brand.senha}
                                         onChange={props.onChange}
                                         error={props.pswValidation}
-                                        {...(props.type == 'Editando varejo'&& {disabled:true })}
+                                        {...(props.type == 'Editando marca'&& {disabled:true })}
                                         {...(props.pswValidation && { helperText: 'Poucos caracteres' })}
                                     />
                                 </Box>
@@ -70,22 +70,20 @@ const FormRetail = (props) => {
                         <Box  p={2} m={1}>
                             <Paper elevation={5} style={{ height: '100%' }}>
                                 <Box p={1}>
-                                    <Typography variant='h5'> Dados de varejo</Typography>
+                                    <Typography variant='h5'> Dados da marca</Typography>
                                 </Box>
                                 <Box p={1}>
-                                    <TextField id="nome_fantasia" label="Nome fantasia" variant="outlined" style={{ width: '49%', paddingRight: '1.4vh' }} onChange={props.onChange} error={props.nomeFantasiaValidation}
-                                        {...(props.nomeFantasiaValidation && { helperText: 'Poucos caracteres' })} value={props.retail.nome_fantasia} />
-                                    <TextField id="razao_social" label="Razão social" variant="outlined" style={{ width: '49%' }} onChange={props.onChange} error={props.razaoSocialValidation}
-                                        {...(props.razaoSocialValidation && { helperText: 'Poucos caracteres' })} value={props.retail.razao_social} />
+                                    <TextField id="nome" label="Nome da marca" variant="outlined" style={{ width: '100%', paddingRight: '1vh' }} onChange={props.onChange} error={props.nomeValidation}
+                                        {...(props.nomeValidation && { helperText: 'Poucos caracteres' })} value={props.brand.nome} />
                                 </Box>
                                 <Box p={1}>
-                                    <InputMask mask="99999999999999" onChange={props.onChange} value={props.retail.cnpj}>
+                                    <InputMask mask="99999999999999" onChange={props.onChange} value={props.brand.cnpj}>
                                         {(inputProps) =>
                                             <TextField id="cnpj" label="CNPJ" variant="outlined"  {...inputProps} style={{ width: '49%', paddingRight: '1.4vh' }} error={props.cnpjValidation}
                                                 {...(props.cnpjValidation && { helperText: 'CNPJ inválido' })} />
                                         }
                                     </InputMask>
-                                    <InputMask mask="(99) 9 9999-9999" onChange={props.onChange} value={props.retail.telefone}>
+                                    <InputMask mask="(99) 9 9999-9999" onChange={props.onChange} value={props.brand.telefone}>
                                         {(inputProps) =>
                                             <TextField id="telefone" label="Telefone" variant="outlined" style={{ width: '49%' }} onChange={props.onChange} />}
                                     </InputMask>
@@ -97,7 +95,7 @@ const FormRetail = (props) => {
                                         label='Segmento'
                                         variant="outlined"
                                         onChange={props.onChangeSelect}
-                                        value={props.retail.segmento}
+                                        value={props.brand.segmento}
                                         style={{ width: '100%' }}
                                         select
                                         error={props.segmentoValidation}
@@ -110,8 +108,21 @@ const FormRetail = (props) => {
 
                                 </Box>
                                 <Box p={1}>
-                                    <TextField id="inscricao" label="Inscrição" variant="outlined" style={{ width: '100%' }} onChange={props.onChange}
-                                        value={props.retail.inscricao} />
+                                    <TextField 
+                                        id="varejo_responsavel" 
+                                        label="Varejo" 
+                                        variant="outlined" 
+                                        style={{ width: '100%' }} 
+                                        onChange={props.onChangeRetail}
+                                        value={props.brand.varejo_responsavel} select
+                                        error={props.retailValidation}
+                                        {...(props.retailValidation && { helperText: 'Varejo é obrigatório' })}>
+
+                                        {props.retails.map(ret =>
+                                            <MenuItem key={ret.id} name={ret.id} value={ret.id}> {ret.razao_social}</MenuItem>
+                                        )}
+                                    </TextField>
+
                                 </Box>
                             </Paper>
                         </Box>
@@ -135,10 +146,12 @@ const FormRetail = (props) => {
 
 const mapStateToProps = state => ({
     segments: state.segments,
+    retails: state.retails,
 })
 
 const mapDispatchToProps = dispatch => ({
     segmentsLoad: () => dispatch(fetchSegments()),
+    retailLoad: () => dispatch(fetchRetails()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormRetail);
+export default connect(mapStateToProps, mapDispatchToProps)(FormBrand);

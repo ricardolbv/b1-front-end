@@ -6,7 +6,7 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
-import RetailTable from './RetailTable';
+import BrandTable from './BrandTable';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
@@ -19,20 +19,20 @@ const useStyle = makeStyles({
     }
 })
 
-const RetailTableContainer = (props) => {
+const BrandTableContainer = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
     const classes = useStyle();
     const history = useHistory();
     return (
         <Box boxShadow={5} m={2} p={2}>
                 <Box p={1} paddingLeft={3}>
-                    <Typography variant='h3'> Varejo</Typography>
+                    <Typography variant='h3'> Marca</Typography>
                     <Divider style={{ padding: '1px' }}/>
                     <Box display='flex' justifyContent='center' p={1}>
                         <Box boxShadow={5} paddingRight={45} >
                         <InputBase 
                             margin='dense'
-                            placeholder='Procurar por nome, razão social ou email...'
+                            placeholder='Procurar por nome, CNPJ ou email...'
                             style={{ width: '52vh', padding:'5px' }}
                             onChange={event => {setSearchTerm(event.target.value)}}
                             startAdornment={
@@ -45,15 +45,15 @@ const RetailTableContainer = (props) => {
                         </Box>
                         <Box paddingLeft={3}>
                             <Button className={classes.Btn} variant="contained" color="primary" 
-                            onClick= {() => history.push('/home/retail/add')}> + Novo varejo </Button>
+                            onClick= {() => history.push('/home/brand/add')}> + Nova marca </Button>
                         </Box>
                     </Box>
                     <Box p={1}>
-                    <RetailTable searchTerm={searchTerm} {...props}/>
+                    <BrandTable searchTerm={searchTerm} {...props}/>
                     </Box>
                 </Box>
         </Box>
     )
 }
 
-export default RetailTableContainer;
+export default BrandTableContainer;

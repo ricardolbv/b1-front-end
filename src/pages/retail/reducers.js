@@ -36,7 +36,7 @@ export const retails = ( state = [], action ) => {
         case EDIT_RETAIL: {
             console.log(payload)
             return state.map(retail => {
-                if (retail.email === payload.emailVarejo) 
+                if (retail.email === payload.email) 
                     return {
                         ...retail,
                         ...payload

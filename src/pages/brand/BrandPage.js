@@ -1,16 +1,14 @@
-import Typography from '@material-ui/core/Typography';
-import BuildIcon from '@material-ui/icons/Build';
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { Route, Switch } from 'react-router-dom';
+import BrandTableContainer from './BrandTableContainer';
 
-const BrandPage = () => {
+const BrandPage = (props) => {
     return (
-        <Box display='flex' justifyContent='center' p={2} style={{maxHeight:'80%'}}>
-        <Paper elevation={3} style={{ width: '100%', height:'85vh' }}>
-            <Typography variant='h2' textAlign='center'> Pagina Marca </Typography>
-            <BuildIcon />
-       </Paper>
-       </Box>
+        <Grid container direction="column" xs={12}>
+            <Grid item xs={12}>
+                <Route path="/home/brand" exact render={() => <BrandTableContainer {...props}/>}/>
+            </Grid>
+        </Grid>
     )
 }
 
