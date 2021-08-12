@@ -4,6 +4,7 @@ import {
     excludeBrand,
     updateNewStatus,
     createNewBrand,
+    editBrand,
 } from './actions';
 
 export const fetchBrands = () => async (dispatch, getState) => {
@@ -46,7 +47,7 @@ export const updateBrandStatus = (brand) => async (dispatch) => {
 }
 
 export const createBrand = (brand) => async (dispatch) => {
-    try{
+    try {
         const _brand = {
             email: brand.email,
             senha: brand.senha,
@@ -58,11 +59,31 @@ export const createBrand = (brand) => async (dispatch) => {
             id_segmento: brand.segmento,
             id_varejo: brand.varejo_responsavel,
         }
-        
-        console.log(_brand);
+    
         await axios.post('https://b1-backend.azurewebsites.net/brand/create',
             _brand);
         dispatch(createNewBrand(brand))
+    }
+    
+catch (error) {
+    alert(error)
+    }  
+}
+
+export const changeBrand = (brand) => async (dispatch) => {
+    try {
+        const _brand = {
+            email: brand.email,
+            update_nome: brand.senha,
+            update_cnpj: brand.cnpj,
+            update_telefone: brand.telefone,
+            update_id_segmento: brand.segmento,
+            update_id_varejo: brand.varejo_responsavel
+        }
+        
+        await axios.post('https://b1-backend.azurewebsites.net/brand/update-brand',
+            _brand);
+        dispatch(editBrand(brand))
     }
     
 catch (error) {

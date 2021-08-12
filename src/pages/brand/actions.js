@@ -21,3 +21,9 @@ export const createNewBrand = brand => ({
     type: CREATE_BRAND,
     payload: brand
 })
+
+export const EDIT_BRAND = 'EDIT_BRAND';
+export const editBrand = brand => ({
+    type: EDIT_BRAND,
+    payload: brand
+})

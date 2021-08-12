@@ -10,7 +10,6 @@ import Tab from '@material-ui/core/Tab';
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import { StaticRouter, useHistory } from 'react-router-dom';
 import InputMask from 'react-input-mask';
-//import { newRetail } from './thunks';
 import { connect } from 'react-redux';
 import Select from '@material-ui/core/Select';
 import { fetchSegments, fetchRetails } from '../retail/thunks';
@@ -50,7 +49,7 @@ const FormBrand = (props) => {
                                 <Box p={1} >
                                     <TextField id="email" label="E-mail" variant="outlined" value={props.brand.email}
                                         style={{ width: '55%', paddingRight: '1vh' }} error={props.mailValidation} onChange={props.onChange}
-                                        {...(props.mailValidation && { helperText: 'Formato inválido' })} {...(props.type == 'Editando varejo'&& {disabled:true })} />
+                                        {...(props.mailValidation && { helperText: 'Formato inválido' })} {...(props.type == 'Editando marca'&& {disabled:true })} />
                                     <TextField style={{ width: '43%' }}
                                         id="senha"
                                         label="Senha"

@@ -1,11 +1,18 @@
 import { React, useState } from 'react';
 import FormBrand from './FormBrand';
 import { connect } from 'react-redux';
-import { createBrand } from './thunks';
-import { useHistory } from 'react-router-dom';
+import { changeBrand } from './thunks';
+import { useHistory, useParams } from 'react-router-dom';
+import { useSelector} from 'react-redux';
 
-function ManageBrandForm (props)  {
+function ManageBrandFormEdit (props)  {
     const history = useHistory();
+    const brands = useSelector(state => state.brands);
+    console.log(brands)
+    let {id} = useParams();
+    console.log(id)
+    const [_brand] = brands.filter(item => item.id == id);
+
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);
     const [cnpjValidation, setCnpjValid] = useState(false);
@@ -13,25 +20,25 @@ function ManageBrandForm (props)  {
     const [retailValidation, setRetailValid] = useState(false)
     const [segmentoValidation, setSegValid] = useState(false);
     const [brand, setBrand] = useState({
-        email: '',
-        senha: '',
-        nome: '',
-        cnpj: '',
-        segmento: '',
-        varejo_responsavel: '',
+        email: _brand.email,
+        senha: _brand.senha,
+        nome: _brand.nome,
+        cnpj: _brand.cnpj,
+        segmento: _brand.id_segmento,
+        varejo_responsavel: _brand.id_varejo,
         status: 1,
-        telefone: ''
+        telefone: _brand.telefone
     });
  
     const handleSubmit = (target) => {
         if (mailIsValidated() && pswIsValid() &&
             nomeIsValid() && retailIsValidated()&&
             segmentoIsValidated()){
-        props.onCreateBrand(brand);
+        props.onEditBrand(brand);
         props.setToast(true)
-        props.setMessage('Marca '+ brand.nome +' Cadastrada!') 
+        props.setMessage('Marca '+ brand.nome+' Editado(a)!') 
         props.setStatus("success");
-        history.push("/home/brand" );
+        history.push("/home/brand");
         }
     }
 
@@ -118,8 +125,8 @@ function ManageBrandForm (props)  {
 
     return (
     <>
-        <FormBrand  brand ={brand}
-                    type={"Nova marca"} 
+        <FormBrand brand ={brand}
+                    type={"Editando marca"} 
                     onChange={handleChange}
                     onSubmit={handleSubmit}
                     onChangeSelect={handleChangeSelect}
@@ -136,7 +143,7 @@ function ManageBrandForm (props)  {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onCreateBrand: brand => dispatch(createBrand(brand))
+    onEditBrand: brand => dispatch(changeBrand(brand))
 })
 
-export default connect(null, mapDispatchToProps)(ManageBrandForm);
+export default connect(null, mapDispatchToProps)(ManageBrandFormEdit);

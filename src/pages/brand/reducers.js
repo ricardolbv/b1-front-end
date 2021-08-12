@@ -3,6 +3,7 @@ import {
     EXCLUDE_BRAND,
     UPDATE_BRAND_STATUS,
     CREATE_BRAND,
+    EDIT_BRAND,
 } from './actions'
 
 export const brands = (state = [], action ) => {
@@ -31,6 +32,17 @@ export const brands = (state = [], action ) => {
             const newBrand = [];
             newBrand.push(payload);
             return state.concat(newBrand);
+
+        case EDIT_BRAND:
+            return state.map(brand => {
+                if (brand.email !== payload.email){
+                    return brand;
+                }            
+                return {
+                    ...brand,
+                    ...payload,
+                }
+            })
         
         default:
             return state;

@@ -35,7 +35,7 @@ const BrandEditAndExcludeEnable = (props) => {
     }
 
     function handleEdit (){
-       // history.push(`/home/retail/edit/${props.idRetail}`)
+       history.push(`/home/brand/edit/${props.id}`)
     }
 
     function handleClickDelete () {
