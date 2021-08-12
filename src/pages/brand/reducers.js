@@ -2,6 +2,7 @@ import {
     LOAD_BRAND,
     EXCLUDE_BRAND,
     UPDATE_BRAND_STATUS,
+    CREATE_BRAND,
 } from './actions'
 
 export const brands = (state = [], action ) => {
@@ -25,6 +26,11 @@ export const brands = (state = [], action ) => {
                     ...payload,
                 }
             })
+
+        case CREATE_BRAND:
+            const newBrand = [];
+            newBrand.push(payload);
+            return state.concat(newBrand);
         
         default:
             return state;

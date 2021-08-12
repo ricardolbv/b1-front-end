@@ -110,12 +110,12 @@ const FormBrand = (props) => {
                                 </Box>
                                 <Box p={1}>
                                     <TextField 
-                                        id="varejo" 
+                                        id="varejo_responsavel" 
                                         label="Varejo" 
                                         variant="outlined" 
                                         style={{ width: '100%' }} 
-                                        onChange={props.onChange}
-                                        value={props.brand.inscricao} select
+                                        onChange={props.onChangeRetail}
+                                        value={props.brand.varejo_responsavel} select
                                         error={props.retailValidation}
                                         {...(props.retailValidation && { helperText: 'Varejo é obrigatório' })}>
 

@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import FormBrand from './FormBrand';
 import { connect } from 'react-redux';
-//import { newRetail } from './thunks';
+import { createBrand } from './thunks';
 import { useHistory } from 'react-router-dom';
 
 function ManageBrandForm (props)  {
@@ -19,14 +19,15 @@ function ManageBrandForm (props)  {
         cnpj: '',
         segmento: '',
         varejo_responsavel: '',
-        status: 1
+        status: 1,
+        telefone: ''
     });
  
     const handleSubmit = (target) => {
         if (mailIsValidated() && pswIsValid() &&
             nomeIsValid() && retailIsValidated()&&
             segmentoIsValidated()){
-        //props.onCreateRetail(retail);
+        props.onCreateBrand(brand);
         props.setToast(true)
         props.setMessage('Marca '+ brand.nome +' Cadastrada!') 
         props.setStatus("success");
@@ -107,6 +108,13 @@ function ManageBrandForm (props)  {
         })
     }
 
+    function handleChangeSelectRetail ({ target }) {
+        setBrand({
+            ...brand,
+            varejo_responsavel: target.value,
+        })
+    }
+
 
     return (
     <>
@@ -115,6 +123,7 @@ function ManageBrandForm (props)  {
                     onChange={handleChange}
                     onSubmit={handleSubmit}
                     onChangeSelect={handleChangeSelect}
+                    onChangeRetail={handleChangeSelectRetail}
                     mailValidation={mailValidation}
                     pswValidation={pswValidation}
                     cnpjValidation={cnpjValidation}
@@ -127,7 +136,7 @@ function ManageBrandForm (props)  {
 }
 
 const mapDispatchToProps = dispatch => ({
-    //onCreateRetail: retail => dispatch(newRetail(retail))
+    onCreateBrand: brand => dispatch(createBrand(brand))
 })
 
 export default connect(null, mapDispatchToProps)(ManageBrandForm);
