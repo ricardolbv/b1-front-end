@@ -9,29 +9,28 @@ function ManageBrandForm (props)  {
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);
     const [cnpjValidation, setCnpjValid] = useState(false);
-    const [nomeFantasiaValidation, setNomeFantasiaValid] = useState(false)
-    const [razaoSocialValidation, setRazaoSocialValid] = useState(false)
+    const [nomeValidation, setNomeValid] = useState(false)
+    const [retailValidation, setRetailValid] = useState(false)
     const [segmentoValidation, setSegValid] = useState(false);
-    const [retail, setRetail] = useState({
-        cnpj: '',
-        razao_social: '',
-        nome_fantasia: '',
-        telefone: '',
-        segmento: '',
-        emailVarejo: '',
+    const [brand, setBrand] = useState({
+        email: '',
         senha: '',
-        inscricao: '',
+        nome: '',
+        cnpj: '',
+        segmento: '',
+        varejo_responsavel: '',
+        status: 1
     });
  
     const handleSubmit = (target) => {
         if (mailIsValidated() && pswIsValid() &&
-            nomeFantasiaIsValid() && razaoSocialIsValid()&&
+            nomeIsValid() && retailIsValidated()&&
             segmentoIsValidated()){
-        props.onCreateRetail(retail);
+        //props.onCreateRetail(retail);
         props.setToast(true)
-        props.setMessage('Varejo '+ retail.nome_fantasia +' Cadastrado!') 
+        props.setMessage('Marca '+ brand.nome +' Cadastrada!') 
         props.setStatus("success");
-        history.push("/home/retail" );
+        history.push("/home/brand" );
         }
     }
 
@@ -39,17 +38,17 @@ function ManageBrandForm (props)  {
         setMailValid(false);
         setPwsValid(false);
         setCnpjValid(false);
-        setNomeFantasiaValid(false);
-        setRazaoSocialValid(false);
+        setNomeValid(false);
+        setRetailValid(false);
         setSegValid(false);
     }
 
     const mailIsValidated = () => {
-        if(retail.emailVarejo === '' ){
+        if(brand.email === '' ){
             setMailValid(true);
             return false;
         }
-        if(!retail.emailVarejo.toLowerCase().includes('@') || !retail.emailVarejo.toLowerCase().includes('.com')){
+        if(!brand.email.toLowerCase().includes('@') || !brand.email.toLowerCase().includes('.com')){
             setMailValid(true);
             return false;
         }
@@ -57,7 +56,7 @@ function ManageBrandForm (props)  {
     }
 
     const segmentoIsValidated = () => {
-        if(retail.segmento === '' ){
+        if(brand.segmento === '' ){
             setSegValid(true);
             return false;
         }
@@ -65,27 +64,28 @@ function ManageBrandForm (props)  {
     }
 
     const pswIsValid = () => {
-        if(retail.senha === '' ){
+        if(brand.senha === '' ){
             setPwsValid(true);
             return false;
         }
-        if(retail.senha.length <= 3){
+        if(brand.senha.length <= 3){
             setPwsValid(true);
             return false;
         }
         return true;
     }
 
-    const razaoSocialIsValid = () => {
-        if(retail.razao_social.length == 0){
-            setRazaoSocialValid(true);
+    const retailIsValidated = () => {
+        if(brand.segmento === '' ){
+            setSegValid(true);
             return false;
         }
         return true;
     }
-    const nomeFantasiaIsValid = () => {
-    if(retail.nome_fantasia.length == 0){
-        setNomeFantasiaValid(true);
+
+    const nomeIsValid = () => {
+    if(brand.nome == 0){
+        setNomeValid(true);
         return false;
     }
     return true;
@@ -94,16 +94,15 @@ function ManageBrandForm (props)  {
 
     function handleChange ({ target }) {
         setValidationsToFalse();
-        setRetail({
-            ...retail,
+        setBrand({
+            ...brand,
             [ target.id ]: target.value,
         })
     }
 
     function handleChangeSelect ({ target }) {
-        console.log(target)
-        setRetail({
-            ...retail,
+        setBrand({
+            ...brand,
             segmento: target.value,
         })
     }
@@ -111,16 +110,16 @@ function ManageBrandForm (props)  {
 
     return (
     <>
-        <FormBrand retail={retail}
-                    type={"Nova marca"} 
+        <FormBrand  brand ={brand}
+                    type={"Nova Marca"} 
                     onChange={handleChange}
                     onSubmit={handleSubmit}
                     onChangeSelect={handleChangeSelect}
                     mailValidation={mailValidation}
                     pswValidation={pswValidation}
                     cnpjValidation={cnpjValidation}
-                    nomeFantasiaValidation={nomeFantasiaValidation}
-                    razaoSocialValidation={razaoSocialValidation}
+                    nomeValidation={nomeValidation}
+                    retailValidation={retailValidation}
                     segmentoValidation={segmentoValidation}
         />
     </>

@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import FormRetail from './FormRetail';
 import { connect } from 'react-redux';
-import { newRetail } from './thunks';
+import { newRetail, fetchRetails } from './thunks';
 import { useHistory } from 'react-router-dom';
 
 function ManageRetailForm (props)  {
@@ -18,9 +18,10 @@ function ManageRetailForm (props)  {
         nome_fantasia: '',
         telefone: '',
         segmento: '',
-        emailVarejo: '',
+        email: '',
         senha: '',
         inscricao: '',
+        status: 1
     });
  
     const handleSubmit = (target) => {
@@ -45,11 +46,11 @@ function ManageRetailForm (props)  {
     }
 
     const mailIsValidated = () => {
-        if(retail.emailVarejo === '' ){
+        if(retail.email === '' ){
             setMailValid(true);
             return false;
         }
-        if(!retail.emailVarejo.toLowerCase().includes('@') || !retail.emailVarejo.toLowerCase().includes('.com')){
+        if(!retail.email.toLowerCase().includes('@') || !retail.email.toLowerCase().includes('.com')){
             setMailValid(true);
             return false;
         }

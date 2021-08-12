@@ -47,7 +47,7 @@ const FormRetail = (props) => {
                                     <Typography variant='h5'> Dados de usuário</Typography>
                                 </Box>
                                 <Box p={1} >
-                                    <TextField id="emailVarejo" label="E-mail" variant="outlined" value={props.retail.emailVarejo}
+                                    <TextField id="email" label="E-mail" variant="outlined" value={props.retail.email}
                                         style={{ width: '55%', paddingRight: '1vh' }} error={props.mailValidation} onChange={props.onChange}
                                         {...(props.mailValidation && { helperText: 'Formato inválido' })} {...(props.type == 'Editando varejo'&& {disabled:true })} />
                                     <TextField style={{ width: '43%' }}
