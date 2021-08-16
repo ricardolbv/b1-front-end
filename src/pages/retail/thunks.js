@@ -30,7 +30,7 @@ export const newRetail = retail => async (dispatch) => {
             nome_fantasia: retail.nome_fantasia,
             telefone: retail.telefone,
             id_cargo: 2,
-            id_segmento: retail.segmento,
+            id_segmento: parseInt(retail.segmento),
             status: retail.status,
         }
 
@@ -38,7 +38,7 @@ export const newRetail = retail => async (dispatch) => {
         const response = await axios.post('https://b1-backend.azurewebsites.net/retail/create', 
         _retail)
 
-        dispatch(createRetail(retail));
+        dispatch(createRetail(_retail));
 
     } catch (error) {
         alert(error)

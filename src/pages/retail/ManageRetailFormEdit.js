@@ -9,7 +9,7 @@ function ManageRetailFormEdit (props)  {
     const history = useHistory();
     const retails = useSelector(state => state.retails);
     let {id} = useParams();
-    const [_retail] = retails.filter(item => item.id == id);
+    const [_retail] = retails.filter(item => item.email == id);
 
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);

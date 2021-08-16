@@ -136,7 +136,7 @@ function ManageBrandForm (props)  {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onCreateBrand: brand => dispatch(createBrand(brand))
+    onCreateBrand: brand => dispatch(createBrand(brand)),
 })
 
 export default connect(null, mapDispatchToProps)(ManageBrandForm);

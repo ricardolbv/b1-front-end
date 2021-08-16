@@ -10,8 +10,7 @@ function ManageBrandFormEdit (props)  {
     const brands = useSelector(state => state.brands);
     console.log(brands)
     let {id} = useParams();
-    console.log(id)
-    const [_brand] = brands.filter(item => item.id == id);
+    const [_brand] = brands.filter(item => item.email == id);
 
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);

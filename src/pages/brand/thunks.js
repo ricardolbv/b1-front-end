@@ -56,13 +56,13 @@ export const createBrand = (brand) => async (dispatch) => {
             telefone: brand.telefone,
             status: brand.status,
             id_cargo: 3,
-            id_segmento: brand.segmento,
-            id_varejo: brand.varejo_responsavel,
+            id_segmento: parseInt(brand.segmento),
+            id_varejo: parseInt(brand.varejo_responsavel),
         }
     
         await axios.post('https://b1-backend.azurewebsites.net/brand/create',
             _brand);
-        dispatch(createNewBrand(brand))
+        dispatch(createNewBrand(_brand))
     }
     
 catch (error) {
