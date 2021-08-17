@@ -41,7 +41,7 @@ export const newRetail = retail => async (dispatch) => {
         dispatch(createRetail(_retail));
 
     } catch (error) {
-        dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Endpoint: /retail/create'}))
+        dispatch(openToast({open: true, status: 'error', message: 'Erro de comunicação. Endpoint: /retail/create'}))
     }
 }
 
@@ -63,7 +63,7 @@ export const editedRetail = retail => async (dispatch) => {
         dispatch(editRetail(retail));
 
     } catch (error) {
-        dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Endpoint: /retail/update-retail'}))
+        dispatch(openToast({open: true, status: 'error', message: 'Erro de comunicação. Endpoint: /retail/update-retail'}))
     }
 }
 
@@ -79,7 +79,7 @@ export const updateNewStatus = retail => async (dispatch) => {
         dispatch(updateRetailStatus(retail));
 
     } catch (error) {
-        dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Endpoint: /retail/update-status'}))
+        dispatch(openToast({open: true, status: 'error', message: 'Erro de comunicação. Endpoint: /retail/update-status'}))
     }
 }
 
@@ -90,11 +90,11 @@ export const excludeRetail = retail => async (dispatch) => {
         }
         await axios.post('https://b1-backend.azurewebsites.net/retail/delete', 
         _retail)
-        dispatch(openToast({open: true, status: 'success', message:"Varejo excluido com sucesso!"}));
+        dispatch(openToast({open: true, status: 'success', message: 'Varejo excluido com sucesso!'}));
         dispatch(deleteRetail(retail));
 
     } catch (error) {
-        dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Endpoint: /retail/delete'}))
+        dispatch(openToast({open: true, status: 'warning', message: 'Varejo possui usuário(s) de Marca associados!'}))
     }
 }
 
