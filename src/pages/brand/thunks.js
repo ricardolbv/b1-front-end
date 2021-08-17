@@ -25,10 +25,11 @@ export const deleteBrand = (brand) => async (dispatch) => {
         }   
         await axios.post('https://b1-backend.azurewebsites.net/brand/delete',
             _brand);
+        dispatch(openToast({open: true, status: 'success', message: "Marca excluida com sucesso!"}));
         dispatch(excludeBrand(brand))
 
     } catch (error) {
-        alert(error)
+        dispatch(openToast({open: true, status: 'error', message: "Erro de comunicação. Endpoint: /brand/delete"}));
     }
 }
 
@@ -40,10 +41,11 @@ export const updateBrandStatus = (brand) => async (dispatch) => {
         }   
         await axios.post('https://b1-backend.azurewebsites.net/brand/update-status',
             _brand);
-        dispatch(updateNewStatus(brand))
+        dispatch(openToast({open: true, status: 'success', message: "Marca atualizada com sucesso!"}));
+        dispatch(updateNewStatus(brand));
 
     } catch (error) {
-        alert(error)
+        dispatch(openToast({open: true, status: 'error', message: "Erro de comunicação. Endpoint: /brand/update-status"}));
     }
 }
 
@@ -68,7 +70,7 @@ export const createBrand = (brand) => async (dispatch) => {
     }
     
 catch (error) {
-    dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Enpoint: /brand/create'}))
+    dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Endpoint: /brand/create'}))
     }  
 }
 
@@ -85,10 +87,11 @@ export const changeBrand = (brand) => async (dispatch) => {
         
         await axios.post('https://b1-backend.azurewebsites.net/brand/update-brand',
             _brand);
+        dispatch(openToast({open: true, status: 'success', message:"Marca editada com sucesso!"}));
         dispatch(editBrand(brand))
     }
     
 catch (error) {
-    alert(error)
+    dispatch(openToast({open: true, status: 'error', message:"Erro de comunicação. Endpoint: /brand/update-brand"}));
     }  
 }

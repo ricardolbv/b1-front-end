@@ -30,9 +30,6 @@ function ManageRetailForm (props)  {
             nomeFantasiaIsValid() && razaoSocialIsValid()&&
             segmentoIsValidated()){
         props.onCreateRetail(retail);
-        props.setToast(true)
-        props.setMessage('Varejo '+ retail.nome_fantasia +' Cadastrado!') 
-        props.setStatus("success");
         history.push("/home/retail" );
         }
     }

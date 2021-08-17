@@ -8,7 +8,6 @@ import { useSelector} from 'react-redux';
 function ManageBrandFormEdit (props)  {
     const history = useHistory();
     const brands = useSelector(state => state.brands);
-    console.log(brands)
     let {id} = useParams();
     const [_brand] = brands.filter(item => item.email == id);
 
@@ -34,9 +33,6 @@ function ManageBrandFormEdit (props)  {
             nomeIsValid() && retailIsValidated()&&
             segmentoIsValidated()){
         props.onEditBrand(brand);
-        props.setToast(true)
-        props.setMessage('Marca '+ brand.nome+' Editado(a)!') 
-        props.setStatus("success");
         history.push("/home/brand");
         }
     }
