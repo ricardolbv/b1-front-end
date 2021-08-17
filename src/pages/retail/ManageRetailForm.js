@@ -1,7 +1,8 @@
 import { React, useState } from 'react';
 import FormRetail from './FormRetail';
 import { connect } from 'react-redux';
-import { newRetail, fetchRetails } from './thunks';
+import { newRetail } from './thunks';
+import { openToast } from '../../common/actions';
 import { useHistory } from 'react-router-dom';
 
 function ManageRetailForm (props)  {
@@ -29,9 +30,6 @@ function ManageRetailForm (props)  {
             nomeFantasiaIsValid() && razaoSocialIsValid()&&
             segmentoIsValidated()){
         props.onCreateRetail(retail);
-        props.setToast(true)
-        props.setMessage('Varejo '+ retail.nome_fantasia +' Cadastrado!') 
-        props.setStatus("success");
         history.push("/home/retail" );
         }
     }
@@ -51,6 +49,12 @@ function ManageRetailForm (props)  {
             return false;
         }
         if(!retail.email.toLowerCase().includes('@') || !retail.email.toLowerCase().includes('.com')){
+            setMailValid(true);
+            return false;
+        }
+        // Verifico no state se há um email já cadastrado:
+        else if(props.retails.find(_retail => _retail.email == retail.email)){
+            props.onOpenToast({open: true, status: 'warning', message:"Email já cadastrado em outro varejo!"})
             setMailValid(true);
             return false;
         }
@@ -128,8 +132,13 @@ function ManageRetailForm (props)  {
     )
 }
 
+const mapStateToProps = state => ({
+    retails: state.retails,
+  })
+
 const mapDispatchToProps = dispatch => ({
-    onCreateRetail: retail => dispatch(newRetail(retail))
+    onCreateRetail: retail => dispatch(newRetail(retail)),
+    onOpenToast: toast => dispatch(openToast(toast)),
 })
 
-export default connect(null, mapDispatchToProps)(ManageRetailForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageRetailForm);

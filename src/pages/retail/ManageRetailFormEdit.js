@@ -9,7 +9,7 @@ function ManageRetailFormEdit (props)  {
     const history = useHistory();
     const retails = useSelector(state => state.retails);
     let {id} = useParams();
-    const [_retail] = retails.filter(item => item.id == id);
+    const [_retail] = retails.filter(item => item.email == id);
 
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);
@@ -23,7 +23,7 @@ function ManageRetailFormEdit (props)  {
         nome_fantasia: _retail.nome_fantasia,
         telefone: _retail.telefone,
         segmento: _retail.id_segmento,
-        emailVarejo: _retail.email,
+        email: _retail.email,
         senha: _retail.senha,
         inscricao: _retail.inscricao,
     });
@@ -33,9 +33,6 @@ function ManageRetailFormEdit (props)  {
             nomeFantasiaIsValid() && razaoSocialIsValid() &&
             segmentoIsValidated()){
         props.onEditRetail(retail);
-        props.setToast(true)
-        props.setMessage('Varejo '+ retail.nome_fantasia +' Editado!') 
-        props.setStatus("success");
         history.push("/home/retail" );
         }
     }

@@ -35,7 +35,7 @@ const RetailEditAndExcludeEnable = (props) => {
     }
 
     function handleEdit (){
-        history.push(`/home/retail/edit/${props.idRetail}`)
+        history.push(`/home/retail/edit/${props.email}`)
     }
 
     function handleClickDelete () {

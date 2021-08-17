@@ -4,6 +4,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Switch from '@material-ui/core/Switch';
 import { connect } from 'react-redux';
 import { deleteBrand, updateBrandStatus } from './thunks';
+import { openToast } from '../../common/actions'
 import DeletAlertDialog from '../../common/DeletAlertDialog';
 import { useHistory } from 'react-router-dom';
 
@@ -18,9 +19,6 @@ const BrandEditAndExcludeEnable = (props) => {
             status: props.status == 0 ? 1 : 0 
         }
         props.onUpdateBrandStatus(_brand);
-        props.setToast(true);
-        props.setStatus("success");
-        props.setMessage('Usuario Marca '+ props.email +' Atualizado!');
     }
 
     function handleExclude (){
@@ -29,13 +27,10 @@ const BrandEditAndExcludeEnable = (props) => {
         }
         props.onExcludeBrand(_brand);
         handleCloseDialog();
-        props.setToast(true);
-        props.setStatus("success");
-        props.setMessage('Usuario Marca '+ props.email +' Excluido!') 
     }
 
     function handleEdit (){
-       history.push(`/home/brand/edit/${props.id}`)
+       history.push(`/home/brand/edit/${props.email}`)
     }
 
     function handleClickDelete () {
@@ -54,7 +49,8 @@ const BrandEditAndExcludeEnable = (props) => {
 
 const mapDispatchToProps = dispatch => ({
    onExcludeBrand: brand => dispatch(deleteBrand(brand)),
-   onUpdateBrandStatus: brand => dispatch(updateBrandStatus(brand))
+   onUpdateBrandStatus: brand => dispatch(updateBrandStatus(brand)),
+   onToastOpen: toast => dispatch(openToast(toast)),
 })
 
 export default connect(null, mapDispatchToProps)(BrandEditAndExcludeEnable);

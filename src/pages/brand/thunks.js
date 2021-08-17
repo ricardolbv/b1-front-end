@@ -6,6 +6,7 @@ import {
     createNewBrand,
     editBrand,
 } from './actions';
+import { openToast } from '../../common/actions';
 
 export const fetchBrands = () => async (dispatch, getState) => {
     try {   
@@ -24,10 +25,11 @@ export const deleteBrand = (brand) => async (dispatch) => {
         }   
         await axios.post('https://b1-backend.azurewebsites.net/brand/delete',
             _brand);
+        dispatch(openToast({open: true, status: 'success', message: "Marca excluida com sucesso!"}));
         dispatch(excludeBrand(brand))
 
     } catch (error) {
-        alert(error)
+        dispatch(openToast({open: true, status: 'error', message: "Erro de comunicação. Endpoint: /brand/delete"}));
     }
 }
 
@@ -39,10 +41,11 @@ export const updateBrandStatus = (brand) => async (dispatch) => {
         }   
         await axios.post('https://b1-backend.azurewebsites.net/brand/update-status',
             _brand);
-        dispatch(updateNewStatus(brand))
+        dispatch(openToast({open: true, status: 'success', message: "Marca atualizada com sucesso!"}));
+        dispatch(updateNewStatus(brand));
 
     } catch (error) {
-        alert(error)
+        dispatch(openToast({open: true, status: 'error', message: "Erro de comunicação. Endpoint: /brand/update-status"}));
     }
 }
 
@@ -56,17 +59,18 @@ export const createBrand = (brand) => async (dispatch) => {
             telefone: brand.telefone,
             status: brand.status,
             id_cargo: 3,
-            id_segmento: brand.segmento,
-            id_varejo: brand.varejo_responsavel,
+            id_segmento: parseInt(brand.segmento),
+            id_varejo: parseInt(brand.varejo_responsavel),
         }
     
         await axios.post('https://b1-backend.azurewebsites.net/brand/create',
             _brand);
-        dispatch(createNewBrand(brand))
+        dispatch(openToast({open: true, status: 'success', message:"Marca criada com sucesso!"}));
+        dispatch(createNewBrand(_brand));
     }
     
 catch (error) {
-    alert(error)
+    dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Endpoint: /brand/create'}))
     }  
 }
 
@@ -83,10 +87,11 @@ export const changeBrand = (brand) => async (dispatch) => {
         
         await axios.post('https://b1-backend.azurewebsites.net/brand/update-brand',
             _brand);
+        dispatch(openToast({open: true, status: 'success', message:"Marca editada com sucesso!"}));
         dispatch(editBrand(brand))
     }
     
 catch (error) {
-    alert(error)
+    dispatch(openToast({open: true, status: 'error', message:"Erro de comunicação. Endpoint: /brand/update-brand"}));
     }  
 }

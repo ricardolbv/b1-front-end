@@ -8,6 +8,7 @@ import {
     editRetail, 
 } 
 from './actions';
+import { openToast } from '../../common/actions';
 
 export const fetchRetails = () => async (dispatch, getState) => {
     try {
@@ -30,18 +31,17 @@ export const newRetail = retail => async (dispatch) => {
             nome_fantasia: retail.nome_fantasia,
             telefone: retail.telefone,
             id_cargo: 2,
-            id_segmento: retail.segmento,
+            id_segmento: parseInt(retail.segmento),
             status: retail.status,
         }
-
-        console.log(_retail);
-        const response = await axios.post('https://b1-backend.azurewebsites.net/retail/create', 
+        
+        await axios.post('https://b1-backend.azurewebsites.net/retail/create', 
         _retail)
-
-        dispatch(createRetail(retail));
+        dispatch(openToast({open: true, status: 'success', message:"Varejo criado com sucesso!"}));
+        dispatch(createRetail(_retail));
 
     } catch (error) {
-        alert(error)
+        dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Endpoint: /retail/create'}))
     }
 }
 
@@ -57,14 +57,13 @@ export const editedRetail = retail => async (dispatch) => {
             update_telefone: retail.telefone,
             update_id_segmento: retail.segmento,
         }
-        const response = await axios.post('https://b1-backend.azurewebsites.net/retail/update-retail', 
+        await axios.post('https://b1-backend.azurewebsites.net/retail/update-retail', 
         _retail)
-
-        console.log(retail)
+        dispatch(openToast({open: true, status: 'success', message:"Varejo editado com sucesso!"}));
         dispatch(editRetail(retail));
 
     } catch (error) {
-        alert(error)
+        dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Endpoint: /retail/update-retail'}))
     }
 }
 
@@ -74,12 +73,13 @@ export const updateNewStatus = retail => async (dispatch) => {
             email: retail.email,
             status: retail.status
         }
-        const response = await axios.post('https://b1-backend.azurewebsites.net/retail/update-status', 
+        await axios.post('https://b1-backend.azurewebsites.net/retail/update-status', 
         _retail)
+        dispatch(openToast({open: true, status: 'success', message:"Varejo atualizado com sucesso!"}));
         dispatch(updateRetailStatus(retail));
 
     } catch (error) {
-        alert(error)
+        dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Endpoint: /retail/update-status'}))
     }
 }
 
@@ -88,12 +88,13 @@ export const excludeRetail = retail => async (dispatch) => {
         const _retail =  {
             email: retail.email,
         }
-        const response = await axios.post('https://b1-backend.azurewebsites.net/retail/delete', 
+        await axios.post('https://b1-backend.azurewebsites.net/retail/delete', 
         _retail)
+        dispatch(openToast({open: true, status: 'success', message:"Varejo excluido com sucesso!"}));
         dispatch(deleteRetail(retail));
 
     } catch (error) {
-        alert(error)
+        dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Endpoint: /retail/delete'}))
     }
 }
 
