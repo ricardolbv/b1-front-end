@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import FormBrand from './FormBrand';
 import { connect } from 'react-redux';
 import { createBrand } from './thunks';
+import { openToast } from '../../common/actions';
 import { useHistory } from 'react-router-dom';
 
 function ManageBrandForm (props)  {
@@ -28,9 +29,6 @@ function ManageBrandForm (props)  {
             nomeIsValid() && retailIsValidated()&&
             segmentoIsValidated()){
         props.onCreateBrand(brand);
-        props.setToast(true)
-        props.setMessage('Marca '+ brand.nome +' Cadastrada!') 
-        props.setStatus("success");
         history.push("/home/brand" );
         }
     }
@@ -49,10 +47,17 @@ function ManageBrandForm (props)  {
             setMailValid(true);
             return false;
         }
-        if(!brand.email.toLowerCase().includes('@') || !brand.email.toLowerCase().includes('.com')){
+        else if(!brand.email.toLowerCase().includes('@') || !brand.email.toLowerCase().includes('.com')){
             setMailValid(true);
             return false;
         }
+        // Verifico no state se há um email já cadastrado:
+        else if(props.brands.find(_brand => _brand.email == brand.email)){
+            props.onOpenToast({open: true, status: 'warning', message:"Email já cadastrado em outra marca!"})
+            setMailValid(true);
+            return false;
+        }
+
         return true;
     }
 
@@ -134,9 +139,13 @@ function ManageBrandForm (props)  {
     </>
     )
 }
+const mapStateToProps = state => ({
+    brands: state.brands,
+  })
 
 const mapDispatchToProps = dispatch => ({
     onCreateBrand: brand => dispatch(createBrand(brand)),
+    onOpenToast: toast => dispatch(openToast(toast)),
 })
 
-export default connect(null, mapDispatchToProps)(ManageBrandForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageBrandForm);

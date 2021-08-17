@@ -8,6 +8,7 @@ import {
     editRetail, 
 } 
 from './actions';
+import { openToast } from '../../common/actions';
 
 export const fetchRetails = () => async (dispatch, getState) => {
     try {
@@ -33,15 +34,14 @@ export const newRetail = retail => async (dispatch) => {
             id_segmento: parseInt(retail.segmento),
             status: retail.status,
         }
-
-        console.log(_retail);
-        const response = await axios.post('https://b1-backend.azurewebsites.net/retail/create', 
+        
+        await axios.post('https://b1-backend.azurewebsites.net/retail/create', 
         _retail)
-
+        dispatch(openToast({open: true, status: 'success', message:"Varejo criado com sucesso!"}));
         dispatch(createRetail(_retail));
 
     } catch (error) {
-        alert(error)
+        dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Enpoint: /retail/create'}))
     }
 }
 

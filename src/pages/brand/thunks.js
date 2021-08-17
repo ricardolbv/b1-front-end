@@ -6,6 +6,7 @@ import {
     createNewBrand,
     editBrand,
 } from './actions';
+import { openToast } from '../../common/actions';
 
 export const fetchBrands = () => async (dispatch, getState) => {
     try {   
@@ -62,11 +63,12 @@ export const createBrand = (brand) => async (dispatch) => {
     
         await axios.post('https://b1-backend.azurewebsites.net/brand/create',
             _brand);
-        dispatch(createNewBrand(_brand))
+        dispatch(openToast({open: true, status: 'success', message:"Marca criada com sucesso!"}));
+        dispatch(createNewBrand(_brand));
     }
     
 catch (error) {
-    alert(error)
+    dispatch(openToast({open: true, status: 'Erro', message: 'Erro de comunicação. Enpoint: /brand/create'}))
     }  
 }
 

@@ -1,16 +1,22 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import BuildIcon from '@material-ui/icons/Build';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Toast from '../../common/Toast';
 import { Button } from '@material-ui/core';
+import { openToast } from '../../common/actions';
 
-const HomeDisplay = () => {
+const HomeDisplay = (props) => {
     //Message status
-    const [toast, setToast] = useState(false);
+    const [toast, setToast] = useState({open: true, status: 'warning', message: 'Aviso: Mensagem de Aviso...'});
     const [status, setStatus] = useState("success");
     const [message, setMessage] = useState("");
+
+    const handleClick = () => { 
+        props.onOpenToast(toast);
+    }
 
     const handleClose = () => setToast(false);
     return (
@@ -19,11 +25,7 @@ const HomeDisplay = () => {
             <Typography variant='h2' textAlign='center'> Pagina Inicial </Typography>
             <BuildIcon />
             <div>
-                <Button variant='contained' onClick={() => {
-                    setToast(true) 
-                    setMessage('Aviso: Mensagem de Aviso...') 
-                    setStatus("warning")         
-                }}> Toast de Aviso 
+                <Button variant='contained' onClick={handleClick}> Toast de Aviso 
                 </Button>
                 <Button variant='contained' onClick={() => {
                     setToast(true) 
@@ -39,10 +41,15 @@ const HomeDisplay = () => {
                 </Button>
                
             </div>
-            <Toast status={status} message={message} open={toast} handleClose={handleClose}/>
+            <Toast />
        </Paper>
        </Box>
     )
 }
 
-export default HomeDisplay;
+const mapDispatchToProps = dispatch => ({
+    onOpenToast: toast => dispatch(openToast(toast)),
+})
+
+export default connect(null, mapDispatchToProps)(HomeDisplay);
+//export default connect(mapStateToProps, mapDispatchToProps)(RetailTable);
