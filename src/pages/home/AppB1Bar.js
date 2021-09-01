@@ -18,7 +18,7 @@ const useStyle = makeStyles({
 const AppB1Bar = () => {
     const classes = useStyle();
         return (
-            <AppBar position="static" className={classes.Root}>
+            <AppBar position="sticky" className={classes.Root}>
                  <Toolbar>
                      <ProfileBar />
                  </Toolbar>
