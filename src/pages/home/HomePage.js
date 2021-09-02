@@ -12,6 +12,7 @@ import ManageRetailForm from '../retail/ManageRetailForm';
 import ManageRetailFormEdit from '../retail/ManageRetailFormEdit';
 import ManageBrandForm from '../brand/ManageBrandForm';
 import ManageBrandFormEdit from '../brand/ManageBrandFormEdit';
+import ManageCampaignForm from '../campaign/ManageCampaignForm';
 import Toast from '../../common/Toast';
 
 const HomePage = () => {
@@ -44,6 +45,8 @@ const HomePage = () => {
                 <Route path="/home/brand/edit/:id" exact render={(props) => <ManageBrandFormEdit {...props} 
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
                 <Route path="/home/campaign" exact component={CampaignPage}/>
+                <Route path="/home/campaign/add" exact render={(props) => <ManageCampaignForm {...props} 
+                setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
                 <Route path="/home/visualization" exact component={VisualizationPage}/>
              </Switch>
           </Grid>
