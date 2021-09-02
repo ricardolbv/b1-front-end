@@ -10,6 +10,8 @@ import StepButton from '@material-ui/core/StepButton';
 import StepLabel from '@material-ui/core/StepLabel';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Slide from '@material-ui/core/Slide';
+import PublishOutlinedIcon from '@material-ui/icons/PublishOutlined';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -22,18 +24,25 @@ import {
 import { useHistory } from 'react-router-dom';
 
 const NewCampaignForm = () => {
-    // TODO: Fazer a transicão de formulario - https://material-ui.com/pt/components/transitions/#transitions
     const history = useHistory();
     const [selectedDate, setSelectedDate] = useState(new Date('2021-08-08T21:11:54'));
     const [activeStep, setActiveStep] = useState(0)
 
-    const handleSubmit = () => {
+    const handleSubmitData = () => {
         setActiveStep(1);
+    }
+
+    const handleSubmitFile = () => {
+        setActiveStep(2);
+    }
+
+    const handleBack = () => {
+        setActiveStep(0);
     }
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
-      };
+    };
 
     return (
         <Box  m={2} boxShadow={5} p={1} >
@@ -55,7 +64,39 @@ const NewCampaignForm = () => {
             <Grid container spacing={0}>
                 <Grid item sm={6}>
                 <Box  m={5} boxShadow={5} p={5} style={{ height: '45vh' }}>
-                    <form id="dadosCampanha">
+                    {activeStep ?  
+                        <Slide direction="up" in={activeStep} mountOnEnter unmountOnExit>
+                            <form>
+                            <Box m={1} p={1} display="flex" justifyContent="center">
+                                    <Typography variant='body1'>
+                                        Selecione o arquivo de tipo .csv ou .XLS
+                                    </Typography>
+                                </Box>
+                                <Box m={2} p={3} display="flex" justifyContent="center">
+                                    <Button variant="contained" component="label">
+                                        Arquivo da campanha
+                                        <input type="file" style={{ display: "none" }} />
+                                    </Button>
+                                </Box>
+                                <Box m={1} p={1} display="flex" justifyContent="center">
+                                    <Typography variant='body2'>
+                                        Nenhum arquivo selecionado
+                                    </Typography>
+                                </Box>
+                                <Box m={1} p={1} display="flex" justifyContent="center">
+                                    <Button variant="contained" component="label"style={{ minWidth: '125px', maxWidth: '200px', height: '40px'}} 
+                                        onClick={handleBack}>
+                                        Voltar
+                                    </Button>
+                                    <Button variant="contained" color="primary" onClick={handleSubmitFile}
+                                        style={{ backgroundColor: "#0D0B23", minWidth: '125px', maxWidth: '200px', height: '40px'}}>
+                                            Proximo
+                                        </Button>
+                                </Box>
+                            </form>
+                        </Slide> 
+                                :
+                        <form id="dadosCampanha">
                         <Box p={1}>
                             <TextField
                                 style={{ width: '100%' }}
@@ -103,7 +144,7 @@ const NewCampaignForm = () => {
                                     <Box p={3}>
                                         <Button variant="contained" color="primary"
                                         style={{ backgroundColor: "#0D0B23", minWidth: '125px', maxWidth: '200px', height: '40px'}}
-                                        onClick={handleSubmit}>
+                                        onClick={handleSubmitData}>
                                             Proximo
                                         </Button>
                                     </Box>
@@ -111,13 +152,14 @@ const NewCampaignForm = () => {
                             </Grid>
                         </Box>
                     </form>
+                }
                 </Box>
                 </Grid>
                 <Grid item sm={6}>
                 <Box  m={5} boxShadow={0} p={5} marginTop={15}>
                     <Stepper activeStep={activeStep}>
                         <Step StepLabel='Dados'>
-                            <StepLabel>
+                            <StepLabel >
                                 Dados
                                 <StepButton/>
                             </StepLabel>
