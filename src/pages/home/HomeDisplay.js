@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Toast from '../../common/Toast';
 import { Button } from '@material-ui/core';
 import { openToast } from '../../common/actions';
+import HomeJoao from './HomeJoao';
 
 const HomeDisplay = (props) => {
     //Message status
@@ -25,21 +26,7 @@ const HomeDisplay = (props) => {
             <Typography variant='h2' textAlign='center'> Pagina Inicial </Typography>
             <BuildIcon />
             <div>
-                <Button variant='contained' onClick={handleClick}> Toast de Aviso 
-                </Button>
-                <Button variant='contained' onClick={() => {
-                    setToast(true) 
-                    setMessage('Aviso: Mensagem de Erro...') 
-                    setStatus("error")         
-                }}> Toast de Erro 
-                </Button>
-                <Button variant='contained' onClick={() => {
-                    setToast(true) 
-                    setMessage('Aviso: Mensagem de Sucesso...') 
-                    setStatus("success")         
-                }}> Toast de Sucesso 
-                </Button>
-               
+                <HomeJoao nome='Joao'/>
             </div>
             <Toast />
        </Paper>
