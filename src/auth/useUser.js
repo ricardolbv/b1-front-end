@@ -12,7 +12,7 @@ export const useUser = () => {
     const [user, setUser] = useState(() => {
         if (!token) return null;
 
-        return setUser(getPayloadFromToken(token));
+        return getPayloadFromToken(token);
     })
 
     useEffect(() => {

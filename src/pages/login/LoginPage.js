@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import FormLogin from './FormLogin';
+import ManageFormLogin from './ManageFormLogin';
 import B1logo from './B1Logo';
 import Contact from './Contact';
 import SideImage from './SideImage';
@@ -27,7 +27,7 @@ function LoginPage() {
           <Grid item sm={12} xs={12} >
             <Typography component="div" className={classes.Above} />
             <B1logo />
-            <FormLogin />
+            <ManageFormLogin />
             <SideImage />
           </Grid>
           <Grid item container sm={12} xs={12} >

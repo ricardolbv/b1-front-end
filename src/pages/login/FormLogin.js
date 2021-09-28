@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
 import Box from '@material-ui/core/Box'
 
 const useStyle = makeStyles({
@@ -46,7 +45,7 @@ const useStyle = makeStyles({
     }
 })
 
-function FormLogin() {
+function FormLogin(props) {
     const classes = useStyle();
     return (
         <Box boxShadow={4} className={classes.Form}>
@@ -55,10 +54,24 @@ function FormLogin() {
                 <Typography className={classes.PrimaryColor} variant='h5' align="center">Bem vindo!</Typography>
                 <Typography variant='subtitle1' align="center" className={classes.GreyText}>Faça seu login</Typography>
                 <Typography align="center">
-                    <TextField id="email" label="E-mail" variant="outlined" className={classes.Input} />
+                    <TextField id="email" 
+                               label="E-mail" 
+                               variant="outlined" className={classes.Input}
+                               value={props.user.email}
+                               onChange={props.onChange}
+                               error={props.mailValidation}
+                               {...(props.mailValidation && { helperText: 'Email inválido' })}/>
                 </Typography>
                 <Typography align="center">
-                <TextField id="senha" label="Digite sua senha" variant="outlined" className={classes.Input} type='password'/>
+                <TextField id="senha" 
+                           label="Digite sua senha" 
+                           variant="outlined" className={classes.Input} 
+                           type='password'
+                           value={props.user.senha}
+                           onChange={props.onChange}
+                           error={props.pswValidation}
+                           {...(props.pswValidation && { helperText: 'Poucos caracteres' })}
+                           />
                 </Typography>
                 <a href="https://material-ui.com/api/text-field/">
                 <Typography align="right" className={classes.Forgot}>
@@ -66,11 +79,11 @@ function FormLogin() {
                 </Typography>
                 </a>
                 <Typography align="center">
-                <Link to='/home'>
-                <Button variant="contained" color="primary" className={classes.Btn}>
+                <Button variant="contained" 
+                        color="primary" className={classes.Btn}
+                        onClick={props.onSubmit}>
                     Entre
                 </Button>
-                </Link>
                 </Typography>
             </form>
         </Paper>
