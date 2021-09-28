@@ -15,6 +15,8 @@ import ManageBrandFormEdit from '../brand/ManageBrandFormEdit';
 import ManageCampaignForm from '../campaign/ManageCampaignForm';
 import Toast from '../../common/Toast';
 
+import PrivateRoute from '../../auth/PrivateRoute';
+
 const HomePage = () => {
     const [toast, setToast] = useState(false);
     const [status, setStatus] = useState("success");
@@ -31,23 +33,23 @@ const HomePage = () => {
           <Grid item  xs={10}>
              <AppB1Bar />
              <Switch>
-                <Route path="/home" exact component={HomeDisplay} />
-                <Route path="/home/retail" exact render={(props) => <RetailPage {...props}
+                <PrivateRoute path="/home" exact component={HomeDisplay} />
+                <PrivateRoute path="/home/retail" exact render={(props) => <RetailPage {...props}
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
-                <Route path="/home/retail/add" exact render={(props) => <ManageRetailForm {...props} 
+                <PrivateRoute path="/home/retail/add" exact render={(props) => <ManageRetailForm {...props} 
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
-                <Route path="/home/retail/edit/:id" exact render={(props) => <ManageRetailFormEdit {...props} 
+                <PrivateRoute path="/home/retail/edit/:id" exact render={(props) => <ManageRetailFormEdit {...props} 
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
-                <Route path="/home/brand" exact render={(props) => <BrandPage {...props}
+                <PrivateRoute path="/home/brand" exact render={(props) => <BrandPage {...props}
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
-                <Route path="/home/brand/add" exact render={(props) => <ManageBrandForm {...props} 
+                <PrivateRoute path="/home/brand/add" exact render={(props) => <ManageBrandForm {...props} 
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
-                <Route path="/home/brand/edit/:id" exact render={(props) => <ManageBrandFormEdit {...props} 
+                <PrivateRoute path="/home/brand/edit/:id" exact render={(props) => <ManageBrandFormEdit {...props} 
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
-                <Route path="/home/campaign" exact component={CampaignPage}/>
-                <Route path="/home/campaign/add" exact render={(props) => <ManageCampaignForm {...props} 
+                <PrivateRoute path="/home/campaign" exact component={CampaignPage}/>
+                <PrivateRoute path="/home/campaign/add" exact render={(props) => <ManageCampaignForm {...props} 
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
-                <Route path="/home/visualization" exact component={VisualizationPage}/>
+                <PrivateRoute path="/home/visualization" exact component={VisualizationPage}/>
              </Switch>
           </Grid>
         </Grid>
