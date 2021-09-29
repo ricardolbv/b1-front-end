@@ -10,6 +10,7 @@ import { openToast } from '../../common/actions';
 
 function ManageLoginForm (props)  {
     const [token, setToken] = useToken();
+    const [isLoading, setLoad] = useState(false);
     const history = useHistory();
 
     const [mailValidation, setMailValid] = useState(false);
@@ -23,11 +24,14 @@ function ManageLoginForm (props)  {
     const handleSubmit = async (target) => {
         if (mailIsValidated() && pswIsValid()){
             try{
+                setLoad(true)
                 const resp = await axios.post('https://b1-backend.azurewebsites.net/login', user);
                 setToken(resp.data.data);
+                setLoad(false)
                 history.push('/home')
 
             } catch (error){
+                setLoad(false)
                 alert(error)
             }
         }
@@ -78,6 +82,7 @@ function ManageLoginForm (props)  {
                     onSubmit={handleSubmit}
                     mailValidation={mailValidation}
                     pswValidation={pswValidation}
+                    isLoading={isLoading}
         />
     </>
     )

@@ -1,10 +1,11 @@
-import React from 'react';
+import { React, useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box'
+import Box from '@material-ui/core/Box';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const useStyle = makeStyles({
     Form: {
@@ -47,11 +48,18 @@ const useStyle = makeStyles({
 
 function FormLogin(props) {
     const classes = useStyle();
+
     return (
         <Box boxShadow={4} className={classes.Form}>
         <Paper elevation={2} className={classes.Form} >
             <form>
                 <Typography className={classes.PrimaryColor} variant='h5' align="center">Bem vindo!</Typography>
+                { props.isLoading ?                 
+                    <Box sx={{ width: '100%' }}>
+                        <LinearProgress />
+                    </Box> :
+                    <></>
+                }
                 <Typography variant='subtitle1' align="center" className={classes.GreyText}>Faça seu login</Typography>
                 <Typography align="center">
                     <TextField id="email" 
@@ -62,7 +70,7 @@ function FormLogin(props) {
                                error={props.mailValidation}
                                {...(props.mailValidation && { helperText: 'Email inválido' })}/>
                 </Typography>
-                <Typography align="center">
+                <Typography align="center" style={{ paddingTop: '3px' }}>
                 <TextField id="senha" 
                            label="Digite sua senha" 
                            variant="outlined" className={classes.Input} 
