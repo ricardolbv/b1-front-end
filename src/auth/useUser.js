@@ -6,22 +6,26 @@ export const useUser = () => {
 
     const getPayloadFromToken = token => {
         const encodedPayload = token.split('.')[1];
-        return JSON.parse(atob(encodedPayload));
+        console.log(JSON.parse(window.atob(encodedPayload)))
+        return JSON.parse(window.atob(encodedPayload));
     }
 
     const [user, setUser] = useState(() => {
-        if (!token) return null;
+        if (!token) 
+            return null;
 
         return getPayloadFromToken(token);
     })
 
     useEffect(() => {
-        if (!token)
+        if (!token){
             setUser(null);
+        }
 
-        else
-            setUser(getPayloadFromToken(token))
-    }, [token])
+        else {
+            setUser(getPayloadFromToken(token));
+        }
+    }, [token]);
 
     return user;
 }
