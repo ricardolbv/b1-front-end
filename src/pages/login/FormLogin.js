@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
+import Loading from '../../common/Loading';
+
+
 const useStyle = makeStyles({
     Form: {
         position: "fixed",
@@ -54,12 +57,7 @@ function FormLogin(props) {
         <Paper elevation={2} className={classes.Form} >
             <form>
                 <Typography className={classes.PrimaryColor} variant='h5' align="center">Bem vindo!</Typography>
-                { props.isLoading ?                 
-                    <Box sx={{ width: '100%' }}>
-                        <LinearProgress />
-                    </Box> :
-                    <></>
-                }
+                <Loading isLoading={props.isLoading}/>
                 <Typography variant='subtitle1' align="center" className={classes.GreyText}>Faça seu login</Typography>
                 <Typography align="center">
                     <TextField id="email" 

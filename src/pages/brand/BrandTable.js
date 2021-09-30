@@ -10,18 +10,20 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import TableContainer from '@material-ui/core/TableContainer';
 import BrandEditExcludeEnable from './BrandEditExcludeEnable';
 
+import Loading from '../../common/Loading';
+
 
 function BrandTable (props) {
-  const [load, setLoad] = useState(true);
+  const [isLoading, setLoad] = useState(false);
 
   useEffect(() => {
-    setLoad(true);
-  }, [])
-
-  useEffect(() => {
+    activateLoad();
     props.brandLoad();
-    setLoad(false);
+    deactivateLoad();
   }, [])
+
+  const activateLoad = () => setLoad(true);
+  const deactivateLoad = () => setLoad(false);
 
   return (
     <TableContainer style={{ minHeight: '80%' }}>
@@ -35,8 +37,15 @@ function BrandTable (props) {
           </TableRow>
         </TableHead>
         <TableBody>
-        {load ? <CircularProgress style={{ position:'relative', left: '75vh', top:'15vh' }}/> : 
-        props.brands.filter((val) => {
+        {isLoading  ?
+        <TableRow >
+          <TableCell colSpan={4}>
+            <Loading isLoading={isLoading}/>
+          </TableCell>
+        </TableRow> :
+        <></>
+        }
+        {props.brands.filter((val) => {
           if (props.searchTerm === '')
             return val
           else if (val.nome.toLowerCase().includes(props.searchTerm.toLowerCase()) || 
