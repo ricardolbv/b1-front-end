@@ -50,7 +50,7 @@ function getTypeUser(idCargo){
 
 const ProfileBar = () => {
     const user = useUser();
-    const { usuarioId, cargoId } = user;
+    const { usuarioId, cargoId, email } = user;
 
     const history = useHistory();
     const classes = useStyle();
@@ -62,7 +62,7 @@ const ProfileBar = () => {
                 </Box>
                 <Box display='flex' flexWrap='wrap' p={1}>
                     <Box>
-                        <Typography align='left' variant='subtitle1' className={classes.Nome}> {usuarioId}</Typography>
+                        <Typography align='left' variant='subtitle1' className={classes.Nome}> {email}</Typography>
                         <Typography align='left' variant='body2' className={classes.Cargo}> {getTypeUser(cargoId)} </Typography>
                         <Breadcrumbs>
                             <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>

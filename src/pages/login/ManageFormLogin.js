@@ -32,7 +32,9 @@ function ManageLoginForm (props)  {
 
             } catch (error){
                 setLoad(false)
-                alert(error)
+                alert('Erro de login ou senha');
+                setMailValid(true);
+                setPwsValid(true);
             }
         }
     }

@@ -9,7 +9,9 @@ export const fetchLogin = (user) => async (dispatch, getState) => {
         const [token, setToken] = useToken();
         const history = useHistory();
 
-        const resp = await axios.prost('https://b1-backend.azurewebsites.net/login', user);
+        const resp = await axios.post('https://b1-backend.azurewebsites.net/login', user)
+        if (resp.status === 401)
+            console.log("falha")
         setToken(resp.data.data)
         dispatch(logIn(resp.data.data));
         history.push('/init')
@@ -19,4 +21,6 @@ export const fetchLogin = (user) => async (dispatch, getState) => {
         alert(error)
     }
 }
+
+
 

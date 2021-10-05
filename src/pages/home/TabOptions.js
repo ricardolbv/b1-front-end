@@ -109,7 +109,7 @@ function TabOptions(props) {
    else if (cargoId === 2)
         return <List disablePadding className={classes.Root}> <Retail/> </List>
 
-    else if (cargoId === 2)
+    else if (cargoId === 1)
         return <List disablePadding className={classes.Root}> <Admin/> </List>
 
 }
