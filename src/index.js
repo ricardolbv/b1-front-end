@@ -7,12 +7,14 @@ import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from './store'
 
+import PrivateRoute from './auth/PrivateRoute';
+
 
 ReactDOM.render(
   <Provider store={configureStore()}>
     <Router>
       <Route path="/" exact component={LoginPage}/>
-      <Route path="/home" component={HomePage}/>
+      <PrivateRoute path="/home" component={HomePage}/>
     </Router> 
   </Provider>
   ,

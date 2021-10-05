@@ -8,6 +8,8 @@ import Link from '@material-ui/core/Link';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useHistory } from 'react-router-dom';
 
+import { useUser } from '../../auth/useUser';
+
 const useStyle = makeStyles(( theme ) => ({
     Root: {
         position:'absolute',
@@ -34,9 +36,22 @@ function handleClick(event) {
     console.info('You clicked a breadcrumb.');
   }
 
-//<Typography align='left' variant='subtitle2' className={classes.Conta}> Minha conta</Typography>
+function getTypeUser(idCargo){
+    if (idCargo === 1)
+        return 'Admin';
+
+    else if (idCargo === 2) // Verejo
+        return 'Varejo';
+
+    else if (idCargo === 3)
+        return 'Marca';
+}
+
 
 const ProfileBar = () => {
+    const user = useUser();
+    const { usuarioId, cargoId, email } = user;
+
     const history = useHistory();
     const classes = useStyle();
         return (
@@ -47,8 +62,8 @@ const ProfileBar = () => {
                 </Box>
                 <Box display='flex' flexWrap='wrap' p={1}>
                     <Box>
-                        <Typography align='left' variant='subtitle1' className={classes.Nome}> Usuario X</Typography>
-                        <Typography align='left' variant='body2' className={classes.Cargo}> Cargo y</Typography>
+                        <Typography align='left' variant='subtitle1' className={classes.Nome}> {email}</Typography>
+                        <Typography align='left' variant='body2' className={classes.Cargo}> {getTypeUser(cargoId)} </Typography>
                         <Breadcrumbs>
                             <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
                                 <Typography align='left' variant='subtitle2' className={classes.Conta}> Minha conta</Typography>
@@ -58,7 +73,10 @@ const ProfileBar = () => {
                 </Box>
             </Box>
             <ExitToAppIcon style={{color: 'black', padding: '1px', position:'relative', top:'35%', left: '99%'}}
-            onClick={() => history.push('/')}/>
+            onClick={() => {
+                localStorage.removeItem('token');
+                history.push('/')
+            }}/>
             </>
         )
 }
