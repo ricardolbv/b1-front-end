@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,6 +6,7 @@ import ManageFormLogin from './ManageFormLogin';
 import B1logo from './B1Logo';
 import Contact from './Contact';
 import SideImage from './SideImage';
+import FormRecoveryPsw from './FormRecoveryPsw';
 
 const useStyle = makeStyles({
     Above: {
@@ -20,6 +21,8 @@ const useStyle = makeStyles({
 
 
 function LoginPage() {
+    const [page, setPage] = useState(1);
+
     const classes = useStyle();
     return (
         <>
@@ -27,7 +30,7 @@ function LoginPage() {
           <Grid item sm={12} xs={12} >
             <Typography component="div" className={classes.Above} />
             <B1logo />
-            <ManageFormLogin />
+              {page === 1 ? <ManageFormLogin onChangePage={setPage} /> : <FormRecoveryPsw onChangePage={setPage} /> }
             <SideImage />
           </Grid>
           <Grid item container sm={12} xs={12} >

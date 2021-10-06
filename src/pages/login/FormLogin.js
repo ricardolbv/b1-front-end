@@ -5,9 +5,10 @@ import { Typography } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import Link from '@material-ui/core/Link';
 
 import Loading from '../../common/Loading';
+import { PowerInputSharp } from '@material-ui/icons';
 
 
 const useStyle = makeStyles({
@@ -79,11 +80,10 @@ function FormLogin(props) {
                            {...(props.pswValidation && { helperText: 'Poucos caracteres' })}
                            />
                 </Typography>
-                <a href="https://material-ui.com/api/text-field/">
-                <Typography align="right" className={classes.Forgot}>
-                    Esqueceu a senha?
-                </Typography>
-                </a>
+                <Box p={2} m={1} paddingRight={5} display='flex' justifyContent='flex-end'>
+                    <Link variant='body1' onClick={() => props.onChangePage(2)}>Esqueceu a senha? </Link>
+                </Box>
+
                 <Typography align="center">
                 <Button variant="contained" 
                         color="primary" className={classes.Btn}
