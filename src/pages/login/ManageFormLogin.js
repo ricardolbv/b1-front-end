@@ -85,6 +85,7 @@ function ManageLoginForm (props)  {
                     mailValidation={mailValidation}
                     pswValidation={pswValidation}
                     isLoading={isLoading}
+                    {...props}
         />
     </>
     )
