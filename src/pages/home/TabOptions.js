@@ -54,10 +54,6 @@ const Brand = () =>{
                     <ListItemIcon > <HomeIcon style={{ color: "white"}}/>  </ListItemIcon>
                     <ListItemText primary={"Home"} style={{ color: "white", width: "auto" }}/>
         </ListItem>
-        <ListItem button  name='campanha' id='campanha' onClick= {() => history.push('/home/campaign')}>
-                <ListItemIcon> <LocalGroceryStoreIcon  style={{ color: "white"}}/>  </ListItemIcon>
-                <ListItemText primary={"Campanha"} style={{ color: "white", width: "auto" }}/>
-        </ListItem>
         <ListItem button name='visualizacao' id='visualizacao' onClick= {() => history.push('/home/visualization')}>
                 <ListItemIcon  > <DashboardIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Visualização"} style={{ color: "white", width: "auto" }}/>
