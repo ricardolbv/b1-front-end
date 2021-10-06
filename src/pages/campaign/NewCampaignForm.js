@@ -99,9 +99,14 @@ const NewCampaignForm = () => {
                         <form id="dadosCampanha">
                         <Box p={1}>
                             <TextField
-                                style={{ width: '100%' }}
+                                style={{ width: '55%' }}
                                 id="nomeProduto"
                                 label="Produto(s)"
+                                variant="outlined"/>
+                            <TextField
+                                style={{ width: '43%', paddingLeft: '1vh' }}
+                                id="idCampanha"
+                                label="ID Campanha"
                                 variant="outlined"/>
                         </Box>
                         <Box p={1}>
@@ -119,7 +124,8 @@ const NewCampaignForm = () => {
                                 label="Descrição"
                                 multiline
                                 defaultValue=""
-                                variant="outlined"/>
+                                variant="outlined"
+                                inputProps={{ maxLength: 74 }}/>
                         </Box>
                         <Box p={1}>
                             <Grid container spacing={0}>
