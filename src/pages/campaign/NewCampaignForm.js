@@ -1,4 +1,4 @@
-import { React, useState }  from 'react';
+import { React, useState, useEffect }  from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -11,8 +11,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
-import PublishOutlinedIcon from '@material-ui/icons/PublishOutlined';
+import MenuItem from '@material-ui/core/MenuItem';
 import 'date-fns';
+import { connect } from 'react-redux';
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
@@ -20,13 +21,18 @@ import {
     KeyboardDatePicker,
   } from '@material-ui/pickers';
 
+import { fetchBrands } from '../brand/thunks';
 
+//TODO: Verificar como pegar estado da data
 import { useHistory } from 'react-router-dom';
 
-const NewCampaignForm = () => {
+const NewCampaignForm = (props) => {
     const history = useHistory();
-    const [selectedDate, setSelectedDate] = useState(new Date('2021-08-08T21:11:54'));
     const [activeStep, setActiveStep] = useState(0)
+
+    useEffect(() => {
+        props.brandLoad();
+    }, [])
 
     const handleSubmitData = () => {
         setActiveStep(1);
@@ -40,17 +46,13 @@ const NewCampaignForm = () => {
         setActiveStep(0);
     }
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    };
-
     return (
         <Box  m={2} boxShadow={5} p={1} >
             <div>
                 <Grid container spacing={1}>
                     <Grid item sm={6}>
                         <Box p={1} paddingLeft={1} paddingBottom={0}>
-                            <Typography variant='h3'> Nova campanha </Typography>
+                            <Typography variant='h3'> Nova Campanha </Typography>
                         </Box>
                     </Grid>
                     <Grid item sm={6}>
@@ -100,14 +102,22 @@ const NewCampaignForm = () => {
                         <Box p={1}>
                             <TextField
                                 style={{ width: '55%' }}
-                                id="nomeProduto"
+                                id="produto"
                                 label="Produto(s)"
-                                variant="outlined"/>
+                                variant="outlined"
+                                onChange={props.onChange}
+                                value={props.campaign.produto}
+                                error={props.prodValidation}
+                                    {...(props.prodValidation && { helperText: 'Poucos caracteres' })}/>
                             <TextField
                                 style={{ width: '43%', paddingLeft: '1vh' }}
-                                id="idCampanha"
+                                id="id_campanha"
                                 label="ID Campanha"
-                                variant="outlined"/>
+                                variant="outlined"
+                                value={props.campaign.id_campanha}
+                                onChange={props.onChange}
+                                error={props.idCampanhaValidation}
+                                    {...(props.idCampanhaValidation && { helperText: 'Poucos caracteres' })}/>
                         </Box>
                         <Box p={1}>
                             <TextField
@@ -115,7 +125,15 @@ const NewCampaignForm = () => {
                                 id="marca"
                                 label="Marca"
                                 variant="outlined"
-                                select/>
+                                select
+                                onChange={props.onSelect}
+                                value={props.campaign.marca}
+                                error={props.marcaValidation}
+                                {...(props.marcaValidation && { helperText: 'Marca é obrigatória' })}>
+                                    {props.brands.map(brand => 
+                                         <MenuItem key={brand.id} name={brand.id} value={brand.id}> {brand.nome}</MenuItem>
+                                    )}
+                                </TextField>
                         </Box>
                         <Box p={1}>
                             <TextField
@@ -125,7 +143,11 @@ const NewCampaignForm = () => {
                                 multiline
                                 defaultValue=""
                                 variant="outlined"
-                                inputProps={{ maxLength: 74 }}/>
+                                onChange={props.onChange}
+                                value={props.campaign.descricao}
+                                inputProps={{ maxLength: 74 }}
+                                error={props.descricaoValdiation}
+                                    {...(props.idescricaoValdiation && { helperText: 'Descrever campanha' })}/>
                         </Box>
                         <Box p={1}>
                             <Grid container spacing={0}>
@@ -136,13 +158,10 @@ const NewCampaignForm = () => {
                                         variant="inline"
                                         format="dd/MM/yyyy"
                                         margin="normal"
-                                        id="date-picker-inline"
+                                        id="dataCriacao"
                                         label="Data de criação"
-                                        value={selectedDate}
-                                        onChange={handleDateChange}
-                                        KeyboardButtonProps={{
-                                            'aria-label': 'change date',
-                                        }}
+                                        value={props.date}
+                                        onChange={date => props.onDataChange(date)}
                                     />
                                 </MuiPickersUtilsProvider>
                                 </Grid>
@@ -150,7 +169,7 @@ const NewCampaignForm = () => {
                                     <Box p={3}>
                                         <Button variant="contained" color="primary"
                                         style={{ backgroundColor: "#0D0B23", minWidth: '125px', maxWidth: '200px', height: '40px'}}
-                                        onClick={handleSubmitData}>
+                                        onClick={props.onSubmit}>
                                             Proximo
                                         </Button>
                                     </Box>
@@ -184,4 +203,12 @@ const NewCampaignForm = () => {
     )
 }
 
-export default NewCampaignForm
+const mapStateToProps = state => ({
+    brands: state.brands,
+  })
+  
+  const mapDispatchToProps = dispatch => ({
+    brandLoad: () => dispatch(fetchBrands()),
+  })
+
+  export default connect(mapStateToProps, mapDispatchToProps)(NewCampaignForm);
