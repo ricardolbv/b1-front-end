@@ -14,6 +14,7 @@ export const ManageCampaingForm = (props) => {
     });
 
     const [date, setData] = useState(new Date());
+    const [loading, setLoad] = useState(false);
 
     const [prodValidation, setProdValid] = useState(false);
     const [idCampanhaValidation, setIdValid] = useState(false);
@@ -46,7 +47,9 @@ export const ManageCampaingForm = (props) => {
         campaign.dataCriacao = date.toLocaleDateString();
         if (prodIsValidated() && idIsValidated() && marcaIsValidated() &&
             descricaoIsValidated() && dataIsValidated()){
-            props.onCreateCampaign(campaign);
+                setLoad(true);
+                await props.onCreateCampaign(campaign);
+                setLoad(false);
         }
     }
 
@@ -111,6 +114,7 @@ export const ManageCampaingForm = (props) => {
                                  onSelect={handleChangeSelect}
                                  onDataChange={setData}
                                  date={date}
+                                 isLoading={loading}
                                  prodValidation={prodValidation}
                                  idCampanhaValidation={idCampanhaValidation}
                                  marcaValidation={marcaValidation}

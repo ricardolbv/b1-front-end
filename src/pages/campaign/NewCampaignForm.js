@@ -15,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import 'date-fns';
 import { connect } from 'react-redux';
 import DateFnsUtils from '@date-io/date-fns';
+import Loading from '../../common/Loading';
 import {
     MuiPickersUtilsProvider,
     KeyboardTimePicker,
@@ -182,6 +183,7 @@ const NewCampaignForm = (props) => {
                 </Grid>
                 <Grid item sm={6}>
                 <Box  m={5} boxShadow={0} p={5} marginTop={15}>
+                <Loading isLoading={props.isLoading}/>
                     <Stepper activeStep={activeStep}>
                         <Step StepLabel='Dados'>
                             <StepLabel >
