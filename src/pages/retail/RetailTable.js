@@ -86,9 +86,7 @@ function RetailTable (props) {
     </TableContainer>
   );
 }
-/*
 
-*/
 const mapStateToProps = state => ({
   retails: state.retails,
 })

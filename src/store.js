@@ -5,7 +5,7 @@ import { retails, segments } from '../src/pages/retail/reducers';
 import { brands } from '../src/pages/brand/reducers';
 import { toast } from '../src/common/reducers';
 import { user } from '../src/pages/login/reducers';
-import { campaigns } from './pages/campaign/reducers';
+import { campaigns } from '../src/pages/campaign/reducers';
 
 const reducers = {
     retails,
