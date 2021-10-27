@@ -5,7 +5,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import DeletAlertDialog from '../../common/DeletAlertDialog';
+
+import DeletCampaignAlert from './DeletCampaignAlert';
 
 const useStyles = makeStyles({
     root: {
@@ -24,19 +25,9 @@ const useStyles = makeStyles({
       marginBottom: 12,
     },
   });
-
-  //TODO: Colocar o componente de dialog no lugar correto. Verificar brand e retail
+ //TODO: integrar endpoint de exclusão de campanhas
   function CardCampaign(props) {
-    const [openDialog, setHandleDialog] = useState(false);
-
     const classes = useStyles();
-    const handleCloseDialog = () => {
-
-    }
-
-    const handleExclude = () => {
-      
-    }
 
     const formatDate = (created, until) => {
       const [dateCreated, ] = created.split('T');
@@ -51,7 +42,6 @@ const useStyles = makeStyles({
   
     return (
       <>
-        <DeletAlertDialog openDialog={openDialog} handleCloseDialog={handleCloseDialog} handleExclude={handleExclude} {...props}/>
       <Card className={classes.root} variant="outlined">
         <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom align='center'>
@@ -69,7 +59,10 @@ const useStyles = makeStyles({
         </CardContent>
         <CardActions>
           <Button size="small" variant="contained">Mais infos</Button>
-          <Button size="small">Excluir</Button>
+          <Button size="small" onClick={() => 
+          { props.textoDialogo(props.nomeCampanha)
+            props.dialogo(true)
+          }}>Excluir</Button>
         </CardActions>
       </Card>
       </>

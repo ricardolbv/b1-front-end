@@ -23,8 +23,6 @@ import {
   } from '@material-ui/pickers';
 
 import { fetchBrands } from '../brand/thunks';
-
-//TODO: Verificar como pegar estado da data
 import { useHistory } from 'react-router-dom';
 
 const NewCampaignForm = (props) => {
