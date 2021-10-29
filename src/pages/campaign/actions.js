@@ -10,3 +10,9 @@ export const loadCampaigns = allCapaigns => ({
     payload: {allCapaigns}
 })
 
+export const DELETE_CAMPAIGNS = "DELETE_CAMPAIGNS";
+export const deleteCampaigns = campaign => ({
+    type: DELETE_CAMPAIGNS,
+    payload: campaign
+})
+

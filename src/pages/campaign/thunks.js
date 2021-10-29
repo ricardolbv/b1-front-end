@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
     createCampaign,
     loadCampaigns,
+    deleteCampaigns,
 } from './actions';
 import { openToast } from '../../common/actions';
 
@@ -33,10 +34,22 @@ export const fetchCampaigns = (id) => async (dispatch) => {
         dispatch(loadCampaigns(campaigns.data.data[0]));
 
     } catch (error) {
-        alert(error)
+        dispatch(openToast({open: true, status: 'error', message: 'Erro de comunicação. Endpoint: /campaign '+ error}))
     }
 }
 
+export const deleteCampaign = (id) => async (dispatch) => {
+    try {   
+        await axios.post('https://b1-backend.azurewebsites.net/campaign/delete', { idCampanha: id });
+        dispatch(deleteCampaigns(id));
+        dispatch(openToast({open: true, status: 'success', message:"Campanha deletada com sucesso!"}));
+
+    } catch (error) {
+        dispatch(openToast({open: true, status: 'error', message: 'Erro de comunicação. Endpoint: /campaign/delete '+ error}))
+    }
+}
+
+/** Função auxiliar para formartar data de requests */
 const auxData = dt => {
     const [dia, mes, ano] = dt.split('/')
 

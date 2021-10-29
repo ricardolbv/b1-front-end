@@ -6,7 +6,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import DeletCampaignAlert from './DeletCampaignAlert';
 
 const useStyles = makeStyles({
     root: {
@@ -62,6 +61,7 @@ const useStyles = makeStyles({
           <Button size="small" onClick={() => 
           { props.textoDialogo(props.nomeCampanha)
             props.dialogo(true)
+            props.onDelete(props.id_campanha)
           }}>Excluir</Button>
         </CardActions>
       </Card>
