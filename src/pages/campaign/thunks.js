@@ -51,14 +51,17 @@ export const deleteCampaign = (id) => async (dispatch) => {
 
 export const newFile = (file) => async (dispatch) => {
     try {
-        let config = {
+        const formData = new FormData();
+        formData.append('filename', new Blob([file], { type: 'text/csv' }));
+
+        const config = {
             headers: {
-              'Content-Type' : 'multipart/form-data'
+              'content-type': 'multipart/form-data'
             }
           }
-          
-        await axios.post('https://upload-archive-node.azurewebsites.net/api/archive-upload',
-            file, config);
+
+        console.log(formData)
+        await axios.post('https://upload-archive-node.azurewebsites.net/api/archive-upload', formData, config);
         dispatch(openToast({open: true, status: 'success', message:"Campanha criada com sucesso!"}));
     
     } catch (error) {

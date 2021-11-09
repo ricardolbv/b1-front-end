@@ -78,7 +78,7 @@ export const changeBrand = (brand) => async (dispatch) => {
     try {
         const _brand = {
             email: brand.email,
-            update_nome: brand.senha,
+            update_nome: brand.nome,
             update_cnpj: brand.cnpj,
             update_telefone: brand.telefone,
             update_id_segmento: brand.segmento,
