@@ -24,12 +24,16 @@ import {
 
 import { fetchBrands } from '../brand/thunks';
 import { useHistory } from 'react-router-dom';
+import TestComponent from './TestComponent';
+import { useUser } from '../../auth/useUser';
 
 const NewCampaignForm = (props) => {
     const history = useHistory();
+    const user = useUser()
+    const { usuarioId } = user;
 
     useEffect(() => {
-        props.brandLoad();
+        props.brandLoad(usuarioId);
     }, [])
 
 
@@ -55,7 +59,7 @@ const NewCampaignForm = (props) => {
                 <Box  m={5} boxShadow={5} p={5} style={{ height: '45vh' }}>
                     {props.step ?  
                         <Slide direction="up" in={props.step} mountOnEnter unmountOnExit>
-                            <form>
+                             <form>
                             <Box m={1} p={1} display="flex" justifyContent="center">
                                     <Typography variant='body1'>
                                         Selecione o arquivo de tipo .csv ou .XLS
@@ -192,7 +196,7 @@ const mapStateToProps = state => ({
   })
   
   const mapDispatchToProps = dispatch => ({
-    brandLoad: () => dispatch(fetchBrands()),
+    brandLoad: id => dispatch(fetchBrands(id)),
   })
 
   export default connect(mapStateToProps, mapDispatchToProps)(NewCampaignForm);
