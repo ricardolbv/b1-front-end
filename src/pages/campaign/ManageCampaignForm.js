@@ -2,9 +2,12 @@ import React, { useState, } from 'react'
 import { connect } from 'react-redux'
 import NewCampaignForm from './NewCampaignForm'
 
-import { newCampaign } from './thunks'
+import { newCampaign, newFile } from './thunks'
 
 export const ManageCampaingForm = (props) => {
+    const [activeStep, setActiveStep] = useState(0);
+    const [file, setFile] = useState()
+
     const [campaign, setCampaign] = useState({
         'produto': '',
         'id_campanha': '',
@@ -30,9 +33,13 @@ export const ManageCampaingForm = (props) => {
         setDataValid(false);
     }
 
-    const handleDateChange = (date) => {
-        setCampaign(campaign.dataCriacao = date);
-    };
+    const handleUploadFile = async () => {
+        setLoad(true);
+        await props.onUploadFile(file);
+        setLoad(false);
+    }
+
+    const handleFile = ({ target }) => setFile(target.files[0])
 
 
     function handleChange ({ target }) {
@@ -49,6 +56,7 @@ export const ManageCampaingForm = (props) => {
             descricaoIsValidated() && dataIsValidated()){
                 setLoad(true);
                 await props.onCreateCampaign(campaign);
+                setActiveStep(1);
                 setLoad(false);
         }
     }
@@ -113,6 +121,9 @@ export const ManageCampaingForm = (props) => {
                                  onChange={handleChange}
                                  onSelect={handleChangeSelect}
                                  onDataChange={setData}
+                                 onUploadFile={handleUploadFile}
+                                 handleFile={handleFile}
+                                 step={activeStep}
                                  date={date}
                                  isLoading={loading}
                                  prodValidation={prodValidation}
@@ -126,7 +137,8 @@ export const ManageCampaingForm = (props) => {
 
 
 const mapDispatchToProps = dispatch => ({
-    onCreateCampaign: campaign => dispatch(newCampaign(campaign))
+    onCreateCampaign: campaign => dispatch(newCampaign(campaign)),
+    onUploadFile: file => dispatch(newFile(file))
 })
 
 export default connect(null, mapDispatchToProps)(ManageCampaingForm)

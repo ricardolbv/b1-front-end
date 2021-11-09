@@ -49,6 +49,23 @@ export const deleteCampaign = (id) => async (dispatch) => {
     }
 }
 
+export const newFile = (file) => async (dispatch) => {
+    try {
+        let config = {
+            headers: {
+              'Content-Type' : 'multipart/form-data'
+            }
+          }
+          
+        await axios.post('https://upload-archive-node.azurewebsites.net/api/archive-upload',
+            file, config);
+        dispatch(openToast({open: true, status: 'success', message:"Campanha criada com sucesso!"}));
+    
+    } catch (error) {
+        dispatch(openToast({open: true, status: 'error', message: 'Erro de comunicação. Endpoint: Function de processamento de arq'+ error}))
+    }  
+}
+
 /** Função auxiliar para formartar data de requests */
 const auxData = dt => {
     const [dia, mes, ano] = dt.split('/')

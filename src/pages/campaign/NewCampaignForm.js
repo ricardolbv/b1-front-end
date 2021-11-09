@@ -27,23 +27,11 @@ import { useHistory } from 'react-router-dom';
 
 const NewCampaignForm = (props) => {
     const history = useHistory();
-    const [activeStep, setActiveStep] = useState(0)
 
     useEffect(() => {
         props.brandLoad();
     }, [])
 
-    const handleSubmitData = () => {
-        setActiveStep(1);
-    }
-
-    const handleSubmitFile = () => {
-        setActiveStep(2);
-    }
-
-    const handleBack = () => {
-        setActiveStep(0);
-    }
 
     return (
         <Box  m={2} boxShadow={5} p={1} >
@@ -65,8 +53,8 @@ const NewCampaignForm = (props) => {
             <Grid container spacing={0}>
                 <Grid item sm={6}>
                 <Box  m={5} boxShadow={5} p={5} style={{ height: '45vh' }}>
-                    {activeStep ?  
-                        <Slide direction="up" in={activeStep} mountOnEnter unmountOnExit>
+                    {props.step ?  
+                        <Slide direction="up" in={props.step} mountOnEnter unmountOnExit>
                             <form>
                             <Box m={1} p={1} display="flex" justifyContent="center">
                                     <Typography variant='body1'>
@@ -76,7 +64,7 @@ const NewCampaignForm = (props) => {
                                 <Box m={2} p={3} display="flex" justifyContent="center">
                                     <Button variant="contained" component="label">
                                         Arquivo da campanha
-                                        <input type="file" style={{ display: "none" }} />
+                                        <input type="file" style={{ display: "none" }} name='file' enctype="multipart/form-data" onChange={props.handleFile} />
                                     </Button>
                                 </Box>
                                 <Box m={1} p={1} display="flex" justifyContent="center">
@@ -85,11 +73,7 @@ const NewCampaignForm = (props) => {
                                     </Typography>
                                 </Box>
                                 <Box m={1} p={1} display="flex" justifyContent="center">
-                                    <Button variant="contained" component="label"style={{ minWidth: '125px', maxWidth: '200px', height: '40px'}} 
-                                        onClick={handleBack}>
-                                        Voltar
-                                    </Button>
-                                    <Button variant="contained" color="primary" onClick={handleSubmitFile}
+                                    <Button variant="contained" color="primary" onClick={props.onUploadFile}
                                         style={{ backgroundColor: "#0D0B23", minWidth: '125px', maxWidth: '200px', height: '40px'}}>
                                             Proximo
                                         </Button>
@@ -182,7 +166,7 @@ const NewCampaignForm = (props) => {
                 <Grid item sm={6}>
                 <Box  m={5} boxShadow={0} p={5} marginTop={15}>
                 <Loading isLoading={props.isLoading}/>
-                    <Stepper activeStep={activeStep}>
+                    <Stepper activeStep={props.step}>
                         <Step StepLabel='Dados'>
                             <StepLabel >
                                 Dados
