@@ -15,12 +15,16 @@ import Select from '@material-ui/core/Select';
 import { fetchSegments, fetchRetails } from '../retail/thunks';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import { useUser } from '../../auth/useUser';
 
 const FormBrand = (props) => {
     const history = useHistory();
+    const user = useUser()
+    const { usuarioId } = user;
+
     useEffect(() => {
         props.segmentsLoad();
-        props.retailLoad();
+        props.retailLoad(usuarioId);
     }, [])
 
     return (
@@ -151,7 +155,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     segmentsLoad: () => dispatch(fetchSegments()),
-    retailLoad: () => dispatch(fetchRetails()),
+    retailLoad: id => dispatch(fetchRetails(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormBrand);

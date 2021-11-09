@@ -47,11 +47,12 @@ function ManageRetailFormEdit (props)  {
     }
 
     const mailIsValidated = () => {
-        if(retail.emailVarejo === '' ){
+        console.log(_retail)
+        if(retail.email === '' ){
             setMailValid(true);
             return false;
         }
-        if(!retail.emailVarejo.toLowerCase().includes('@') || !retail.emailVarejo.toLowerCase().includes('.com')){
+        if(!retail.email.toLowerCase().includes('@') || !retail.email.toLowerCase().includes('.com')){
             setMailValid(true);
             return false;
         }

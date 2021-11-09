@@ -10,13 +10,13 @@ import {
 from './actions';
 import { openToast } from '../../common/actions';
 
-export const fetchRetails = () => async (dispatch, getState) => {
+export const fetchRetails = (id) => async (dispatch, getState) => {
     try {
-        const retail = await axios.get('https://b1-backend.azurewebsites.net/retail');
+        const retail = await axios.get('https://b1-backend.azurewebsites.net/retail/'+id);
         dispatch(loadRetail(retail.data.data[0]));
 
     } catch (error) {
-        alert(error);
+        dispatch(openToast({open: true, status: 'error', message: "Erro de comunicação. Endpoint: /retail/:IdUsuario "+ error}));
     }
 }
 

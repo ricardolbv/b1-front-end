@@ -10,9 +10,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import TableContainer from '@material-ui/core/TableContainer';
 import RetailPagination from './RetailPagination'
 import RetailEditAndExcludeEnable from './RetailEditExcludeEnable';
+import { useUser } from '../../auth/useUser';
 
 
 function RetailTable (props) {
+  const user = useUser()
+  const { usuarioId } = user;
+
   const [load, setLoad] = useState(true);
   const [page, setPage] = useState(1);
   const [ref, setRef] = useState();
@@ -44,7 +48,7 @@ function RetailTable (props) {
   }, [])
 
   useEffect(() => {
-    props.retailLoad();
+    props.retailLoad(usuarioId);
     setLoad(false);
   }, [])
 
@@ -86,15 +90,13 @@ function RetailTable (props) {
     </TableContainer>
   );
 }
-/*
 
-*/
 const mapStateToProps = state => ({
   retails: state.retails,
 })
 
 const mapDispatchToProps = dispatch => ({
-  retailLoad: () => dispatch(fetchRetails()),
+  retailLoad: id => dispatch(fetchRetails(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(RetailTable);
