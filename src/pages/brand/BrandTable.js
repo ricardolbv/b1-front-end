@@ -9,16 +9,20 @@ import TableRow from '@material-ui/core/TableRow';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TableContainer from '@material-ui/core/TableContainer';
 import BrandEditExcludeEnable from './BrandEditExcludeEnable';
+import { useUser } from '../../auth/useUser';
 
 import Loading from '../../common/Loading';
 
 
 function BrandTable (props) {
+  const user = useUser()
+  const { usuarioId } = user;
+
   const [isLoading, setLoad] = useState(false);
 
   useEffect(() => {
     activateLoad();
-    props.brandLoad();
+    props.brandLoad(usuarioId);
     deactivateLoad();
   }, [])
 
@@ -72,7 +76,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  brandLoad: () => dispatch(fetchBrands()),
+  brandLoad: id => dispatch(fetchBrands(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BrandTable);
