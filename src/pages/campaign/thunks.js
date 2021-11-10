@@ -51,8 +51,9 @@ export const deleteCampaign = (id) => async (dispatch) => {
 
 export const newFile = (file) => async (dispatch) => {
     try {
+        console.log(file)
         const formData = new FormData();
-        formData.append('filename', new Blob([file], { type: 'text/csv' }));
+        formData.append('file', file, { type: 'text/csv' });
 
         const config = {
             headers: {
@@ -60,9 +61,8 @@ export const newFile = (file) => async (dispatch) => {
             }
           }
 
-        console.log(formData)
         await axios.post('https://upload-archive-node.azurewebsites.net/api/archive-upload', formData, config);
-        dispatch(openToast({open: true, status: 'success', message:"Campanha criada com sucesso!"}));
+        dispatch(openToast({open: true, status: 'success', message:"Arquivo atualizado com sucesso!"}));
     
     } catch (error) {
         dispatch(openToast({open: true, status: 'error', message: 'Erro de comunicação. Endpoint: Function de processamento de arq'+ error}))

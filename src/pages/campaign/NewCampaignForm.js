@@ -72,8 +72,8 @@ const NewCampaignForm = (props) => {
                                     </Button>
                                 </Box>
                                 <Box m={1} p={1} display="flex" justifyContent="center">
-                                    <Typography variant='body2'>
-                                        Nenhum arquivo selecionado
+                                    <Typography variant='body1'>
+                                        {props.file ? props.file.name: 'Nenhum arquivo selecionado' }
                                     </Typography>
                                 </Box>
                                 <Box m={1} p={1} display="flex" justifyContent="center">

@@ -1,10 +1,12 @@
 import React, { useState, } from 'react'
 import { connect } from 'react-redux'
 import NewCampaignForm from './NewCampaignForm'
+import { useHistory } from 'react-router-dom';
 
 import { newCampaign, newFile } from './thunks'
 
 export const ManageCampaingForm = (props) => {
+    const history = useHistory();
     const [activeStep, setActiveStep] = useState(0);
     const [file, setFile] = useState()
 
@@ -37,6 +39,7 @@ export const ManageCampaingForm = (props) => {
         setLoad(true);
         await props.onUploadFile(file);
         setLoad(false);
+        history.push('/home/campaign')
     }
 
     const handleFile = ({ target }) => setFile(target.files[0])
@@ -123,6 +126,7 @@ export const ManageCampaingForm = (props) => {
                                  onDataChange={setData}
                                  onUploadFile={handleUploadFile}
                                  handleFile={handleFile}
+                                 file={file}
                                  step={activeStep}
                                  date={date}
                                  isLoading={loading}
