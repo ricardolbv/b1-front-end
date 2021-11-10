@@ -13,6 +13,7 @@ import ManageRetailFormEdit from '../retail/ManageRetailFormEdit';
 import ManageBrandForm from '../brand/ManageBrandForm';
 import ManageBrandFormEdit from '../brand/ManageBrandFormEdit';
 import ManageCampaignForm from '../campaign/ManageCampaignForm';
+import ProfilePage from '../../pages/profile/ProfilePage';
 import Toast from '../../common/Toast';
 
 import PrivateRoute from '../../auth/PrivateRoute';
@@ -34,6 +35,7 @@ const HomePage = () => {
              <AppB1Bar />
              <Switch>
                 <PrivateRoute path="/home" exact component={HomeDisplay} />
+                <PrivateRoute path="/home/profile-change" exact component={ProfilePage} />
                 <PrivateRoute path="/home/retail" exact render={(props) => <RetailPage {...props}
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
                 <PrivateRoute path="/home/retail/add" exact render={(props) => <ManageRetailForm {...props} 

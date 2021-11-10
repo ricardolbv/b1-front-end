@@ -11,7 +11,6 @@ import Card from '@material-ui/core/Card';
 import Toast from '../../common/Toast';
 import { Button } from '@material-ui/core';
 import { openToast } from '../../common/actions';
-import HomeJoao from './HomeJoao';
 
 const HomeDisplay = (props) => {
     //Message status
