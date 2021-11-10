@@ -68,7 +68,7 @@ const NewCampaignForm = (props) => {
                                 <Box m={2} p={3} display="flex" justifyContent="center">
                                     <Button variant="contained" component="label">
                                         Arquivo da campanha
-                                        <input type="file" style={{ display: "none" }} name='file' enctype="multipart/form-data" onChange={props.handleFile} />
+                                        <input type="file" style={{ display: "none" }} name='filename' enctype="multipart/form-data" onChange={props.handleFile} />
                                     </Button>
                                 </Box>
                                 <Box m={1} p={1} display="flex" justifyContent="center">

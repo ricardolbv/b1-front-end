@@ -64,11 +64,6 @@ const ProfileBar = () => {
                     <Box>
                         <Typography align='left' variant='subtitle1' className={classes.Nome}> {email}</Typography>
                         <Typography align='left' variant='body2' className={classes.Cargo}> {getTypeUser(cargoId)} </Typography>
-                        <Breadcrumbs>
-                            <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
-                                <Typography align='left' variant='subtitle2' className={classes.Conta}> Minha conta</Typography>
-                            </Link>
-                        </Breadcrumbs>
                     </Box>
                 </Box>
             </Box>
