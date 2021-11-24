@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 import CardCampaign from './CardCampaign';
 import { connect } from 'react-redux';
 import { fetchCampaigns, deleteCampaign } from './thunks';
@@ -30,7 +32,11 @@ function CardTable(props){
         <DeleteAlertCampaign openDialog={dialog} handleCloseDialog={handleCloseDialog} handleExclude={onDelete}
                              campanha={dialogText}/>
         <Grid container direction='row' spacing={1}>
-            { props.campaigns.filter((val) => {
+            { props.campaigns.length === 0 ?
+                <Box display='flex' justifyContent='center' style={{ marginLeft: '40%', marginTop: '5%'}}>
+                    <Typography variant='h6'> Ainda sem campanhas! </Typography>
+                </Box> :
+            props.campaigns.filter((val) => {
             if (props.searchTerm === '')
                 return val
             else if (val.campanha.toLowerCase().includes(props.searchTerm.toLowerCase()) || 

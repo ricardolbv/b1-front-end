@@ -6,6 +6,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TableContainer from '@material-ui/core/TableContainer';
 import BrandEditExcludeEnable from './BrandEditExcludeEnable';
@@ -49,7 +51,13 @@ function BrandTable (props) {
         </TableRow> :
         <></>
         }
-        {props.brands.filter((val) => {
+        {props.brands.length === 0 ?
+        <TableCell colSpan={4}>
+          <Box display='flex' justifyContent='center'>
+            <Typography variant='h6'> Ainda sem marcas! </Typography>
+          </Box> 
+        </TableCell> : 
+        props.brands.filter((val) => {
           if (props.searchTerm === '')
             return val
           else if (val.nome.toLowerCase().includes(props.searchTerm.toLowerCase()) || 

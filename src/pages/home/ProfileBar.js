@@ -3,12 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Link from '@material-ui/core/Link';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { useUser } from '../../auth/useUser';
+import { logout } from './actions';
+
 
 const useStyle = makeStyles(( theme ) => ({
     Root: {
@@ -48,7 +49,7 @@ function getTypeUser(idCargo){
 }
 
 
-const ProfileBar = () => {
+const ProfileBar = (props) => {
     const user = useUser();
     const { usuarioId, cargoId, email } = user;
 
@@ -70,11 +71,19 @@ const ProfileBar = () => {
             <ExitToAppIcon style={{color: 'black', padding: '1px', position:'relative', top:'35%', left: '99%'}}
             onClick={() => {
                 localStorage.removeItem('token');
-                history.push('/')
+                props.onLogout();
+                history.push('/');
             }}/>
             </>
         )
 }
+const mapStateToProps = state => ({
 
+  })
 
-export default ProfileBar;
+const mapDispatchToProps = dispatch => ({
+    onLogout: () => dispatch(logout()),
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileBar);

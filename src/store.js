@@ -7,6 +7,8 @@ import { toast } from '../src/common/reducers';
 import { user } from '../src/pages/login/reducers';
 import { campaigns } from '../src/pages/campaign/reducers';
 
+import { LOGOUT } from './pages/home/actions';
+
 const reducers = {
     retails,
     segments,
@@ -16,9 +18,19 @@ const reducers = {
     campaigns,
 }
 
+const appReducer = (state, action) => {
+
+    switch (action.type) {
+        case  LOGOUT:
+            return rootReducer(undefined, action)
+        default:
+            return rootReducer(state, action)
+    }
+};
+
 const rootReducer = combineReducers(reducers);
 
 export const configureStore = () => createStore (
-    rootReducer,
+    appReducer,
     composeWithDevTools(applyMiddleware(thunk))
 )

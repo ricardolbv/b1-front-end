@@ -6,9 +6,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 import TableContainer from '@material-ui/core/TableContainer';
-import RetailPagination from './RetailPagination'
 import RetailEditAndExcludeEnable from './RetailEditExcludeEnable';
 import { useUser } from '../../auth/useUser';
 
@@ -66,7 +66,13 @@ function RetailTable (props) {
           </TableRow>
         </TableHead>
         <TableBody>
-        {load ? <CircularProgress style={{ position:'relative', left: '75vh', top:'15vh' }}/> : 
+        {props.retails.length === 0 ? 
+        <TableCell colSpan={5}>
+        <Box display='flex' justifyContent='center'>
+          <Typography variant='h6'> Ainda sem varejos! </Typography>
+        </Box> 
+      </TableCell>
+        : 
         props.retails.filter((val) => {
           if (props.searchTerm === '')
             return val
