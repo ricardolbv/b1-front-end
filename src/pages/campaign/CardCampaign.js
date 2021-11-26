@@ -5,7 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
@@ -24,9 +24,10 @@ const useStyles = makeStyles({
       marginBottom: 12,
     },
   });
- //TODO: integrar endpoint de exclusão de campanhas
+
   function CardCampaign(props) {
     const classes = useStyles();
+    const history = useHistory();
 
     const formatDate = (created, until) => {
       const [dateCreated, ] = created.split('T');
@@ -57,7 +58,7 @@ const useStyles = makeStyles({
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" variant="contained">Mais infos</Button>
+          <Button size="small" variant="contained" onClick={() => history.push(`/home/campaign/edit/${props.id_campanha}`)}>Mais infos</Button>
           <Button size="small" onClick={() => 
           { props.textoDialogo(props.nomeCampanha)
             props.dialogo(true)

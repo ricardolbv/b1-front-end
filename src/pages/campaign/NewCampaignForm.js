@@ -43,7 +43,7 @@ const NewCampaignForm = (props) => {
                 <Grid container spacing={1}>
                     <Grid item sm={6}>
                         <Box p={1} paddingLeft={1} paddingBottom={0}>
-                            <Typography variant='h3'> Nova Campanha </Typography>
+                            <Typography variant='h3'> {props.type === 'Nova'? "Nova campanha" : "Editando campanha"} </Typography>
                         </Box>
                     </Grid>
                     <Grid item sm={6}>
