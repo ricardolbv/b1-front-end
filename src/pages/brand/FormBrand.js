@@ -16,6 +16,7 @@ import { fetchSegments, fetchRetails } from '../retail/thunks';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import { useUser } from '../../auth/useUser';
+import Loading from '../../common/Loading';
 
 const FormBrand = (props) => {
     const history = useHistory();
@@ -31,12 +32,17 @@ const FormBrand = (props) => {
         <Box  m={2} boxShadow={5} p={1} >
             <div>
                 <Grid container spacing={1}>
-                    <Grid item sm={6}>
+                    <Grid item sm={5}>
                         <Box p={1} paddingLeft={1} paddingBottom={0}>
                             <Typography variant='h3'> {props.type} </Typography>
                         </Box>
                     </Grid>
-                    <Grid item sm={6}>
+                    <Grid item xs={2}>
+                        <Box paddingTop={4}>
+                            <Loading isLoading={props.isLoading}/>
+                        </Box>
+                    </Grid>
+                    <Grid item sm={5}>
                         <Box p={1} paddingRight={0} display='flex' justifyContent='flex-end'>
                             <Tab icon={<ArrowBackIosRoundedIcon />} onClick={() => history.push('/home/brand')} />
                         </Box>

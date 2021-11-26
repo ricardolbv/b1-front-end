@@ -13,19 +13,24 @@ const BrandEditAndExcludeEnable = (props) => {
     const handleCloseDialog = () => setHandleDialog(false);
     const history = useHistory();
 
-    function handleClickSlide () {
+    async function handleClickSlide () {
         const _brand = {
             email: props.email, 
             status: props.status == 0 ? 1 : 0 
         }
-        props.onUpdateBrandStatus(_brand);
+        props.setLoading(true);
+        await props.onUpdateBrandStatus(_brand);
+        props.setLoading(false);
     }
 
-    function handleExclude (){
+    async function handleExclude (){
         const _brand = {
             email: props.email,
         }
-        props.onExcludeBrand(_brand);
+        props.setLoading(true);
+        await props.onExcludeBrand(_brand);
+        props.setLoading(false);
+
         handleCloseDialog();
     }
 

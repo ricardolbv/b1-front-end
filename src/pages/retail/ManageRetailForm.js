@@ -6,6 +6,7 @@ import { openToast } from '../../common/actions';
 import { useHistory } from 'react-router-dom';
 
 function ManageRetailForm (props)  {
+    const [isLoading, setLoading] = useState(false);
     const history = useHistory();
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);
@@ -25,11 +26,15 @@ function ManageRetailForm (props)  {
         status: 1
     });
  
-    const handleSubmit = (target) => {
+    const handleSubmit = async () => {
         if (mailIsValidated() && pswIsValid() &&
             nomeFantasiaIsValid() && razaoSocialIsValid()&&
             segmentoIsValidated()){
-        props.onCreateRetail(retail);
+        
+        setLoading(true);
+        await props.onCreateRetail(retail);
+        setLoading(false)
+
         history.push("/home/retail" );
         }
     }
@@ -127,6 +132,7 @@ function ManageRetailForm (props)  {
                     nomeFantasiaValidation={nomeFantasiaValidation}
                     razaoSocialValidation={razaoSocialValidation}
                     segmentoValidation={segmentoValidation}
+                    isLoading={isLoading}
         />
     </>
     )

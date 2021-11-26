@@ -16,6 +16,7 @@ import Select from '@material-ui/core/Select';
 import { fetchSegments } from './thunks';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import Loading from '../../common/Loading';
 
 const FormRetail = (props) => {
     const history = useHistory();
@@ -27,12 +28,17 @@ const FormRetail = (props) => {
         <Box  m={2} boxShadow={5} p={1} >
             <div>
                 <Grid container spacing={1}>
-                    <Grid item sm={6}>
+                    <Grid item sm={5}>
                         <Box p={1} paddingLeft={1} paddingBottom={0}>
                             <Typography variant='h3'> {props.type} </Typography>
                         </Box>
                     </Grid>
-                    <Grid item sm={6}>
+                    <Grid xs={2}>
+                        <Box paddingTop={4}>
+                            <Loading isLoading={props.isLoading}/>
+                        </Box>
+                    </Grid>
+                    <Grid item sm={5}>
                         <Box p={1} paddingRight={0} display='flex' justifyContent='flex-end'>
                             <Tab icon={<ArrowBackIosRoundedIcon />} onClick={() => history.push('/home/retail')} />
                         </Box>
