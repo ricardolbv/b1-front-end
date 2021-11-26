@@ -42,9 +42,9 @@ const Retail = () =>{
                 <ListItemIcon  > <DashboardIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Visualização"} style={{ color: "white", width: "auto" }}/>
         </ListItem>
-        <ListItem button name='perfil' id='perfil' onClick= {() => history.push('/home/profile-change')}>
-                <ListItemIcon  > <DashboardIcon style={{ color: "white"}}/>  </ListItemIcon>
-                <ListItemText primary={"Perfil"} style={{ color: "white", width: "auto" }}/>
+        <ListItem button name='profile' id='profile' onClick= {() => history.push('/home/profile-change')}>
+                <ListItemIcon  > <AccountBoxIcon style={{ color: "white"}}/>  </ListItemIcon>
+                <ListItemText primary={"Meu perfil"} style={{ color: "white", width: "auto" }}/>
         </ListItem>
     </>
     )
@@ -62,6 +62,10 @@ const Brand = () =>{
         <ListItem button name='visualizacao' id='visualizacao' onClick= {() => history.push('/home/visualization')}>
                 <ListItemIcon  > <DashboardIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Visualização"} style={{ color: "white", width: "auto" }}/>
+        </ListItem>
+        <ListItem button name='profile' id='profile' onClick= {() => history.push('/home/profile-change')}>
+                <ListItemIcon  > <AccountBoxIcon style={{ color: "white"}}/>  </ListItemIcon>
+                <ListItemText primary={"Meu perfil"} style={{ color: "white", width: "auto" }}/>
         </ListItem>
     </>
     )
