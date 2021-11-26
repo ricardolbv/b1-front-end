@@ -6,6 +6,7 @@ import { openToast } from '../../common/actions';
 import { useHistory } from 'react-router-dom';
 
 function ManageBrandForm (props)  {
+    const [isLoading, setLoading] = useState(false);
     const history = useHistory();
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);
@@ -24,11 +25,15 @@ function ManageBrandForm (props)  {
         telefone: ''
     });
  
-    const handleSubmit = (target) => {
+    const handleSubmit = async () => {
         if (mailIsValidated() && pswIsValid() &&
             nomeIsValid() && retailIsValidated()&&
             segmentoIsValidated()){
-        props.onCreateBrand(brand);
+
+        setLoading(true);
+        await props.onCreateBrand(brand);
+        setLoading(true);
+
         history.push("/home/brand" );
         }
     }
@@ -135,6 +140,7 @@ function ManageBrandForm (props)  {
                     nomeValidation={nomeValidation}
                     retailValidation={retailValidation}
                     segmentoValidation={segmentoValidation}
+                    isLoading={isLoading}
         />
     </>
     )

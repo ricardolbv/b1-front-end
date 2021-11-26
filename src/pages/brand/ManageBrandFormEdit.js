@@ -11,6 +11,7 @@ function ManageBrandFormEdit (props)  {
     let {id} = useParams();
     const [_brand] = brands.filter(item => item.email == id);
 
+    const [isLoading, setLoading] = useState(false);
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);
     const [cnpjValidation, setCnpjValid] = useState(false);
@@ -28,11 +29,15 @@ function ManageBrandFormEdit (props)  {
         telefone: _brand.telefone
     });
  
-    const handleSubmit = (target) => {
+    const handleSubmit = async () => {
         if (mailIsValidated() && pswIsValid() &&
             nomeIsValid() && retailIsValidated()&&
             segmentoIsValidated()){
-        props.onEditBrand(brand);
+
+        setLoading(true);
+        await props.onEditBrand(brand);
+        setLoading(false);
+
         history.push("/home/brand");
         }
     }
@@ -132,6 +137,7 @@ function ManageBrandFormEdit (props)  {
                     nomeValidation={nomeValidation}
                     retailValidation={retailValidation}
                     segmentoValidation={segmentoValidation}
+                    isLoading={isLoading}
         />
     </>
     )

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import { Typography } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
@@ -11,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Loading from '../../common/Loading';
 
 const useStyle = makeStyles({
     Btn: {
@@ -20,13 +22,23 @@ const useStyle = makeStyles({
 })
 
 const CampaignTableContainer = (props) => {
+    const [isLoading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const classes = useStyle();
     const history = useHistory();
     return (
         <Box boxShadow={5} m={2} p={2}>
                 <Box p={1} paddingLeft={3}>
-                    <Typography variant='h3'> Campanhas</Typography>
+                    <Grid container spacing={1}>
+                        <Grid item xs={5}>
+                            <Typography variant='h3'> Campanhas</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Box paddingTop={3}>
+                                <Loading isLoading={isLoading}/>
+                            </Box>
+                        </Grid>
+                    </Grid>
                     <Divider style={{ padding: '1px' }}/>
                     <Box display='flex' justifyContent='center' p={1}>
                         <Box boxShadow={5} paddingRight={45} >
@@ -49,7 +61,7 @@ const CampaignTableContainer = (props) => {
                         </Box>
                     </Box>
                     <Box p={1}>
-                        <CardTable searchTerm={searchTerm}/>
+                        <CardTable searchTerm={searchTerm} setLoading={setLoading}/>
                     </Box>
                 </Box>
         </Box>

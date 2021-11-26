@@ -11,6 +11,7 @@ function ManageRetailFormEdit (props)  {
     let {id} = useParams();
     const [_retail] = retails.filter(item => item.email == id);
 
+    const [isLoading, setLoading] = useState(false);
     const [mailValidation, setMailValid] = useState(false);
     const [pswValidation, setPwsValid] = useState(false);
     const [cnpjValidation, setCnpjValid] = useState(false);
@@ -28,11 +29,15 @@ function ManageRetailFormEdit (props)  {
         inscricao: _retail.inscricao,
     });
  
-    const handleSubmit = (target) => {
+    const handleSubmit = async (target) => {
         if (mailIsValidated() && pswIsValid() &&
             nomeFantasiaIsValid() && razaoSocialIsValid() &&
             segmentoIsValidated()){
-        props.onEditRetail(retail);
+
+        setLoading(true);        
+        await props.onEditRetail(retail);
+        setLoading(false);
+        
         history.push("/home/retail" );
         }
     }
@@ -125,6 +130,7 @@ function ManageRetailFormEdit (props)  {
                     nomeFantasiaValidation={nomeFantasiaValidation}
                     razaoSocialValidation={razaoSocialValidation}
                     segmentoValidation={segmentoValidation}
+                    isLoading={isLoading}
         />
     </>
     )

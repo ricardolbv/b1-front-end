@@ -18,8 +18,11 @@ function CardTable(props){
     const { usuarioId, cargoId, email } = user;
     
     const handleCloseDialog = () => openDialog(false);
-    const onDelete = () => {
-        props.onDeleteCampaign(campaignToDelete);
+    const onDelete = async () => {
+        props.setLoading(true);
+        await props.onDeleteCampaign(campaignToDelete);
+        props.setLoading(false);
+
         openDialog(false)
     }
 
@@ -53,7 +56,8 @@ function CardTable(props){
                         descricao={item.descricao}
                         dialogo={openDialog}
                         textoDialogo={setDialogText}
-                        onDelete={setCampaignDelete}/>
+                        onDelete={setCampaignDelete}
+                        />
                 </Grid>
             )}
         </Grid>
