@@ -1,21 +1,27 @@
 import React, { useState, } from 'react'
 import { connect } from 'react-redux'
 import NewCampaignForm from './NewCampaignForm'
-import { useHistory } from 'react-router-dom';
-
+import { useHistory, useParams } from 'react-router-dom';
+import { useSelector} from 'react-redux';
 import { newCampaign, newFile } from './thunks'
 
-export const ManageCampaingForm = (props) => {
+export const ManageCampaingFormEdit = (props) => {
     const history = useHistory();
     const [activeStep, setActiveStep] = useState(0);
+
+    const campaigns = useSelector(state => state.campaigns);
+    let {id} = useParams();
+
+    const [_campaign] = campaigns.filter(item => item.id == id);
+
     const [file, setFile] = useState()
 
     const [campaign, setCampaign] = useState({
-        'produto': '',
-        'id_campanha': '',
-        'marca': '',
-        'descricao': '',
-        'dataCriacao': Date.now(),
+        'produto': _campaign.campanha,
+        'id_campanha': 'xxxxx',
+        'marca': _campaign.nome_marca,
+        'descricao': _campaign.descricao,
+        'dataCriacao': _campaign.data_de_fim,
     });
 
     const [date, setData] = useState(new Date());
@@ -53,7 +59,7 @@ export const ManageCampaingForm = (props) => {
         })
     }
 
-    const handleSubmit = async (target) => {
+    const handleSubmit = async () => {
         campaign.dataCriacao = date.toLocaleDateString();
         if (prodIsValidated() && idIsValidated() && marcaIsValidated() &&
             descricaoIsValidated() && dataIsValidated()){
@@ -120,7 +126,7 @@ export const ManageCampaingForm = (props) => {
         return (
             <>
                 <NewCampaignForm 
-                                 type={"Novo"}
+                                 type={"Editar"}
                                  campaign={campaign}
                                  onSubmit={handleSubmit}
                                  onChange={handleChange}
@@ -147,4 +153,4 @@ const mapDispatchToProps = dispatch => ({
     onUploadFile: file => dispatch(newFile(file))
 })
 
-export default connect(null, mapDispatchToProps)(ManageCampaingForm)
+export default connect(null, mapDispatchToProps)(ManageCampaingFormEdit)

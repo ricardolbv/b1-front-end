@@ -13,6 +13,7 @@ import ManageRetailFormEdit from '../retail/ManageRetailFormEdit';
 import ManageBrandForm from '../brand/ManageBrandForm';
 import ManageBrandFormEdit from '../brand/ManageBrandFormEdit';
 import ManageCampaignForm from '../campaign/ManageCampaignForm';
+import ManageCampaignFormEdit from '../campaign/ManageCampaignFormEdit';
 import ProfilePage from '../../pages/profile/ProfilePage';
 import Toast from '../../common/Toast';
 
@@ -50,6 +51,8 @@ const HomePage = () => {
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
                 <PrivateRoute path="/home/campaign" exact component={CampaignPage}/>
                 <PrivateRoute path="/home/campaign/add" exact render={(props) => <ManageCampaignForm {...props} 
+                setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
+                <PrivateRoute path="/home/campaign/edit/:id" exact render={(props) => <ManageCampaignFormEdit {...props} 
                 setToast={setToast} setStatus={setStatus} setMessage={setMessage}/>}/>
                 <PrivateRoute path="/home/visualization" exact component={VisualizationPage}/>
              </Switch>
