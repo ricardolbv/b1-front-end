@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import NewCampaignForm from './NewCampaignForm'
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector} from 'react-redux';
-import { newCampaign, newFile } from './thunks'
+import { actualizationCampaign, newFile } from './thunks'
 
 export const ManageCampaingFormEdit = (props) => {
     const history = useHistory();
@@ -17,9 +17,10 @@ export const ManageCampaingFormEdit = (props) => {
     const [file, setFile] = useState()
 
     const [campaign, setCampaign] = useState({
+        'id': id,
         'produto': _campaign.campanha,
         'id_campanha': 'xxxxx',
-        'marca': _campaign.nome_marca,
+        'marca': _campaign.id_marca,
         'descricao': _campaign.descricao,
         'dataCriacao': _campaign.data_de_fim,
     });
@@ -33,7 +34,7 @@ export const ManageCampaingFormEdit = (props) => {
     const [descricaoValidation, setDescricaoValid] = useState(false);
     const [dataValidation, setDataValid] = useState(false);
 
-    const setValidationsToFalse = () => {
+    const setValidationsToFalse = () => {;
         setProdValid(false);
         setIdValid(false);
         setMarcaValid(false);
@@ -64,7 +65,7 @@ export const ManageCampaingFormEdit = (props) => {
         if (prodIsValidated() && idIsValidated() && marcaIsValidated() &&
             descricaoIsValidated() && dataIsValidated()){
                 setLoad(true);
-                await props.onCreateCampaign(campaign);
+                await props.onUpdateCampaign(campaign);
                 setActiveStep(1);
                 setLoad(false);
         }
@@ -149,7 +150,7 @@ export const ManageCampaingFormEdit = (props) => {
 
 
 const mapDispatchToProps = dispatch => ({
-    onCreateCampaign: campaign => dispatch(newCampaign(campaign)),
+    onUpdateCampaign: campaign => dispatch(actualizationCampaign(campaign)),
     onUploadFile: file => dispatch(newFile(file))
 })
 
