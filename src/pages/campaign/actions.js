@@ -16,3 +16,9 @@ export const deleteCampaigns = campaign => ({
     payload: campaign
 })
 
+export const UPDATE_CAMPAIGN = "UPDATE_CAMPAIGN";
+export const updateCampaign = campaign => ({
+    type: UPDATE_CAMPAIGN,
+    payload: campaign
+})
+

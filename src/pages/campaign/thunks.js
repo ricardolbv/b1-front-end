@@ -3,6 +3,7 @@ import {
     createCampaign,
     loadCampaigns,
     deleteCampaigns,
+    updateCampaign,
 } from './actions';
 import { openToast } from '../../common/actions';
 
@@ -66,6 +67,28 @@ export const newFile = (file) => async (dispatch) => {
     
     } catch (error) {
         dispatch(openToast({open: true, status: 'error', message: 'Erro de comunicação. Endpoint: Function de processamento de arq'+ error}))
+    }  
+}
+
+export const actualizationCampaign = (campaign) => async (dispatch) => {
+    try {
+        const _campanha = {
+            idCampanha: campaign.id,
+            updateCampanha: campaign.produto,
+            updateDescricao: campaign.descricao,
+            updateDataInicio: auxData(new Date().toLocaleDateString()),
+            updateDataFim: auxData(campaign.dataCriacao),
+            updateIdMarca: campaign.marca, 
+        }
+        console.log(_campanha)
+        await axios.post('https://b1-backend.azurewebsites.net/campaign/update',
+            _campanha);
+        dispatch(openToast({open: true, status: 'success', message:"Campanha atualizada com sucesso!"}));
+        dispatch(updateCampaign(_campanha));
+    }
+    
+catch (error) {
+    dispatch(openToast({open: true, status: 'error', message: 'Erro de comunicação. Endpoint: /campaign/update '+ error}))
     }  
 }
 

@@ -2,6 +2,7 @@ import {
     CREATE_CAMPAIGN,
     LOAD_CAMPAIGNS,
     DELETE_CAMPAIGNS,
+    UPDATE_CAMPAIGN,
 } from './actions'
 
 export const campaigns = (state = [], action) => {
@@ -20,6 +21,17 @@ export const campaigns = (state = [], action) => {
 
         case DELETE_CAMPAIGNS:
             return state.filter(campaign => campaign.id !== payload)
+
+        case UPDATE_CAMPAIGN:
+            return state.map(campaign => {
+                if(campaign.id !== payload.id){
+                    return campaign
+                }
+                return {
+                    ...campaign,
+                    ...payload,
+                }
+            })
 
         default:
             return state;
