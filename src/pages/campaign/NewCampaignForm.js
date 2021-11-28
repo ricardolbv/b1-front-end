@@ -87,24 +87,15 @@ const NewCampaignForm = (props) => {
                                 :
                         <form id="dadosCampanha">
                         <Box p={1}>
-                            <TextField
-                                style={{ width: '55%' }}
+                            <TextField  
                                 id="produto"
-                                label="Produto(s)"
+                                label="Nome da campanha"
                                 variant="outlined"
+                                fullWidth
                                 onChange={props.onChange}
                                 value={props.campaign.produto}
                                 error={props.prodValidation}
                                     {...(props.prodValidation && { helperText: 'Poucos caracteres' })}/>
-                            <TextField
-                                style={{ width: '43%', paddingLeft: '1vh' }}
-                                id="id_campanha"
-                                label="ID Campanha"
-                                variant="outlined"
-                                value={props.campaign.id_campanha}
-                                onChange={props.onChange}
-                                error={props.idCampanhaValidation}
-                                    {...(props.idCampanhaValidation && { helperText: 'Poucos caracteres' })}/>
                         </Box>
                         <Box p={1}>
                             <TextField

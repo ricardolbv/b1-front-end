@@ -22,14 +22,12 @@ export const ManageCampaingForm = (props) => {
     const [loading, setLoad] = useState(false);
 
     const [prodValidation, setProdValid] = useState(false);
-    const [idCampanhaValidation, setIdValid] = useState(false);
     const [marcaValidation, setMarcaValid] = useState(false);
     const [descricaoValidation, setDescricaoValid] = useState(false);
     const [dataValidation, setDataValid] = useState(false);
 
     const setValidationsToFalse = () => {
         setProdValid(false);
-        setIdValid(false);
         setMarcaValid(false);
         setDescricaoValid(false);
         setDataValid(false);
@@ -53,9 +51,9 @@ export const ManageCampaingForm = (props) => {
         })
     }
 
-    const handleSubmit = async (target) => {
+    const handleSubmit = async () => {
         campaign.dataCriacao = date.toLocaleDateString();
-        if (prodIsValidated() && idIsValidated() && marcaIsValidated() &&
+        if (prodIsValidated() && marcaIsValidated() &&
             descricaoIsValidated() && dataIsValidated()){
                 setLoad(true);
                 await props.onCreateCampaign(campaign);
@@ -77,13 +75,6 @@ export const ManageCampaingForm = (props) => {
         return true;
     }
 
-    const idIsValidated = () => {
-        if(campaign.id_campanha === '' ){
-            setIdValid(true);
-            return false;
-        }
-        return true;
-    }
 
     const marcaIsValidated = () => {
         if(campaign.marca === '' ){
@@ -133,7 +124,6 @@ export const ManageCampaingForm = (props) => {
                                  date={date}
                                  isLoading={loading}
                                  prodValidation={prodValidation}
-                                 idCampanhaValidation={idCampanhaValidation}
                                  marcaValidation={marcaValidation}
                                  descricaoValidation={descricaoValidation}
                                  dataValidation={dataValidation}/>   
