@@ -16,11 +16,11 @@ export const newCampaign = (campaign) => async (dispatch) => {
             data_de_fim: auxData(campaign.dataCriacao),
             id_marca: campaign.marca, 
         }
-        console.log(_campanha)
-        await axios.post('https://b1-backend.azurewebsites.net/campaign/create',
+        const resp = await axios.post('https://b1-backend.azurewebsites.net/campaign/create',
             _campanha);
+        console.log(resp)
         dispatch(openToast({open: true, status: 'success', message:"Campanha criada com sucesso!"}));
-        dispatch(createCampaign(_campanha));
+        dispatch(createCampaign(_campanha.data));
     }
     
 catch (error) {
