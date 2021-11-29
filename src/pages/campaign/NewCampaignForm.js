@@ -35,7 +35,7 @@ const NewCampaignForm = (props) => {
 
     function fileNameSplit (fileName, id_campanha){
         const [first, second] = fileName.split('.');
-        return first+"-"+id_campanha+second
+        return first+"_"+"."+id_campanha+second
     }
 
     useEffect(() => {
