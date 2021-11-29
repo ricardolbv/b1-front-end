@@ -56,7 +56,7 @@ export const newFile = (file, fileName) => async (dispatch) => {
     try {
         //file.id_campanha = '123'
         const formData = new FormData();
-        formData.append('file', file, file.name, { type: 'text/csv' });
+        formData.append('file', file, fileName, { type: 'text/csv' });
         console.log(file)
 
         const config = {
