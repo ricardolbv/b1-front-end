@@ -117,7 +117,7 @@ export const ManageCampaingForm = (props) => {
         return (
             <>
                 <NewCampaignForm 
-                                 type={"Novo"}
+                                 type={"Nova"}
                                  campaign={campaign}
                                  onSubmit={handleSubmit}
                                  onChange={handleChange}
