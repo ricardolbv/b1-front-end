@@ -16,6 +16,11 @@ export const ManageCampaingFormEdit = (props) => {
 
     const [file, setFile] = useState()
 
+     function fileNameSplit (fileName, id_campanha){
+        const [first, second] = fileName.split('.');
+        return first+"-"+id_campanha+"."+second;
+    }
+
     const [campaign, setCampaign] = useState({
         'id': id,
         'produto': _campaign.campanha,
@@ -44,7 +49,8 @@ export const ManageCampaingFormEdit = (props) => {
 
     const handleUploadFile = async () => {
         setLoad(true);
-        await props.onUploadFile(file);
+        const tst = fileNameSplit(file.name, id)
+        await props.onUploadFile(file, tst);
         setLoad(false);
         history.push('/home/campaign')
     }
@@ -150,7 +156,7 @@ export const ManageCampaingFormEdit = (props) => {
 
 const mapDispatchToProps = dispatch => ({
     onUpdateCampaign: campaign => dispatch(actualizationCampaign(campaign)),
-    onUploadFile: file => dispatch(newFile(file))
+    onUploadFile: (file, fileName) => dispatch(newFile(file, fileName))
 })
 
 export default connect(null, mapDispatchToProps)(ManageCampaingFormEdit)

@@ -143,7 +143,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onCreateCampaign: campaign => dispatch(newCampaign(campaign)),
-    onUploadFile: file => dispatch(newFile(file))
+    onUploadFile: (file, fileName) => dispatch(newFile(file, fileName))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageCampaingForm)
