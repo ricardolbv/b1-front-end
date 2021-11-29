@@ -20,7 +20,7 @@ export const ManageCampaingForm = (props) => {
 
     function fileNameSplit (fileName, id_campanha){
         const [first, second] = fileName.split('.');
-        return first+"-"+id_campanha+"."+second;
+        return first+"_"+id_campanha+"."+second;
     }
 
     const [date, setData] = useState(new Date());
