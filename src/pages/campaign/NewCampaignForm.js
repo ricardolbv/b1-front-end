@@ -32,6 +32,12 @@ const NewCampaignForm = (props) => {
     const user = useUser()
     const { usuarioId } = user;
 
+
+    function fileNameSplit (fileName, id_campanha){
+        const [first, second] = fileName.split('.');
+        return first+"-"+id_campanha+second
+    }
+
     useEffect(() => {
         props.brandLoad(usuarioId);
     }, [])
@@ -73,7 +79,7 @@ const NewCampaignForm = (props) => {
                                 </Box>
                                 <Box m={1} p={1} display="flex" justifyContent="center">
                                     <Typography variant='body1'>
-                                        {props.file ? props.file.name: 'Nenhum arquivo selecionado' }
+                                        {props.file ? fileNameSplit(props.file.name, props.campaign_id): 'Nenhum arquivo selecionado' }
                                     </Typography>
                                 </Box>
                                 <Box m={1} p={1} display="flex" justifyContent="center">
@@ -184,6 +190,7 @@ const NewCampaignForm = (props) => {
 
 const mapStateToProps = state => ({
     brands: state.brands,
+    campaign_id: state.campaign_id
   })
   
   const mapDispatchToProps = dispatch => ({

@@ -3,6 +3,7 @@ import {
     LOAD_CAMPAIGNS,
     DELETE_CAMPAIGNS,
     UPDATE_CAMPAIGN,
+    UPDATE_CAMPAIGN_ID
 } from './actions'
 
 export const campaigns = (state = [], action) => {
@@ -32,6 +33,18 @@ export const campaigns = (state = [], action) => {
                     ...payload,
                 }
             })
+
+        default:
+            return state;
+    }
+}
+
+export const campaign_id = (state = {}, action) => {
+    const { type, payload } = action;
+
+    switch (type){
+        case UPDATE_CAMPAIGN_ID:
+            return payload
 
         default:
             return state;

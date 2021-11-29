@@ -148,7 +148,6 @@ export const ManageCampaingFormEdit = (props) => {
         )
 }
 
-
 const mapDispatchToProps = dispatch => ({
     onUpdateCampaign: campaign => dispatch(actualizationCampaign(campaign)),
     onUploadFile: file => dispatch(newFile(file))
