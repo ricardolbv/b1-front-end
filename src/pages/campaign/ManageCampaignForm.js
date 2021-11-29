@@ -18,6 +18,11 @@ export const ManageCampaingForm = (props) => {
         'dataCriacao': Date.now(),
     });
 
+    function fileNameSplit (fileName, id_campanha){
+        const [first, second] = fileName.split('.');
+        return first+"-"+id_campanha+"."+second;
+    }
+
     const [date, setData] = useState(new Date());
     const [loading, setLoad] = useState(false);
 
@@ -35,7 +40,8 @@ export const ManageCampaingForm = (props) => {
 
     const handleUploadFile = async () => {
         setLoad(true);
-        await props.onUploadFile(file);
+        const tst = fileNameSplit(file.name, props.campaign_id)
+        await props.onUploadFile(file, tst);
         setLoad(false);
         history.push('/home/campaign')
     }
@@ -131,10 +137,13 @@ export const ManageCampaingForm = (props) => {
         )
 }
 
+const mapStateToProps = state => ({
+    campaign_id: state.campaign_id
+  })
 
 const mapDispatchToProps = dispatch => ({
     onCreateCampaign: campaign => dispatch(newCampaign(campaign)),
     onUploadFile: file => dispatch(newFile(file))
 })
 
-export default connect(null, mapDispatchToProps)(ManageCampaingForm)
+export default connect(mapStateToProps, mapDispatchToProps)(ManageCampaingForm)

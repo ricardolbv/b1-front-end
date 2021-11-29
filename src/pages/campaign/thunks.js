@@ -4,6 +4,7 @@ import {
     loadCampaigns,
     deleteCampaigns,
     updateCampaign,
+    updateCampaignId,
 } from './actions';
 import { openToast } from '../../common/actions';
 
@@ -18,9 +19,10 @@ export const newCampaign = (campaign) => async (dispatch) => {
         }
         const resp = await axios.post('https://b1-backend.azurewebsites.net/campaign/create',
             _campanha);
-        console.log(resp)
+        
         dispatch(openToast({open: true, status: 'success', message:"Campanha criada com sucesso!"}));
-        dispatch(createCampaign(_campanha.data));
+        dispatch(createCampaign(resp.data.data[0][0]));
+        dispatch(updateCampaignId(resp.data.data[0][0].id))
     }
     
 catch (error) {
@@ -50,11 +52,12 @@ export const deleteCampaign = (id) => async (dispatch) => {
     }
 }
 
-export const newFile = (file) => async (dispatch) => {
+export const newFile = (file, fileName) => async (dispatch) => {
     try {
-        console.log(file)
+        //file.id_campanha = '123'
         const formData = new FormData();
-        formData.append('file', file, { type: 'text/csv' });
+        formData.append('file', file, file.name, { type: 'text/csv' });
+        console.log(file)
 
         const config = {
             headers: {

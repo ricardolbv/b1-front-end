@@ -5,7 +5,7 @@ import { retails, segments } from '../src/pages/retail/reducers';
 import { brands } from '../src/pages/brand/reducers';
 import { toast } from '../src/common/reducers';
 import { user } from '../src/pages/login/reducers';
-import { campaigns } from '../src/pages/campaign/reducers';
+import { campaigns, campaign_id } from '../src/pages/campaign/reducers';
 
 import { LOGOUT } from './pages/home/actions';
 
@@ -16,6 +16,7 @@ const reducers = {
     toast,
     user,
     campaigns,
+    campaign_id
 }
 
 const appReducer = (state, action) => {

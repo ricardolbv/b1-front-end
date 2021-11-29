@@ -22,3 +22,10 @@ export const updateCampaign = campaign => ({
     payload: campaign
 })
 
+export const UPDATE_CAMPAIGN_ID = "UPDATE_CAMPAIGN_ID";
+export const updateCampaignId = campaign => ({
+    type: UPDATE_CAMPAIGN_ID,
+    payload: campaign
+})
+
+
